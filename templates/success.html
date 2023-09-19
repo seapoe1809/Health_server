@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Success</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50vh;
+            background: #393e46;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .button {
+            position: relative;
+            width: 700px;
+            height: 13px;
+            padding: 0;
+            overflow: hidden;
+            background-color: green;
+            border-radius: 10px;
+            transition: all 0.5s ease;
+            animation: pulsate 4s infinite;
+        }
+
+        .button::before,
+        .button::after {
+            content: '😀';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 20px;
+            
+        }
+
+        .button::after {
+            width: 20px;
+            height: 100px;
+        }
+
+        @keyframes pulsate {
+            0% {
+                background-color: aqua;
+                box-shadow: 0 0 20px aqua, 0 0 160px aqua, 0 0 100px aqua;
+                transform: scale(0.7);
+            }
+            50% {
+                background-color: green;
+                box-shadow: none;
+                transform: scale(1.2);
+            }
+            100% {
+                background-color: aqua;
+                box-shadow: 0 0 20px aqua, 0 0 160px aqua, 0 0 500px aqua;
+                transform: scale(1);
+            }
+        }
+
+        .terminal-window {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background-color: turquoise;
+            color: black;
+            padding: 20px;
+            overflow: auto;
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+    <script>
+        setTimeout(function() {
+            window.close();
+        }, 4000); // Auto-close after 1 minute (60000 milliseconds)
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="button"></div>
+    </div>
+
+    <div class="terminal-window">
+        <!-- Place your terminal data output here -->
+        <pre>
+            >>SUCCESS 
+            >>Window will auto-close in 3 Sec
+            
+        </pre>
+    </div>
+</body>
+</html>
+

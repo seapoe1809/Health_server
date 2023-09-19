@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App Installation</title>
+
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="{{ url_for('serve_install_module', filename=app_folder~'/Info.js') }}"></script>
+
+</head>
+<style>
+#form-container {
+  display: grid;
+  justify-content: center; /* Horizontally center */
+}
+</style>
+<body>
+    <h1 style="font-family: 'Roboto', sans-serif; font-size: 45px; font-weight: bold; font-style: bold; font-color: black; text-align: center;">CARD INSTALL</h1>
+    <h2 style="font-family: 'Roboto', sans-serif; font-size: 30px; font-weight: bold; font-color:black; font-style: bold;text-align: center;">DARNA.HI</h2>
+
+    <!-- Import pictures -->
+    <div class="container">
+        <ul>
+            <li>
+                <a href="#" class="flip">
+                    <img src="{{ url_for('serve_install_module', filename=app_folder ~ '/pic1.png') }}" alt="App Image" style="max-width: 100%; height: 100%;">
+                </a>
+            </li>
+            <li>
+                <a href="#" class="flip">
+                    <img src="{{ url_for('serve_install_module', filename=app_folder ~ '/pic2.png') }}" alt="App Image" style="max-width: 100%; height: 100%;">
+                </a>
+            </li>
+            <!-- Add more image tiles as needed -->
+        </ul>
+    </div>
+
+    <div class="form-container">
+        <div id="app-info">
+        <h2>App Information</h2>
+        <p><strong>App Name:</strong> <span id="app-name">Loading...</span></p>
+        <p><strong>Port:</strong> <span id="app-port">Loading...</span></p>
+        <p><strong>Requirements:</strong> <span id="app-requirements">Loading...</span></p>
+        <p><strong>Description:</strong> <span id="app-description">Loading...</span></p>
+       
+
+
+            <!-- Button to install app -->
+            <div class="form-container" style="position: fixed; left: 0; bottom: 1rem; width: 100%; text-align: center;">
+            <button id="install-button" class="login__button">INSTALL</button>
+            <button id="install-button-ghost" class="login__button-ghost"></button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const installButton = document.getElementById('install-button');
+
+            // Update app information on the page
+            document.getElementById('app-name').textContent = `${appInfo.App_name}`;
+            document.getElementById('app-port').textContent = `${appInfo.Port}`;
+            document.getElementById('app-requirements').textContent = `${appInfo.Requirements}`;
+            document.getElementById('app-description').textContent = `${appInfo.Description}`;
+
+            
+
+            // Add a click event handler to the link
+            installButton.addEventListener('click', function() {
+                installButton.style.display = 'none'; // Hide the button
+            // Client-side logic to go from /install to /execute_script
+            //window.location.href = "/get_sudo";
+                fetch('/execute_script', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ app_name: appInfo.App_name }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Script executed successfully!');
+                    } else {
+                        alert('Error executing script: ' + data.error);
+                    }
+                })
+                .finally(() => {
+                    installButton.style.display = 'block'; // Show the button again
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

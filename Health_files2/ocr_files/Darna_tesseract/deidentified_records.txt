@@ -1,0 +1,5 @@
+Please run Analyze module after uploading health documents using the Upload module. 
+This file will then be populated with deidentified records.
+Please inspect record to ensure deidentification. This is a beta version and might not be fully secure.
+For example deidentified records could be shared without risking privacy issues.
+Or deidentified records could be used in LLM's to generate personalized information.

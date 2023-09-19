@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analyze</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <style>
+         body {
+            background-color: darkgrey; /* Replace "bkg.png" with your mobile background image path */
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+       
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            width: 400px;
+            color: black;
+        }
+
+        label {
+            margin-top: 1px;
+            font-size: 18px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            background-color: white;
+            color: black;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            margin-bottom: 10px;
+        }
+
+        #ignore-words {
+            height: 200px;
+            overflow: auto;
+        }       
+
+        
+       .header-title, .header-subtitle {
+           font-family: 'Roboto', sans-serif;
+           font-weight: bold;
+           color: black;
+           text-align: center;
+       }
+
+       .header-title {
+           font-size: 35px;
+           margin-top: 20px;
+       }
+
+       .header-subtitle {
+           font-size: 20px;
+           margin-top: 2px;
+       }
+
+       .button-container {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+       }
+
+
+    </style>
+</head>
+<body>
+    <form id="input-form" action="/analyze" method="POST">
+        <h1 class="header-title">DARNA.HI</h1>
+        <h2 class="header-subtitle">Enter for analysis (5min run)</h2>
+
+        <div class="button-container">
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age" required>
+
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex" required class="login__user">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="pregnant">Pregnant</option>
+            </select>
+
+            <label for="ignore-words">Words to Deidentify <br>(Separate by '|')</label>
+            <textarea id="ignore-words" name="ignore-words" required></textarea>
+
+            <button type="submit" class="login__button"><i class="fas fa-upload"></i> ANALYZE</button>
+        </div>
+    </form>
+
+    {% if submitted %}
+    <div class="button-container">
+        <!-- Add your button content here -->
+    </div>
+    {% endif %}
+</body>
+
+</html>
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UPLOAD FILE</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<style>
+.form__container {
+            display: flex;
+    	    flex-direction: column; /* Set flex direction to column */
+    	    justify-content: center; /* Center items vertically */
+    	    align-items: center; /* Center items horizontally */
+    	    padding: 20px; /* Add padding as desired */
+    	    max-width: 270px; /* Set maximum width as desired */
+            height: 350px;
+    	    background-color: hsla(244, 16%, 92%, 0.6);
+    	    border-radius: 10px; /* Add rounded edges */
+    	    margin: 0 auto;
+            margin-top: 30px;
+            font-family: 'Roboto', sans-serif;
+            
+        }
+</style>
+<h1 style="font-family: 'Roboto', sans-serif; font-size: 45px; font-weight: bold; font-style: bold; color:black; text-align: center;">UPLOAD</h1>
+        <h2 style="font-family: 'Roboto', sans-serif; font-size: 30px; font-weight: bold; color:black; text-align: center;">DARNA.HI
+        </h2>
+        
+    <div class="form__container">
+        
+        <form method="POST" action="/upload" enctype="multipart/form-data">
+        <div style="text-align: center; font-family: 'Roboto', sans-serif;">
+            <select name="Type" class="login__user">
+            <option value="HL_File">Health File</option>
+            <option value="File">Regular File</option>
+        </select>
+            
+            <input type="File" name="File" class="login__user" accept=".pdf, .jpg, .png, .zip, .txt, .jpeg, .xml" required>
+     
+            <button type="submit" class="login__button"><i class="fas fa-upload"></i> GO</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sync</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <style>
+
+	body {
+            margin: 0;
+            padding: 0;
+            background-position: top;
+            background-image: url("{{ url_for('static', filename='bkg0.png') }}"); /* Replace "bkg.png" with your mobile background image path */
+            background-repeat: repeat;
+            background-color: #f1f1f1;
+            background-size: stretch;
+        }
+	.form_container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 90vw; /* 90% of viewport width */
+            max-width: 300px; /* Set maximum width as desired */
+            height: 400px;
+            padding: 10px;
+            background-color: hsla(244, 16%, 92%, 0.6);
+            border-radius: 10px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+        .login__input {
+  	    width: 80%;
+            padding: 12px 12px;
+            border-radius: 6px;
+            border: 2px solid var(--text-color);
+            background-color: hsla(244, 16%, 92%, 0.6);
+            color: var(--title-color);
+            font-size: var(--smaller-font-size);
+            font-weight: var(--font-medium);
+            transition: border 0.4s;
+            margin: 0 auto;
+        }
+        
+        .login__button {
+            width: 70%;
+            padding: 10px 1.5rem;
+            border-radius: 6px;
+            background: lightblue;
+            color: #000;
+            font-size: var(--small-font-size);
+            font-weight: var(--font-semi-bold);
+            box-shadow: 0 6px 24px hsla(244, 75%, 48%, 0.3);
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+
+        .login__button-ghost {
+            background: hsla(244, 16%, 92%, 0.6);
+            border: 2px solid var(--first-color);
+            color: var(--first-color);
+            box-shadow: none;
+        }
+        .hidden {
+  display: none;
+}
+    </style>
+</head>
+<body>
+<div class="form_container">
+    <h1 style="font-family: Calibri, sans-serif; font-size: 30px; font-weight: bold; color: darkblue; font-style: bold;text-align: center;">DARNA.HI</h1>
+    <h2 style="font-family: Calibri, sans-serif; font-size: 20px; font-weight: bold; color: darkblue; font-style: bold;text-align: center;">Please enter super user password to run Install:</h2>
+    <div style="text-align: center;">
+    
+    <form action="/execute_script" method="post">
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+        {% endif %}
+        <input type="password" id="sudo" placeholder="Enter sudo password">
+        <button type="submit" class="login__button" id="installButton">GO</button>
+       
+    </form>
+    <h3></h3>
+</div>
+<script>
+    const installButton = document.getElementById('installButton');
+    installButton.addEventListener('click', function() {
+        installButton.style.display = 'none'; // Hide the button
+
+        const sudoPassword = document.getElementById('sudo').value;
+
+        // Fetch request to execute the script
+        fetch('/execute_script', { 
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ sudo: sudoPassword })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Script executed successfully!');
+                window.close();
+            } else {
+                alert('Error executing script: ' + data.error);
+            }
+        })
+        .catch(error => {
+            alert('Failed to execute script: ' + error);
+        })
+        .finally(() => {
+            installButton.style.display = 'block'; // Show the button again
+        });
+    });
+</script>
+
+</body>
+</html>

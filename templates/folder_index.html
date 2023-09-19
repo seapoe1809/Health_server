@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HEALTH FOLDER</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 20;
+            padding: 0;
+            background-position: top;
+            background-color: darkgrey; 
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        h1 {
+  margin-bottom: 0.25rem; /* Adjust the margin-bottom value as desired */
+}
+
+h2 {
+  margin-top: 0.25rem; /* Adjust the margin-top value as desired */
+  margin-bottom: 0.7rem; /* Adjust the margin-top value as desired */
+}
+	
+        .form_container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+            gap: 5px; /* Gap between columns */
+            justify-items: top; /* Center items horizontally within each column */
+            align-items: top; /* Align items to the top of each column */
+            padding: 5px; /* Add padding as desired */
+            background-color: hsla(244, 16%, 92%, 0.6); /* Added background color */
+            font-family: 'Roboto', sans-serif; 
+            
+        }
+
+        ul {
+            list-style-type: none; /* Remove default list styles */
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 0rem; /* Add margin between list items */
+            background-color: #f9f9f9; /* default color*/
+        }
+        
+        li:nth-child(4n+1) {
+        background-color: turquoise; /* Light grey background color for even list items */
+    }
+        li:nth-child(4n) {
+        background-color: turquoise; /* Light grey background color for even list items */
+    }
+       .directory:before {
+        content: "\1F5C4"; /* Unicode character for 🗄️ */
+        font-size: 20px; /* Adjust the font size as desired */
+        margin-right: 5px; /* Add spacing between the icon and text */
+        font-family: 'Roboto', sans-serif;
+        
+    }
+
+    .file:before {
+        content: "\1F4C3"; /* Unicode character for 📃 */
+        font-size: 20px; /* Adjust the font size as desired */
+        margin-right: 5px; /* Add spacing between the icon and text */
+        font-family: 'Roboto', sans-serif;
+    }
+    .text {
+        margin-top: 0rem; /* Add margin as desired */
+        font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="text">
+        <h1 style="font-family: 'Roboto', sans-serif; font-size: 45px; font-weight: bold; font-style: bold; color: black; text-align: center;">FILES</h1>
+        <h2 style="font-family: 'Roboto', sans-serif; font-size: 30px; font-weight: regular; color: black; text-align: center;">DARNA.HI
+        </h2>
+        
+    </div>
+    <div>
+        <ul class="form_container">
+            {% for file in files %}
+            <li>
+                <a href="{{ file.path }}">
+                    <div>
+                        {% if file.is_folder %}
+                        <text class="directory" filename="🗄️">
+                        {% else %}
+                        <text class="file" filename='fle.png'>
+                        {% endif %}
+                    {{ file.filename }}</div>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+

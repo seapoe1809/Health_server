@@ -1,0 +1,13 @@
+cryptography
+docker
+flask
+Flask-Login
+Flask-Bcrypt
+Flask-SQLAlchemy
+gunicorn
+pdf2image
+pyzipper
+pytesseract
+qrcode
+schedule
+stdiomask

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sync</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <style>
+
+	body {
+            margin: 0;
+            padding: 0;
+            background-position: top;
+            background-color: darkgrey;
+            font-family: 'Roboto', sans-serif;
+            
+        }
+	.form_container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 90vw; /* 90% of viewport width */
+            max-width: 300px; /* Set maximum width as desired */
+            height: 400px;
+            padding: 10px;
+            background-color: hsla(244, 16%, 92%, 0.6);
+            border-radius: 10px;
+            margin: 0 auto;
+            margin-top: 50px;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .hidden {
+  display: none;
+}
+    </style>
+</head>
+<body>
+<div class="form_container">
+    <h1 style="font-family: 'Roboto', sans-serif; font-size: 40px; font-weight: bold; color: black; font-style: bold;text-align: center;">DARNA.HI</h1>
+    <h2 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">Please enter superuser password to Index & Catalog</h2>
+    <div style="text-align: center;">
+    <form id="sudopwdForm" method="POST" action="/sudopwd">
+        <input type="password" id="sudopwdInput" name="sudopwd" class="login__user" placeholder="sudopwd" required>
+        
+        <button type="submit" class="login__button" onclick="showProcessing(event)"><i class="fas fa-upload"></i> GO</button>
+    </form>
+    <div id="processingIcon" class="hidden">Processing... ☕</div>
+    </div>
+    <h3 style="font-family: 'Roboto', sans-serif; font-size: 14px; color: black;text-align: center;">Also run Grafana when iOS 'export.zip' uploaded as 'Regular File'</h3>
+</div>
+<script>
+    function showProcessing(event) {
+      // Hide the submit button
+      var goButton = document.querySelector('.login__button');
+      goButton.style.display = 'none';
+
+      // You can show the processing icon here, if you'd like
+      var processingIcon = document.getElementById('processingIcon');
+      processingIcon.classList.remove('hidden');
+      processingIcon.style.display = 'inline-block';
+    }
+</script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SUMMARY</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<style>
+.form__container {
+            display: flex;
+    	    flex-direction: column; /* Set flex direction to column */
+    	    justify-content: center; /* Center items vertically */
+    	    align-items: center; /* Center items horizontally */
+    	    padding: 20px; /* Add padding as desired */
+    	    max-width: 400px; /* Set maximum width as desired */
+            height: 40px;
+    	    background-color: hsla(244, 16%, 92%, 0.6);
+    	    border-radius: 10px; /* Add rounded edges */
+    	    margin: 0 auto;
+            margin-top: 30px;
+            font-family: 'Roboto', sans-serif;
+            
+        }
+.text__container {
+  	    display: flex;
+ 	    flex-direction: column;
+  	    justify-content: center;
+  	    align-items: top;
+ 	    padding: 20px;
+  	    max-width: 100%; /* make it responsive */
+  	    box-sizing: border-box; /* include padding and border in the element's total width and height */
+ 	    background-color: white;
+	    border-radius: 10px;
+  	    margin: 10px; /* added px */
+  	    margin-top: 30px;
+            font-family: 'Roboto', sans-serif;
+            overflow-y: auto;
+            overflow-x: auto;
+        }
+        
+#zip {
+  text-align: center;
+}
+
+
+</style>
+<h1 style="font-family: 'Roboto', sans-serif; font-size: 45px; font-weight: bold; font-style: bold; color:black; text-align: center;">HEALTH SUMMARY</h1>
+        <h2 style="font-family: 'Roboto', sans-serif; font-size: 30px; font-weight: bold; color:black; text-align: center;">DARNA.HI
+        </h2>
+        
+<!-- Original form container -->
+<div class="form__container">
+    <form method="POST" action="/summary" enctype="multipart/form-data">
+        <div style="text-align: center; font-family: 'Roboto', sans-serif;">
+            <select id="fileType" name="Type" class="login__user" onchange="showFile(); showDescription()">
+                <option value="summary">View Health Summary</option>
+                <option value="intent">View Health Intent</option>
+                <option value="deidentified">View Deidentified File</option>
+                <option value="zip">Prepare Zip Share</option>
+            </select>
+        </div>
+    </form>
+</div>
+
+<!-- Container for files and the submit button -->
+<div class="text__container">
+    <div id="summary" class="file-view">
+        <embed src="/summary/summary.pdf" type="application/pdf" style="width:100%; height:800px;"></div>
+    <div id="intent" class="file-view" style="display:none;">
+        <embed src="/ocr_files/Darna_tesseract/USPTF_Intent.txt" type="text/plain" style="width:100%; height:800px;"></div>
+    <div id="deidentified" class="file-view" style="display:none;">
+        <embed src="/ocr_files/Darna_tesseract/deidentified_records.txt" type="text/plain" style="width:100%; height:800px;"></div>
+    
+    <!-- New form embedded within text__container -->
+    <div id="zip" style="display:none;"> <!-- wrap the button with a div -->
+    <form method="POST" action="/zip_summary" enctype="multipart/form-data">
+        <p id="description" class="description"></p>
+        <button id="submitButton" type="submit" class="login__button"><i class="fas fa-upload"></i> ZIP IT</button>
+    </form>
+</div>
+</div>
+
+<script>
+    function showFile() {
+        // Hide all divs
+        document.querySelectorAll('.file-view').forEach((div) => {
+            div.style.display = 'none';
+        });
+
+        // Show the selected div
+        const selectedType = document.getElementById('fileType').value;
+        if (document.getElementById(selectedType)) {
+            document.getElementById(selectedType).style.display = 'block';
+        }
+    }
+
+    function showDescription() {
+    const selectedType = document.getElementById('fileType').value;
+    const descriptionElement = document.getElementById('description');
+    const zipDiv = document.getElementById('zip');  // Get the wrapper div
+
+    if (selectedType === 'zip') {
+        descriptionElement.textContent = 'Prepares an encrypted zip file for share with password (2023). The contents of the "summary" folder are zipped.To change password, edit darna.py';
+        zipDiv.style.display = 'block';  // Show the wrapper div
+    } else {
+        descriptionElement.textContent = '';
+        zipDiv.style.display = 'none';  // Hide the wrapper div
+    }
+}
+
+
+    // Initialize the file view and description based on the initially selected option
+    showFile();
+    showDescription();
+</script>
+
+
+</body>
+</html>
+

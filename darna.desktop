@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=DARNA. HI
+Comment=Start Darna
+Exec=/home/{user}/Health_server/darna_launch.sh
+Icon=/home/{user}/Health_server/static/favicon.png
+Terminal=true
+Type=Application
+

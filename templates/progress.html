@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>MY NODE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles3.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <style>
+         body {
+            background-color: #4D4D4D;
+            position: relative;
+            color: aqua; /* Setting font color to aqua for all text */
+        }
+        h1 {
+            text-align: center;
+        }
+
+        #xmr-price {
+            font-size: 1rem;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: center;
+            margin: 5px;
+        }
+        
+         .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70vw; /* 90% of viewport width */
+    max-width: none;
+    height: 450px;
+    background-color: hsla(aqua, 16%, 92%, 0.2);
+    border: 2px solid aqua;
+    box-shadow: 0 0 15px aqua;
+    margin: 50px auto 0; /* Top margin 50px, horizontal margins auto */
+    row-gap: 1.25rem;
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 2rem;
+    animation: jiggle 1s ease-in-out;
+}
+
+
+
+        .data-container {
+            width: 90%;
+            padding: 1px;
+            background-color: none; 
+        }
+
+        .data-container table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .data-container th,
+        .data-container td {
+            padding: 8px;
+            text-align: left;
+            border: none; /* Remove table borders */
+        }
+
+        .data-container th {
+            background-color: #f2f2f2;
+        }
+
+        .skill {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+  /* New styles for the progress line */
+.progress-bar {
+    width: 200px;
+    height: 5px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+}
+
+.progress {
+    height: 100%;
+    border-radius: 5px;
+    background: linear-gradient(to right, #00A36C 0%, #00A36C 0%);
+    animation: fillProgress 2s linear forwards;
+}
+
+@keyframes fillProgress {
+    to {
+        {% if data.percent_synced is defined and data.percent_synced is number %}
+            width: {{ data.percent_synced|round(2) }}%;
+        {% else %}
+            width: 0%;
+        {% endif %}
+    }
+}
+
+#number {
+    font-weight: 600;
+    color: #555;
+    font-size: 1.25rem;
+}
+
+
+@keyframes fillStroke {
+    100% {
+        /* to fill the percentage => 314.16 - (percentage * 3.1416) */
+        {% if data.percent_synced is defined and data.percent_synced is number %}
+            stroke-dashoffset: calc(314.16 - ({{ data.percent_synced|round(2) }} * 3.1416));
+        {% else %}
+            stroke-dashoffset: 314.16;
+        {% endif %}
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <h1 style="font-family: Calibri, sans-serif; font-size: 50px; font-weight: bold; font-style: bold;text-align: center;">MONERO NODE</h1>
+    <h2 style="font-family: Calibri, sans-serif; font-size: 30px; font-weight: regular; text-align: center;">DARNA.HI
+        </h2>
+    <div> </div>
+    {% if data %}
+    <div class="container1">
+        <div class="skill">
+            <div class="progress-bar">
+                <!-- Progress line -->
+                <div class="progress"></div>
+            </div>
+            <!-- Center the percentage text -->
+            <div>
+                <div id="number">{{ data.percent_synced|round(2) }}%</div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- First Container with subheading "My Node" -->
+        <div class="data-container">
+             <h2 style="font-family: Calibri, sans-serif; font-size: 20px; font-weight: regular; text-align: center;">NODE
+        </h2>
+            <table>
+                <tr>
+                    <td>Synchronized:</td>
+                    <td>{{ data.percent_synced|round(2) }}%</td>
+                </tr>
+           
+                <tr>
+                    <td>Size:</td>
+                    <td>{{ data.memory_size_gb|round(2) }} GB</td>
+                </tr>
+                <tr>
+                    <td>Uptime:</td>
+                    <td>{{ data.node_uptime }}</td>
+                </tr>
+                <tr>
+                    <td>Height:</td>
+                    <td>{{ data.height }}</td>
+                </tr>
+                <tr>
+                    <td>Status:</td>
+                    <td>{{ data.status }}</td>
+                </tr>
+                <tr>
+                    <td>Transactions:</td>
+                    <td>{{ data.transaction_count }}</td>
+                </tr>
+                <tr>
+                    <td>Peers:</td>
+                    <td>{{ data.network_connections }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Second Container with subheading "Monero Network" -->
+        <div class="data-container">
+            <h2 style="font-family: Calibri, sans-serif; font-size: 20px; font-weight: regular; text-align: center;">NETWORK
+        </h2>
+            <div> </div>
+            <p> </p>
+            
+            <div style="text-align: center;" id="xmr-price">XMR Price ($):</div>
+            <p> </p>
+            <table>
+                
+                
+                <tr>
+                    <td>Hash Rate</td>
+                    <td>{{ data.hash_rate }} H/s</td>
+                </tr>
+                <tr>
+                    <td>Transaction Pool Size</td>
+                    <td>{{ data.transaction_pool_size }}</td>
+                </tr>
+                <tr>
+                    <td>Block Time</td>
+                    <td>{{ data.block_time }}</td>
+                </tr>
+                <tr>
+                    <td>Memory Pool Size</td>
+                    <td>{{ data.mem_pool_size }}</td>
+                </tr>
+                <tr>
+                    <td>Network Difficulty</td>
+                    <td>{{ data.network_difficulty }} H/s</td>
+                </tr>
+                <tr>
+        	    <td>Byte Fee:</td>
+                    <td id="fee-per-byte">{{ data.fee_per_byte }}</td>
+                </tr>
+                <tr>
+                    <td>Blockhain Height</td>
+                    <td>{{ data.target_height }}</td>
+                </tr>
+                <tr>
+                    <td>Block Size</td>
+                    <td>{{ data.block_size }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+    // Function to fetch the real-time price from the Kraken API
+    async function fetchMoneroPrice() {
+        try {
+            const response = await fetch('https://api.kraken.com/0/public/Ticker?pair=XXMRZUSD');
+            const data = await response.json();
+
+            // Extract the price from the API response
+            const moneroPrice = parseFloat(data.result.XXMRZUSD.c[0]).toFixed(2);
+
+            // Update the HTML with the real-time price
+            const priceElement = document.getElementById('xmr-price');
+            priceElement.textContent = `XMR Price ($): ${moneroPrice}`;
+
+            // Calculate Fee Per Byte and update the table
+            calculateFeePerByte(moneroPrice);
+        } catch (error) {
+            console.error('Error fetching Monero price:', error);
+        }
+    }
+
+    // Fetch the Monero price every 1 hour (3600 seconds)
+    fetchMoneroPrice();
+    setInterval(fetchMoneroPrice, 3600000);
+
+    // Function to calculate Fee Per Byte and update the table
+    function calculateFeePerByte(xmrPrice) {
+        const feePerByte = parseFloat({{ data.fee_per_byte }}) / parseFloat(xmrPrice);
+        const feePerByteFormatted = feePerByte.toExponential(2);
+
+        // Update the table with the calculated Fee Per Byte value
+        const feePerByteElement = document.getElementById('fee-per-byte');
+        feePerByteElement.textContent = feePerByteFormatted + '';
+    }
+    // Function to animate the percentage completion circle
+    function animateCircle() {
+        let number = document.querySelector("#number");
+        let count = 0;
+        let percentVal = parseFloat(number.innerHTML); // Get the percentage value as a number
+        let interval = (2000 / 1000) * percentVal; // Calculate the correct interval based on the percentage value
+
+        const animation = setInterval(() => {
+            if (count >= percentVal) {
+                clearInterval(animation);
+            } else {
+                count++;
+                number.innerHTML = count + "%";
+            }
+        }, interval);
+    }
+
+    // Call the animation function when the page is loaded
+    window.addEventListener("load", animateCircle);
+</script>
+    {% else %}
+    <p>Metrics data not available.</p>
+    {% endif %}
+</body>
+
+</html>
+
