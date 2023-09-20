@@ -189,6 +189,21 @@ with open(file_path, 'w') as file:
     file.write(content)
 subprocess.run(['cp', 'darna.desktop', str(Path.home() / '.local' / 'share' / 'applications' / 'darna.desktop')])
 
+# Prepare the content for the launch.sh file
+content2 = f"""#!/bin/bash
+cd {HS_path}
+source darnav/bin/activate
+#gunicorn -w 2 -b 0.0.0.0:3001 darna:app
+nohup python3 darna.py &"""
+
+# Define the path to the .desktop file
+file_path = f'{HS_path}/darna_launch.sh'
+
+# Open the file in write mode and write the content
+with open(file_path, 'w') as file:
+    file.write(content2)
+
+
 #lets all the above startup and subsequently opens browser
 print('        🏃🏃 Waiting for final leg of installation to complete 🏃🏃')
 
