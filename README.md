@@ -54,7 +54,9 @@ Change directory into the Git repo directory
               
     cd Health_server
 
-Now run Setup of Darna. HI. This should also start your Server.
+Now install distro module and subsequently run Setup of Darna. HI. This should also start your Server.
+
+    pip install distro
               
               
     python3 setup_darna.py
