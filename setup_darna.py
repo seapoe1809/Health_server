@@ -212,7 +212,7 @@ print('        🏃🏃 Waiting for final leg of installation to complete 🏃�
 caffeine_command= "caffeine &"
 subprocess.run(caffeine_command, shell=True)
 
-subprocess.run(['darna_launch.sh'])
+subprocess.run(['./darna_launch.sh'], shell=true)
 print('        ☕ The server will be available at: ☕')
 print(f"       ☕ On other devices, http://{ip_address}:3001 ☕ ")
 print("        ☕ On same computer access at http://localhost:3001 ☕ ")
