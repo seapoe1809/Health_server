@@ -145,7 +145,7 @@ print('        ☕ You could edit IP_address in variables.py if you ever change 
 
 print('        ☕ Setting up virtual Env for Darna at darnavenv☕')
 subprocess.run(['python3', '-m',  'venv', 'darnavenv'])
-subprocess.run('source darnavenv/bin/activate && pip install -r requirements.txt && python3 setupapp.py && deactivate', shell=True)
+subprocess.run('source darnavenv/bin/activate && python3 -m pip install --force-reinstall -r requirements.txt && python3 setupapp.py && deactivate', shell=True)
 
 print('        ☕ Installing install_module from Git ☕')
 #install_module gitclone
