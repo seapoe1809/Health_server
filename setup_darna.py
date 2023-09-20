@@ -45,7 +45,7 @@ print('*********|▓****▞|**▓***▚***▓▓▚***▓**▐**▓*▓***▚***
 print('*********|▓**▚▞/***▓▓▓▓▓▚**▓**▚**▓***▚*▓*▓▓▓▓▓▚*****▓****▓***▓************')
 print('*********|▓▓▞▘/****▓*****▚*▓***▚*▓****▚▓*▓*****▚*▓▓*▓****▓*▓▓▓▓▓|*********')
 print('**************************************************************************')
-print(' ☕Step 1: Will try to install rsync to allow indexing Health_server files ☕,')
+print('        ☕ Step 1: Will try to install rsync to allow indexing Health_server files ☕,')
 print('        ☕ Caffeine (to prevent the device from falling asleep while running Health_server.☕')
 print('        ☕ Check for python version and install pip if needed ☕')
 print('        ☕ Check for linux distro and install relevant modules ☕')
@@ -192,7 +192,7 @@ subprocess.run(['cp', 'darna.desktop', str(Path.home() / '.local' / 'share' / 'a
 # Prepare the content for the launch.sh file
 content2 = f"""#!/bin/bash
 cd {HS_path}
-source darnav/bin/activate
+source darnavenv/bin/activate
 #gunicorn -w 2 -b 0.0.0.0:3001 darna:app
 nohup python3 darna.py &"""
 
@@ -212,7 +212,7 @@ print('        🏃🏃 Waiting for final leg of installation to complete 🏃�
 caffeine_command= "caffeine &"
 subprocess.run(caffeine_command, shell=True)
 
-subprocess.run([f'{HS_path}/darna_launch.sh'])
+subprocess.run(['darna_launch.sh'])
 print('        ☕ The server will be available at: ☕')
 print(f"       ☕ On other devices, http://{ip_address}:3001 ☕ ")
 print("        ☕ On same computer access at http://localhost:3001 ☕ ")
