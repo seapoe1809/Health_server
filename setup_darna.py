@@ -26,6 +26,7 @@ import socket
 import sys
 import distro
 import glob
+import venv
 
 ##setup with git: sudo apt-get install git
 ##git clone"https://github.com/seapoe1809/Health_server"
@@ -144,8 +145,13 @@ print('        ☕ You could edit IP_address in variables.py if you ever change 
 
 
 print('        ☕ Setting up virtual Env for Darna at darnavenv☕')
-subprocess.run(['python3', '-m',  'venv', 'darnavenv'])
-subprocess.run('source darnavenv/bin/activate && python3 -m pip install --force-reinstall -r requirements.txt && python3 setupapp.py && deactivate', shell=True)
+# Create and activate virtual environment
+env = venv.EnvBuilder(with_pip=True)
+env.create('darnavenv')
+
+# Install requirements
+subprocess.run(["darnavenv/bin/pip", "install", "--force-reinstall", "-r", "requirements.txt"])
+subprocess.run(["darnavenv/bin/python3", "setupapp.py"])
 
 print('        ☕ Installing install_module from Git ☕')
 #install_module gitclone
