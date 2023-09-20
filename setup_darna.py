@@ -146,8 +146,8 @@ print('        ☕ You could edit IP_address in variables.py if you ever change 
 
 print('        ☕ Setting up virtual Env for Darna at darnavenv☕')
 # Create and activate virtual environment
-env = venv.EnvBuilder(with_pip=True)
-env.create('darnavenv')
+subprocess.run(['python3', '-m', 'venv', 'darnavenv'])
+
 
 # Install requirements
 subprocess.run(["darnavenv/bin/pip", "install", "--force-reinstall", "-r", "requirements.txt"])
