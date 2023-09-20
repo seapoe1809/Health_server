@@ -26,6 +26,8 @@ from pathlib import Path
 import socket
 import sys
 import distro
+import glob
+import venv
 
 ##setup with git: sudo apt-get install git
 ##git clone"https://github.com/seapoe1809/Health_server"
@@ -52,7 +54,7 @@ print('        ☕ Check for linux distro and install relevant modules ☕')
 #get caffeine to help the computer stay awake and not fall asleep so it is available to nexcloud app
 # Get the Python version
 python_version = tuple(map(int, sys.version.split(" ")[0].split(".")))
-min_version = (3, 0)
+min_version = (3, 9)
 
 if python_version < min_version:
     print(f"Warning: You are using Python {'.'.join(map(str, python_version))}. The minimum required version is Python {'.'.join(map(str, min_version))}. Please update your Python installation and re-run setup.")
@@ -68,7 +70,10 @@ summary_dir = os.path.join(Health_files, 'summary')
 
 def run_common_commands():
     subprocess.run(['sudo', 'chmod', '750', 'Health_files/', 'Health_files2/'])
-    subprocess.run(['sudo', 'chmod', '+x', '*.sh'])
+    # List all .sh files
+    sh_files = glob.glob('*.sh')
+    for sh_file in sh_files:
+        subprocess.run(['sudo', 'chmod', '+x', sh_file])
 
 def run_apt_commands():
     subprocess.run(['sudo', 'apt-get', 'update'])
@@ -96,7 +101,7 @@ def run_platform_specific_commands():
     print(f"Detected distribution ID: {distro_name}")
 
     try:
-        subprocess.run(['docker', 'version'], check=True)
+        subprocess.run(['sudo', 'docker', 'version'], check=True)
         print('Good news, Docker already installed')
     except subprocess.CalledProcessError:
         print('Installing Docker...')
@@ -141,7 +146,8 @@ print('        ☕ You could edit IP_address in variables.py if you ever change 
 
 print('        ☕ Setting up virtual Env for Darna at darnavenv☕')
 subprocess.run(['python3', '-m',  'venv', 'darnavenv'])
-subprocess.run('source darnavenv/bin/activate && pip install -r requirements.txt && python3 setupapp.py && deactivate', shell=True)
+subprocess.run(["darnavenv/bin/pip", "install", "--force-reinstall", "-r", "requirements.txt"])
+subprocess.run(["darnavenv/bin/python3", "setupapp.py"])
 
 print('        ☕ Installing install_module from Git ☕')
 #install_module gitclone
