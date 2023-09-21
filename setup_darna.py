@@ -54,7 +54,7 @@ print('        ☕ Check for linux distro and install relevant modules ☕')
 #get caffeine to help the computer stay awake and not fall asleep so it is available to nexcloud app
 # Get the Python version
 python_version = tuple(map(int, sys.version.split(" ")[0].split(".")))
-min_version = (3, 9)
+min_version = (3, 6)
 
 if python_version < min_version:
     print(f"Warning: You are using Python {'.'.join(map(str, python_version))}. The minimum required version is Python {'.'.join(map(str, min_version))}. Please update your Python installation and re-run setup.")
@@ -140,7 +140,7 @@ def get_ip_address():
     return ip_address
 
 print('        ☕ Writing variables to variables.py ☕')
-print('        ☕ You could edit IP_address in variables.py if you ever change your device IP ☕')
+print('        🢡 You could edit IP_address in variables.py if you ever change your device IP')
 
 
 
@@ -212,7 +212,7 @@ print('        🏃🏃 Waiting for final leg of installation to complete 🏃�
 caffeine_command= "caffeine &"
 subprocess.run(caffeine_command, shell=True)
 
-subprocess.run(['./darna_launch.sh'], shell=true)
+subprocess.run(['./darna_launch.sh'], shell=True)
 print('        ☕ The server will be available at: ☕')
 print(f"       ☕ On other devices, http://{ip_address}:3001 ☕ ")
 print("        ☕ On same computer access at http://localhost:3001 ☕ ")
