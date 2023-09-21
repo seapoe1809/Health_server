@@ -54,7 +54,7 @@ print('        ☕ Check for linux distro and install relevant modules ☕')
 #get caffeine to help the computer stay awake and not fall asleep so it is available to nexcloud app
 # Get the Python version
 python_version = tuple(map(int, sys.version.split(" ")[0].split(".")))
-min_version = (3, 6)
+min_version = (3, 8)
 
 if python_version < min_version:
     print(f"Warning: You are using Python {'.'.join(map(str, python_version))}. The minimum required version is Python {'.'.join(map(str, min_version))}. Please update your Python installation and re-run setup.")
