@@ -80,7 +80,8 @@ You can check with:
     python3
     import sqlite3
  
-
+OR 
+Build python3 from source: https://github.com/seapoe1809/assets/blob/main/Python_from_source_LINUX
 
 The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish.
 
