@@ -69,9 +69,17 @@ To give feedback, please go to 'Information' card and send email to me. Or you c
 
 **Troubleshooting**
 ===================
-If you have trouble launching with $python3 darna.py, you might have to speciy the version of python. eg. in venv 
+If you encounter the missing module _sqlite3 error. You might need to uninstall python3 and reinstall with sqlite. Its preferred if you download directly from python.org. 
 
-    python3.6 darna.py 
+    sudo apt update
+    sudo apt install libsqlite3-dev
+    sudo apt install python3 python3-venv
+
+You can check with:
+
+    python3
+    import sqlite3
+ 
 
 
 The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish.
