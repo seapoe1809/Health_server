@@ -1,21 +1,3 @@
-#!/usr/bin/env python3
-#/* DARNA.HI
-# * Copyright (c) 2023 Seapoe1809   <https://github.com/seapoe1809>
-# * Copyright (c) 2023 pnmeka   <https://github.com/pnmeka>
-# * 
-# *
-# *   This program is free software: you can redistribute it and/or modify
-# *   it under the terms of the GNU General Public License as published by
-# *   the Free Software Foundation, either version 3 of the License, or
-# *   (at your option) any later version.
-# *
-# *   This program is distributed in the hope that it will be useful,
-# *   but WITHOUT ANY WARRANTY; without even the implied warranty of
-# *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# *   GNU General Public License for more details.
-# *
-# *   You should have received a copy of the GNU General Public License
-# *   along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##Sets up the flask server for viewing the folder locally at {ip_address}:3001
 from flask import Flask, render_template, send_from_directory, session, request, redirect, jsonify, url_for, Response, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
@@ -551,8 +533,7 @@ def analyze():
         folderpath = session.get('folderpath')
         env_vars = os.environ.copy()
         env_vars['FOLDERPATH'] = folderpath
-        #command = f'nohup python3 {HS_path}/analyze.py > /dev/null 2>&1 &'
-        command = f'python3 {HS_path}/analyze.py'
+        command = f'nohup python3 {HS_path}/analyze.py > /dev/null 2>&1 &'
         subprocess.Popen(command, shell=True, env=env_vars)
         print("Process time is 3 minutes")
         try:
@@ -587,31 +568,12 @@ def install():
     return render_template('install.html', app_name_file=app_name_file, app_folder=app_folder)
 
 
-
-@app.route('/get_sudo', methods=['GET', 'POST'])
-@login_required
-def get_sudo():
-    print("Inside /get_sudo - before rendering")
-    if request.method == 'POST':
-        sudo_password = request.form.get('sudo')
-        if sudo_password:
-            session['sudo'] = sudo_password  # Storing the password in the session
-            return redirect('/execute_script')  # Redirect to execute the script
-    print("Inside /get_sudo - rendering sudo.html")
-    return render_template('sudo.html')
-
-
 @app.route('/execute_script', methods=['GET', 'POST'])
 @login_required
 # executes the install script
 def execute_script():
     try:
         print("Inside /execute_script")
-        sudo_password = session.get('sudo')
-        if not sudo_password:
-            return redirect('/get_sudo')  # Redirect to get password if not in session
-
-        # The rest of your original code
         app_name = session.get('app_name_file', '').replace('.js', '')
         if not app_name:
             return jsonify(success=False, error="Missing app_name")
@@ -623,13 +585,15 @@ def execute_script():
         env_vars = os.environ.copy()
         env_vars['URL'] = url
 
-        cmd = ['sudo', 'python3', f'install_module/{app_name}/{app_name}.py']
+        cmd = ['python3', f'install_module/{app_name}/{app_name}.py']
         proc = subprocess.Popen(cmd, env=env_vars, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-        stdout, stderr = proc.communicate(sudo_password + '\n')
+        stdout, stderr = proc.communicate()
 
         if proc.returncode == 0:
             return jsonify(success=True, message="Please Refresh App")
         else:
+            print(f'Subprocess output: {stdout}')
+            print(f'Subprocess error: {stderr}')
             return jsonify(success=False, error="Non-zero return code")
 
         print(f"Session variables: {session}")
