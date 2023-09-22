@@ -133,13 +133,18 @@ Snapshots:
 
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5884.jpeg" width =300, height=550>
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5885.jpeg" width =300, height=550>
-
+<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/pic1.png" width =300, height=550>
+<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/pic2.png" width =300, height=550>
 
 
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5886.jpeg" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5889.jpeg" width =300, height=550>
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5890.jpeg" width =300, height=550>
+<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/pic22.png" width =300, height=550>
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5887.jpeg" width =300, height=550>
+<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/pic11.png" width =300, height=550>
+<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/pic12.png" width =300, height=550>
+<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5889.jpeg" width =300, height=550>
+
 
 
 **PIE IN SKY:** Is still under construction. I imagine it a way download external apps to run on your server. It adds more functionalities and dimensions to our server. Cheers! 
