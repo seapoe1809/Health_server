@@ -38,9 +38,9 @@ Please note that this is only the second version of the project, and I plan on a
 **step 1: Git clone and install Health_server**
 ==============================================
 
-a) Make sure you have python3. If not go to https://www.python.org/. Once done do the following:
+Make sure you have python3. If not go to https://www.python.org/. Once done do the following:
 
- Install Git and git clone Darna_local repo: 
+Install Git and git clone Darna_local repo: 
  (skip this step if git already installed)
  
     sudo apt-get install git
@@ -84,9 +84,10 @@ e) Tips are in 'INFORMATION' card of server.
 
 f)  The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish. For Grafana is user:'admin', password:'health'.
 
+
 **Troubleshooting**
 ===================
-If you encounter the missing module _sqlite3 error. You might need to uninstall python3 and reinstall with sqlite. Its preferred if you download directly from python.org. 
+If you encounter the missing module _sqlite3 error when you start venv. Its a known error with older python Venv. You might need to uninstall python3 and reinstall. Its preferred if you download directly from python.org. 
 
     sudo apt update
     sudo apt install libsqlite3-dev
