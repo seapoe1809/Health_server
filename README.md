@@ -134,7 +134,7 @@ Snapshots:
 
 https://github.com/pnmeka/install_module/
 
-Install Module is a set of dockerized container apps that you could add to the 'Pie in Sky'. It is completely optional.
+Install Module is a set of **dockerized container apps** that you could add to the 'Pie in Sky'. It is completely optional.
 It is maintained by another user.
 
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5880.png" width =300, height=550>
