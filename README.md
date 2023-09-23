@@ -38,9 +38,10 @@ Please note that this is only the second version of the project, and I plan on a
 **step 1: Git clone and install Health_server**
 ==============================================
 
-a) Make sure you have python3. If not go to https://www.python.org/ and update your Python. Once done do the following:
+a) Make sure you have python3. If not go to https://www.python.org/. Once done do the following:
 
- Install Git and git clone Darna_local repo: (skip this step if git already installed)
+ Install Git and git clone Darna_local repo: 
+ (skip this step if git already installed)
  
     sudo apt-get install git
 
@@ -48,11 +49,12 @@ a) Make sure you have python3. If not go to https://www.python.org/ and update y
               
     git clone https://github.com/seapoe1809/Health_server
 
- Make sure pip is installed to help install python modules (skip this step if pip is already installed)
+ Make sure pip is installed to help install python modules 
+ (skip this step if pip is already installed)
 
     sudo apt-get install python3-pip
 
-Change directory into the GHealth_server directory
+Change directory into the Health_server directory
               
     cd Health_server
 
@@ -100,6 +102,11 @@ Build python3 from source: https://github.com/seapoe1809/assets/blob/main/Python
 
 The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish.
 
+**Install Module is at : **
+https://github.com/pnmeka/install_module/
+
+Install Module is a set of dockerized container apps that you could add to the 'Pie in Sky'. It is completely optional.
+It is maintained by another user.
 
 
 Snapshots:
