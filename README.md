@@ -67,7 +67,20 @@ The server should be active at port :3001. The flask server when launched will g
         
 To give feedback, please go to 'Information' card and send email to me. Or you could start a debug here itself.
 
+**Step 2: Download your health data in the health_server folder:**
+=================================================================
 
+a) Download ios health files: On apple health app, click the profile icon, then choose "Export All Health Data" and save the zip file in files. Then click on 'UPLOAD' card on your flask server and download to your server.
+ 
+b) If you have data on EPIC MyChart or your doctors gateway, login and go to Menu, search 'sharing' or 'export', click 'yourself' and download a zip file to 'files'.  Then click on 'UPLOAD' card on your flask server and download to your server.
+ 
+c) PDF's and JPGS on mobile: 'UPLOAD' card of server and follow instructions to download to your server.
+
+d) Once files are downloaded, to UPLOAD directory, click tha 'RUN SYNC' card to move files and start Grafana.
+
+e) Tips are in 'INFORMATION' card of server. 
+
+f)  The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish. For Grafana is user:'admin', password:'health'.
 
 **Troubleshooting**
 ===================
@@ -88,21 +101,6 @@ Build python3 from source: https://github.com/seapoe1809/assets/blob/main/Python
 The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish.
 
 
-
-**Step 2: Download your health data in the health_server folder:**
-=================================================================
-
-a) Download ios health files: On apple health app, click the profile icon, then choose "Export All Health Data" and save the zip file in files. Then click on 'UPLOAD' card on your flask server and download to your server.
- 
-b) If you have data on EPIC MyChart or your doctors gateway, login and go to Menu, search 'sharing' or 'export', click 'yourself' and download a zip file to 'files'.  Then click on 'UPLOAD' card on your flask server and download to your server.
- 
-c) PDF's and JPGS on mobile: 'UPLOAD' card of server and follow instructions to download to your server.
-
-d) Once files are downloaded, to UPLOAD directory, click tha 'RUN SYNC' card to move files and start Grafana.
-
-e) Tips are in 'INFORMATION' card of server. 
-
-f)  The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish. For Grafana is user:'admin', password:'health'.
 
 Snapshots:
 =============
