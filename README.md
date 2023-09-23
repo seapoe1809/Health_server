@@ -36,11 +36,11 @@ basic requirements
 Please note that this is only the second version of the project, and I plan on adding more features and making improvements in the future.
 
 **step 1: Git clone and install Health_server**
-=======================================
+==============================================
 
 a) Make sure you have python3. If not go to https://www.python.org/ and update your Python. Once done do the following:
 
- Install Git and git clone Darna_local repo:
+ Install Git and git clone Darna_local repo: (skip this step if git already installed)
  
     sudo apt-get install git
 
@@ -48,15 +48,15 @@ a) Make sure you have python3. If not go to https://www.python.org/ and update y
               
     git clone https://github.com/seapoe1809/Health_server
 
- Make sure pip is installed to help install python modules
+ Make sure pip is installed to help install python modules (skip this step if pip is already installed)
 
     sudo apt-get install python3-pip
 
-Change directory into the Git repo directory
+Change directory into the GHealth_server directory
               
     cd Health_server
 
-Now install distro module and subsequently run Setup of Darna. HI. This should also start your Server.
+Now install 'distro' and subsequently run Setup. This should also start your Server.
 
     pip install distro
               
