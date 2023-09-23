@@ -103,13 +103,7 @@ Build python3 from source: https://github.com/seapoe1809/assets/blob/main/Python
 
 The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish.
 
-**Install Module is at : **
-========================================
 
-https://github.com/pnmeka/install_module/
-
-Install Module is a set of dockerized container apps that you could add to the 'Pie in Sky'. It is completely optional.
-It is maintained by another user.
 
 
 Snapshots:
@@ -134,6 +128,15 @@ Snapshots:
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/deidentify.png" width =300, height=550>
 
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5879.jpeg" width =300, height=550>
+
+**Code for Install Module is at : **
+========================================
+
+https://github.com/pnmeka/install_module/
+
+Install Module is a set of dockerized container apps that you could add to the 'Pie in Sky'. It is completely optional.
+It is maintained by another user.
+
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5880.png" width =300, height=550>
 
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5881.jpeg" width =300, height=550>
