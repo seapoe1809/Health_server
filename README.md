@@ -104,6 +104,8 @@ Build python3 from source: https://github.com/seapoe1809/assets/blob/main/Python
 The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish.
 
 **Install Module is at : **
+========================================
+
 https://github.com/pnmeka/install_module/
 
 Install Module is a set of dockerized container apps that you could add to the 'Pie in Sky'. It is completely optional.
