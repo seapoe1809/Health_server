@@ -89,7 +89,7 @@ The default username password: ADMIN 'health' and USER1 'wellness'. You could ch
 
 
 
-**Step3: Download your health data in the health_server folder:**
+**Step 2: Download your health data in the health_server folder:**
 =================================================================
 
 a) Download ios health files: On apple health app, click the profile icon, then choose "Export All Health Data" and save the zip file in files. Then click on 'UPLOAD' card on your flask server and download to your server.
