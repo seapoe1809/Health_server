@@ -96,6 +96,7 @@ def create_users():
     
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error_message = None
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -110,8 +111,10 @@ def login():
                 session['folderpath'] = f"{os.getcwd()}/Health_files2"
 
             return redirect(url_for('protected'))
+        else:
+            error_message = "Oops!"
 
-    return render_template('login.html')
+    return render_template('login.html', error_message=error_message)
 
 @app.route('/protected')
 @login_required
