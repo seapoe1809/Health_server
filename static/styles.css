@@ -1,7 +1,7 @@
 @media (max-width: 500px) {
     body {
         background-position: top;
-        background-color: darkgrey; 
+        background: linear-gradient(to right, #686868, #484848); 
         background-size: stretch; /* Stretch the background image to cover the entire screen */
         font-family: 'Roboto', sans-serif;
     }
@@ -12,7 +12,7 @@
         gap: 1rem; /* Gap between columns */
         justify-items: center; /* Center items horizontally within each column */
         align-items: start; /* Align items to the top of each column */
-        padding: 0.5rem; /* Add padding as desired */
+        padding: 0.3rem; /* Add padding as desired */
         background-color: hsla(244, 16%, 92%, 0.6); /* Added background color */
     }
 }
@@ -21,7 +21,7 @@
 @media (min-width: 501px) {
     body {
         background-position: top;
-        background-color: darkgrey;
+        background: linear-gradient(to right, #686868, #484848); 
         font-family: 'Roboto', sans-serif; 
     }
 }
@@ -36,7 +36,7 @@ h2 {
 }
 
 body {
-    margin: 55px;
+    margin: 53px;
     padding: 0;
     background-size: 140%;
     font-family: 'Roboto', sans-serif;
@@ -58,6 +58,34 @@ body {
     scroll-snap-type: x mandatory;
     perspective: 1000px; /* Add perspective for 3D transformations */
 }
+  
+  
+   .a {
+        stroke: black;
+        stroke-width: 500;
+        fill: none;
+    }
+    .indicator {
+        width: 2rem;
+        height: 2rem;
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1000;
+    }
+    .indicator[data-u="arrowleft"] {
+        left: 0;
+    }
+    .indicator[data-u="arrowright"] {
+        right: 0;
+    }
+    .indicator svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 
 ul {
     display: flex;
@@ -74,7 +102,7 @@ ul li {
     background-color: hsla(244, 16%, 92%, 0.6); /* Added background color */
     border: 2px solid hsla(244, 16%, 92%, 0.75); /* Added border */
     backdrop-filter: blur(20px); /* Added backdrop filter */
-    border-radius: 10px; /* Added border radius for rounded edges */
+    border-radius: 11px; /* Added border radius for rounded edges */
     margin-inline: 1.5rem; /* Updated margin between tiles */
     row-gap: 1.25rem; /* Added row gap */
     scroll-snap-align: start;
