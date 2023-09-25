@@ -15,30 +15,40 @@
   <div class="text">
    <h1 style="font-family: Roboto, sans-serif; font-size: 45px; font-weight: bold; color: black; font-style: bold;text-align: center;">LANDING</h1>
     <h2 style="font-family: Roboto, sans-serif; font-size: 30px; font-weight: regular; color: black; font-style: bold;text-align: center;">DARNA.HI</h1>
-   
+  
+ <div data-u="arrowleft" class="indicator">
+    <svg viewBox="0 0 16000 16000">
+        <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+    </svg>
+</div>
+<div data-u="arrowright" class="indicator">
+    <svg viewBox="0 0 16000 16000">
+        <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+    </svg>
+</div> 
    
   </div>
   
   <div class="container">
   
     <ul class="icons">
-      <li><a href="{{ url_for('folder_index') }}" target="_blank" class="home"><img class="icon" src="{{ url_for('static', filename='home.png') }}" alt="Home"></a></li>
       <li><a href="/upload" target="_blank" class="upload"><img class="icon" src="{{ url_for('static', filename='upload.png') }}" alt="Upload"></a></li>
-      <li><a href="/summary" target="_blank" class="healthfile"><img class="icon" src="{{ url_for('static', filename='healthfile.png') }}" alt="Health File"></a></li>
-     
       <li><a href="/launch-program" target="_blank" class="sync"><img class="icon" src="{{ url_for('static', filename='sync.png') }}" alt="Sync"></a></li>
       <li><a href="/analyze" target="_blank" class="analyze"><img class="icon" src="{{ url_for('static', filename='analyze.png') }}" alt="analyze"></a></li>
-      
+      <li><a href="/summary" target="_blank" class="healthfile"><img class="icon" src="{{ url_for('static', filename='healthfile.png') }}" alt="Health File"></a></li>
+      <li><a href="{{ url_for('folder_index') }}" target="_blank" class="home"><img class="icon" src="{{ url_for('static', filename='home.png') }}" alt="Home"></a></li>   
        <li><a href="/connect_nc" target="_blank" class="nc"><img class="icon" src="{{ url_for('static', filename='NC.png') }}" alt="nc"></a></li>
       <li><a href="/pi" class="pi"><img class="icon" src="{{ url_for('static', filename='PI.png') }}" alt="PI"></a></li>
 
     </ul>
+   
     </div>
-    <div class="form-container" style="position: fixed; left: 0; bottom: 1rem; width: 100%; text-align: center;">
+    <div class="form-container" style="position: fixed; left: 0; bottom: 2rem; width: 100%; text-align: center;">
   <a href="/logout">
     <button type="submit" class="login__button"><i class="fas fa-upload"></i> EXIT</button>
   </a>
 </div>
+
 <script>
     function hideAddressBar() {
       if (window.innerHeight > window.innerWidth) {
@@ -46,8 +56,8 @@
         window.scrollTo(0, 1);
       }
     }
-  </script>
-  
+</script>
 </body>
 </html>
+
 
