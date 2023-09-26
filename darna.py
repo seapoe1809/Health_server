@@ -112,7 +112,7 @@ def login():
 
             return redirect(url_for('protected'))
         else:
-            error_message = "Oops!"
+            error_message = "Password ⚠️"
 
     return render_template('login.html', error_message=error_message)
 
