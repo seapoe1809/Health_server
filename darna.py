@@ -537,10 +537,10 @@ def analyze():
         env_vars = os.environ.copy()
         env_vars['FOLDERPATH'] = folderpath
         command = f'nohup python3 {HS_path}/analyze.py > /dev/null 2>&1 &'
-        subprocess.Popen(command, shell=True, env=env_vars)
+        #subprocess.Popen(command, shell=True, env=env_vars)
         print("Process time is 3 minutes")
         try:
-            subprocess.Popen(command, shell=True)
+            subprocess.Popen(command, shell=True, env=env_vars)
         except Exception as e:
             print(f"Error running analyze.py: {str(e)}")
             return str(e)
