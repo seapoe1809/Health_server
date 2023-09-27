@@ -1,3 +1,21 @@
+#!/usr/bin/env python3
+#/* DARNA.HI
+# * Copyright (c) 2023 Seapoe1809   <https://github.com/seapoe1809>
+# * Copyright (c) 2023 pnmeka   <https://github.com/pnmeka>
+# * 
+# *
+# *   This program is free software: you can redistribute it and/or modify
+# *   it under the terms of the GNU General Public License as published by
+# *   the Free Software Foundation, either version 3 of the License, or
+# *   (at your option) any later version.
+# *
+# *   This program is distributed in the hope that it will be useful,
+# *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+# *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# *   GNU General Public License for more details.
+# *
+# *   You should have received a copy of the GNU General Public License
+# *   along with this program. If not, see <http://www.gnu.org/licenses/>.
 import pytesseract
 from pdf2image import convert_from_path
 import os
@@ -26,7 +44,7 @@ formatted_ignore_words = variables2.ignore_words
 
 
 # Path to the Tesseract OCR executable (change this if necessary)
-pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+pytesseract.pytesseract.tesseract_cmd = '/usr/local/bin/tesseract'
 
 ocr_files_dir = f'{ocr_files}/'
 
