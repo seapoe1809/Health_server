@@ -44,7 +44,7 @@ formatted_ignore_words = variables2.ignore_words
 
 
 # Path to the Tesseract OCR executable (change this if necessary)
-pytesseract.pytesseract.tesseract_cmd = '/usr/local/bin/tesseract'
+pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
 
 ocr_files_dir = f'{ocr_files}/'
 
