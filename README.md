@@ -107,6 +107,12 @@ Build python3 from source: https://github.com/seapoe1809/assets/blob/main/Python
 The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish.
 
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/1-2-3.png" width =300, height=550>
+**
+Venv error:** 
+Error creating venv could mean venv need to be installed or upgraded
+
+    python -m pip install --upgrade venv
+
 
 
 Snapshots:
