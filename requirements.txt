@@ -2,7 +2,7 @@ Flask<3
 Werkzeug<3
 cryptography
 docker
-flask
+#flask
 Flask-Login
 Flask-Bcrypt
 Flask-SQLAlchemy
