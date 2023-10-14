@@ -63,7 +63,7 @@ Change directory into the Health_server directory
 
 Now install 'distro' and subsequently run Setup. This should also start your Server.
 
-    pip install pip-tools, distro
+    pip install pip-tools distro
               
               
     python3 setup_darna.py
