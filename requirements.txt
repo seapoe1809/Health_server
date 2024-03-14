@@ -11,15 +11,11 @@ pytesseract
 qrcode
 schedule
 stdiomask
-
-#dicom
 pydicom
 numpy
 matplotlib
 nltk
 wordcloud
-
-#chroma# need to finesse this. will use pymupdf
 chromadb
 tqdm
 PyMuPDF 

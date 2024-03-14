@@ -1,4 +1,22 @@
-##Sets up the flask server for viewing the folder locally at {ip_address}:3001
+##Sets up the flask server for viewing locally at {ip_address}:3001
+#/* DARNA.HI
+# * Copyright (c) 2023 Seapoe1809   <https://github.com/seapoe1809>
+# * Copyright (c) 2023 pnmeka   <https://github.com/pnmeka>
+# * 
+# *
+# *   This program is free software: you can redistribute it and/or modify
+# *   it under the terms of the GNU General Public License as published by
+# *   the Free Software Foundation, either version 3 of the License, or
+# *   (at your option) any later version.
+# *
+# *   This program is distributed in the hope that it will be useful,
+# *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+# *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# *   GNU General Public License for more details.
+# *
+# *   You should have received a copy of the GNU General Public License
+# *   along with this program. If not, see <http://www.gnu.org/licenses/>.
+# */
 from flask import Flask, render_template, send_file, send_from_directory, session, request, redirect, jsonify, url_for, Response, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_bcrypt import Bcrypt
@@ -12,7 +30,7 @@ import webbrowser
 import os, subprocess
 from subprocess import run, CalledProcessError
 import getpass
-import variables
+import variables.variables
 import qrcode
 import pyzipper
 from pdf2image import convert_from_path
