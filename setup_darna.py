@@ -149,6 +149,13 @@ subprocess.run(['python3', '-m',  'venv', 'darnavenv'])
 subprocess.run(["darnavenv/bin/pip", "install", "--force-reinstall", "-r", "requirements.txt"])
 subprocess.run(["darnavenv/bin/python3", "setupapp.py"])
 
+#set up darnabot
+print('        ☕ Setting up virtual Env for Darnabot llmvenv. TensorRT required☕')
+subprocess.run(['python3', '-m',  'venv', 'darnabot/darnavenv'])
+subprocess.run(["darnabot/darnavenv/bin/pip", "install", "--force-reinstall", "-r", "requirements.txt"])
+#subprocess.run(["darnavenv/bin/python3", "setupapp.py"])
+
+
 print('        ☕ Installing install_module from Git ☕')
 #install_module gitclone
 install_module_repository='https://github.com/pnmeka/install_module'
@@ -202,6 +209,24 @@ file_path = f'{HS_path}/darna_launch.sh'
 # Open the file in write mode and write the content
 with open(file_path, 'w') as file:
     file.write(content2)
+    
+#prepare content and write to darnabot.sh file
+content3 = f"""#!/bin/bash
+cd {HS_path}/darnabot
+source llmvenv/bin/activate
+# Set the environment variable HF_HOME
+export HF_HOME={HS_path}/darnabot/cache/hub
+export HUGGINGFACE_HUB_CACHE={HS_path}/darnabot/cache/huggingface/hub
+export TRANSFORMERS_CACHE={HS_path}/darnabot/cache/
+nohup python3 darnabot.py &
+"""
+
+# Define the path to the .desktop file
+file_path2 = f'{HS_path}/darnabot.sh'
+
+# Open the file in write mode and write the content
+with open(file_path2, 'w') as file:
+    file.write(content3)
 
 
 #lets all the above startup and subsequently opens browser
