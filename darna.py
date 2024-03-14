@@ -161,19 +161,40 @@ def logout():
 @app.route('/shutdown')
 @login_required
 def shutdown():
+    messages = []
+
+    # Attempt to gracefully shut down the mainapp.py process
     try:
-        pid = subprocess.check_output(["lsof", "-t", "-i:3001"]).decode().strip()
-        if pid:  # Checks for pid
-            subprocess.run(["kill", pid], check=True)
-        else:
-            return "No process found on port 3001."
-    except subprocess.CalledProcessError:
+        subprocess.run(["pkill", "-f", "python.*darnabot.py"], check=True)
+        messages.append("mainapp.py shut down successfully.")
+        subprocess.run(["pkill", "-f", "python.*darna.py"], check=True)
+        messages.append("app2.py shut down successfully.")
+    except subprocess.CalledProcessError as e:
+        messages.append(f"Failed to shut down processes: {e}")
+    # List of ports to shut down processes on
+    ports = [3001, 3012]
+    
+    for port in ports:
         try:
-            # If fail, attempt forceful process kill
-            subprocess.run(["kill", "-9", pid], check=True)
-        except subprocess.CalledProcessError as e:
-            return f'Forceful kill failed: {e}', 500
-    return 'Server shutting down...'
+            pid = subprocess.check_output(["lsof", "-t", "-i:{}".format(port)]).decode().strip()
+            if pid:
+                # Splitting PIDs in case multiple PIDs are found
+                pids = pid.split('\n')
+                for pid in pids:
+                    subprocess.run(["kill", pid], check=True)
+                messages.append(f"Process on port {port} shut down successfully.")
+            else:
+                messages.append(f"No process found on port {port}.")
+        except subprocess.CalledProcessError:
+            try:
+                # If the first kill fails, attempt a forceful kill
+                for pid in pids:
+                    subprocess.run(["kill", "-9", pid], check=True)
+                messages.append(f"Process on port {port} force-killed successfully.")
+            except subprocess.CalledProcessError as e:
+                messages.append(f"Forceful kill failed on port {port}: {e}")
+
+    return ' '.join(messages)
     
 
 @app.route('/')
