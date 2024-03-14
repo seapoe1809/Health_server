@@ -1,0 +1,294 @@
+@media (max-width: 500px) {
+    body {
+        background-position: top;
+        background: linear-gradient(to right, #87CEEB, #A7C7E7); 
+        background-size: cover; /* Stretch the background image to cover the entire screen */
+        font-family: 'Roboto', sans-serif;
+
+    }
+
+    .form_container ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+        gap: 1rem; /* Gap between columns */
+        justify-items: center; /* Center items horizontally within each column */
+        align-items: start; /* Align items to the top of each column */
+        padding: 1rem; /* Add padding as desired */
+        background-color: hsla(244, 16%, 92%, 0.6); /* Added background color */
+    }
+}
+
+
+@media (min-width: 501px) {
+    body {
+        background-position: top;
+        background: linear-gradient(to right, #87CEEB, #A7C7E7);
+        font-family: 'Roboto', sans-serif; 
+    }
+}
+
+h1 {
+  margin-bottom: 0.25rem; /* Adjust the margin-bottom value as desired */
+}
+
+h2 {
+  margin-top: 0.25rem; /* Adjust the margin-top value as desired */
+  margin-bottom: 0.25rem; /* Adjust the margin-top value as desired */
+}
+
+body {
+    margin: 55px;
+    padding: 0;
+    background-size: 140%;
+    font-family: 'Roboto', sans-serif;
+}
+
+   .a {
+        stroke: black;
+        stroke-width: 500;
+        fill: none;
+    }
+    .indicator {
+        width: 2rem;
+        height: 2rem;
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1000;
+    }
+    .indicator[data-u="arrowleft"] {
+        left: 0;
+    }
+    .indicator[data-u="arrowright"] {
+        right: 0;
+    }
+    .indicator svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+
+.icon {
+    width: 200px; /* Adjust the width as needed */
+    height: 240px; /* Adjust the height as needed */
+}
+
+.container {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0.6rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 0.3in;
+    row-gap: 0.5rem;
+    scroll-snap-type: x mandatory;
+    perspective: 1000px; /* Add perspective for 3D transformations */
+}
+
+ul {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent tiles from wrapping to new lines */
+    justify-content: center;
+    margin: 0.1rem;
+    padding: 0.1rem;
+}
+
+ul li {
+    list-style: none;
+    margin: 20px;
+    width: 200px;
+    height: 240px;
+    background-color: hsla(244, 16%, 92%, 0.6); /* Added background color */
+    border: 2px solid hsla(244, 16%, 92%, 0.75); /* Added border */
+    backdrop-filter: blur(20px); /* Added backdrop filter */
+    border-radius: 10px; /* Added border radius for rounded edges */
+    margin-inline: 1.5rem; /* Updated margin between tiles */
+    row-gap: 1.25rem; /* Added row gap */
+    scroll-snap-align: center;
+    transform-style: preserve-3d; /* Enable 3D transformations */
+}
+
+ul li a .fa {
+    font-size: 40px;
+    color: rgba(38, 38, 38, 0.8); /* Updated icon color to 20% transparent */
+    line-height: 80px;
+    padding-left: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+ul li a { /*designs the cards*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: .5s;
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, .8);
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: orange;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center;
+}
+
+ul li a:before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: -8px;
+    height: 100%;
+    width: 8px;
+    background: #8a6f6f;
+    transform: 1s;
+    transform: rotate(0deg) skewY(-45deg);
+    backface-visibility: hidden; /* Hide the backface of the container */
+}
+
+ul li a:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: -4px;
+    height: 8px;
+    width: 100%;
+    background: gray;
+    transform: 1s;
+    transform: rotate(0deg) skewX(-45deg);
+    backface-visibility: hidden; /* Hide the backface of the element */
+}
+
+ul li a.flip:after {
+    /* Additional styles for the back face */
+    background: red; /* Set a different background color for the back face */
+    transform: rotateY(180deg) skewX(-45deg); /* Apply the necessary transformations */
+}
+
+.form_container ul li::before {
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.form_container {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.6rem;
+    height: 100vh;
+    margin-bottom: 20px;
+}
+
+.login__button {
+    width: 70%; /* Adjust the width as desired */
+    padding: 10px 1.5rem; /* Adjust the padding as desired */
+    border-radius: 6px;
+    background: turquoise; /* Set the background color to light blue */
+    color: #000; /* Set the font color to black */
+    font-family: 'Roboto', sans-serif;
+    font-size: var(--small-font-size);
+    font-weight: var(--font-semi-bold);
+    box-shadow: 0 6px 24px hsla(244, 75%, 48%, 0.5);
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.login__button-ghost {
+    background: hsla(244, 16%, 92%, 0.6);
+    border: 2px solid var(--first-color);
+    color: var(--first-color);
+    box-shadow: none;
+}
+
+/* Corrected and improved CSS */
+.form-container-choice-button {
+  display: flex;
+  justify-content: center; /* Correctly center the buttons horizontally */
+  align-items: center; /* Center the buttons vertically */
+  position: fixed; /* Keep the container fixed at the bottom */
+  left: 0; /* Align with the left edge */
+  right: 0; /* Align with the right edge */
+  bottom: 2rem; /* Distance from the bottom */
+  width: 100%;
+}
+
+.choice_button {
+  width: 2.2cm; /* Default size */
+  height: 2.2cm; /* Ensure circular shape */
+  padding: 10px; /* Corrected unit */
+  border-radius: 50%; /* Round shape */
+  background: turquoise; /* Background color */
+  color: #000; /* Font color */
+  font-family: 'Roboto', sans-serif;
+  font-size: var(--very-small-font-size);
+  font-weight: var(--font-bold);
+  box-shadow: 0 6px 24px hsla(244, 75%, 48%, 0.5);
+  margin: 0 20px; /* Horizontal margin between buttons */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.fas {
+  color: #E5E4E2; /* Change the color to light grey */
+  font-size: 40px; /* Make the icons bigger */
+}
+
+.button_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.choice_button:hover {
+  transform: translateY(-3px); /* Slight move up on hover */
+}
+
+.choice_button:active {
+  transform: translateY(1px); /* Slight move down on click */
+}
+
+/* Adjustments for laptops and larger screens */
+@media (min-width: 768px) {
+  .choice_button {
+    width: 3.1cm; /* Larger size for laptop screens */
+    height: 3.1cm; /* Maintain circular shape */
+  }
+}
+
+/* Positioning for the buttons in a banner at the bottom */
+.banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around; /* Distribute buttons evenly */
+  align-items: center;
+  height: 60px; /* Adjust based on your preference */
+  background-color: hsla(242, 45%, 90%, 0.8);
+  padding: 20px; /* Example padding */
+}
+
+ .done-button {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background-color: #F28C28;
+      color: black;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+
