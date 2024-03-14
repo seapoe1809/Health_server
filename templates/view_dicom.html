@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DICOM Viewer</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<style>
+  .play__button {
+            width: 100px;
+            padding: 10px 1.5rem;
+            border-radius: 6px;
+            background: turquoise;
+            color: #000;
+            font: "Poppins";
+            font-size: var(--small-font-size);
+            font-weight: var(--font-semi-bold);
+            box-shadow: 0 6px 24px hsla(244, 75%, 48%, 0.3);
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+
+</style>
+<body>
+<button class="done-button" onclick="window.close()">Done</button>
+
+    <div style="text-align:center;">
+        <!-- Updated src to include filename and initial slice index -->
+        <img id="dicomImage" src="/summary/slice/{{ filename }}/0" alt="DICOM Image" style="max-width:100%;">
+        <br>
+        <input type="range" id="sliceSlider" min="0" max="{{ max_slice }}" value="0">
+        <button class="play__button" id="playPauseBtn">Play</button>
+    </div>
+    <script>
+        const filename = "{{ filename }}"; // Add filename to JavaScript
+        const slider = document.getElementById('sliceSlider');
+        const image = document.getElementById('dicomImage');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        let playInterval = null;
+
+        slider.oninput = function() {
+            // Updated image.src to include filename in the path
+            image.src = `/dicom/slice/${filename}/` + this.value;
+        }
+
+        playPauseBtn.onclick = function() {
+            if (playInterval) {
+                clearInterval(playInterval);
+                playInterval = null;
+                playPauseBtn.textContent = 'Play';
+            } else {
+                playPauseBtn.textContent = 'Pause';
+                playInterval = setInterval(function() {
+                    let currentValue = parseInt(slider.value);
+                    let maxValue = parseInt(slider.max);
+                    if (currentValue >= maxValue) {
+                        slider.value = 0; // Loop back to the start
+                    } else {
+                        slider.value = currentValue + 1;
+                    }
+                    slider.oninput();
+                }, 200); // Change slice every 200 milliseconds
+            }
+        }
+    </script>
+</body>
+</html>
+

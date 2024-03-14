@@ -7,16 +7,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
  
  <style>
  body{
- background-color: darkgrey;
+ background-color: #DCDCDC;
  } 
  </style>
    
 </head>
 
 <body>
+<button class="done-button" onclick="window.close()">Done</button>
 
 
 	
@@ -223,5 +225,33 @@ Darna.HI believes that there natural synchronization between healthcare security
 
 </div>
 
+ <div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px;">
+<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">Kill Switch </h3>
+<p id="pi">
+ </p> <p>
+Kill Switch shuts down the Server on your home computer.
+ </p> <p>
+Please note it can only be restarted when you are near your home computer,
+ </p> <p>
+It might not shut down the running docker containers.
+  </p> 
+  
+</div>
+
+<!-- Central Red Button with the stop icon -->
+<div style="display: flex; justify-content: center; height: 5vh;">
+    <a href="/shutdown">
+        <button type="button" class="choice_button" style="background-image: radial-gradient(circle, #FF2400, #FF4433);">
+            <div class="button_content"><i class="fas fa-power-off"></i><span></span></div>
+        </button>
+    </a>
+</div>
+
+
+
+</div>
+
+</body>
+</html>
 
  

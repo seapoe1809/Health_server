@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FHIR Questionnaire Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://lhcfhirtools-static.nlm.nih.gov/lforms-versions/34.0.0/webcomponent/styles.css">
+    <!-- Other head elements -->
+</head>
+<style>
+.done-button {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background-color: #F28C28;
+      color: black;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    </style>
+
+<body>
+<button class="done-button" onclick="window.close()">Done</button>
+
+<div id="formContainer"></div>
+
+<script src="https://lhcfhirtools-static.nlm.nih.gov/lforms-versions/34.0.0/webcomponent/assets/lib/zone.min.js"></script>
+<script src="https://lhcfhirtools-static.nlm.nih.gov/lforms-versions/34.0.0/webcomponent/lhc-forms.js"></script>
+<script src="https://lhcfhirtools-static.nlm.nih.gov/lforms-versions/34.0.0/fhir/lformsFHIRAll.min.js"></script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const chartJsonUrl = "{{ chart_json_url }}?nocache=" + new Date().getTime();
+    fetch(chartJsonUrl)
+    /*fetch('{{ url_for('static', filename='chart.json') }}')*/
+
+    .then(response => response.json())
+    .then(fhirQuestionnaire => {
+        LForms.Util.addFormToPage(fhirQuestionnaire, 'formContainer');
+    })
+    .catch(error => console.error('Error loading the FHIR Questionnaire:', error));
+
+    // Example of a save function triggered by a button or periodically
+    window.saveEdits = function() {
+        const fhirData = LForms.Util.getFormData('formContainer');
+        fetch('/save-edits', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(fhirData),
+        })
+        .then(response => response.json())
+        .then(data => console.log('Save successful', data))
+        .catch(error => console.error('Save failed', error));
+    };
+
+    // Optional: Set up a timer for autosave, e.g., save every 5 minutes
+    setInterval(saveEdits, 5000); // 1000 ms = 1 sec
+});
+</script>
+
+
+
+</body>
+</html>
+

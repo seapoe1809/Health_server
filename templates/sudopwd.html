@@ -38,6 +38,7 @@
     </style>
 </head>
 <body>
+<button class="done-button" onclick="window.close()">Done</button>
 <div class="form_container">
     <h1 style="font-family: 'Roboto', sans-serif; font-size: 40px; font-weight: bold; color: black; font-style: bold;text-align: center;">DARNA.HI</h1>
     <h2 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">Please enter superuser password to Index & Catalog</h2>
@@ -45,7 +46,7 @@
     <form id="sudopwdForm" method="POST" action="/sudopwd">
         <input type="password" id="sudopwdInput" name="sudopwd" class="login__user" placeholder="sudopwd" required>
         
-        <button type="submit" class="login__button" onclick="showProcessing(event)"><i class="fas fa-upload"></i> GO</button>
+        <button type="submit" class="login__button" onclick="showProcessing(event)"><i></i> GO</button>
     </form>
     <div id="processingIcon" class="hidden">Processing... ☕</div>
     </div>

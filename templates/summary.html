@@ -32,23 +32,53 @@
   	    align-items: top;
  	    padding: 20px;
   	    max-width: 100%; /* make it responsive */
-  	    box-sizing: border-box; /* include padding and border in the element's total width and height */
+  	    box-sizing: border-box;
  	    background-color: white;
 	    border-radius: 10px;
   	    margin: 10px; /* added px */
   	    margin-top: 30px;
             font-family: 'Roboto', sans-serif;
             overflow-y: auto;
-            overflow-x: auto;
+            overflow-x: 100%;
         }
+        
+#pdf-container {
+    width: 100%; 
+    overflow-y: auto; /* Enables vertical scrolling if necessary */
+    overflow-x: auto; /* Hides horizontal scrollbar */
+    margin: 0 auto; /* Centers the container */
+    height: auto; /* Makes height dynamic based on content */
+    max-height: 800px; /* Limits maximum height */
+}
+
+.file-view, #pdf-container {
+    display: none; /* Ensures all are hidden by default */
+}  
         
 #zip {
   text-align: center;
 }
+    
+.vertical-grid-container {
+            background-color: lightgray;
+            padding: 10px;
+            overflow-y: auto;
+        }
 
+.link-box {
+            background-color: #f2f2f2;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: black;
+            display: block;
+            border-radius: 5px;
+        }
 
 </style>
-<h1 style="font-family: 'Roboto', sans-serif; font-size: 45px; font-weight: bold; font-style: bold; color:black; text-align: center;">HEALTH SUMMARY</h1>
+<button class="done-button" onclick="window.close()">Done</button>
+
+<h1 style="font-family: 'Roboto', sans-serif; font-size: 45px; font-weight: bold; font-style: bold; color:black; text-align: center;">SUMMARY FOLDER FILES</h1>
         <h2 style="font-family: 'Roboto', sans-serif; font-size: 30px; font-weight: bold; color:black; text-align: center;">DARNA.HI
         </h2>
         
@@ -57,43 +87,76 @@
     <form method="POST" action="/summary" enctype="multipart/form-data">
         <div style="text-align: center; font-family: 'Roboto', sans-serif;">
             <select id="fileType" name="Type" class="login__user" onchange="showFile(); showDescription()">
-                <option value="summary">View Health Summary</option>
+                
+                <option value="pdf">Summary PDF</option>
+                <option value="List">Summary Files</option>
                 <option value="intent">View Health Intent</option>
+                <option value="wordcloud">View WordCloud</option>
                 <option value="deidentified">View Deidentified File</option>
-                <option value="zip">Prepare Zip Share</option>
+                <option value="zip">Make Summary Zip</option>
             </select>
         </div>
     </form>
 </div>
 
 <!-- Container for files and the submit button -->
+
 <div class="text__container">
-    <div id="summary" class="file-view">
-        <embed src="/summary/summary.pdf" type="application/pdf" style="width:100%; height:800px;"></div>
-    <div id="intent" class="file-view" style="display:none;">
-        <embed src="/ocr_files/Darna_tesseract/USPTF_Intent.txt" type="text/plain" style="width:100%; height:800px;"></div>
-    <div id="deidentified" class="file-view" style="display:none;">
-        <embed src="/ocr_files/Darna_tesseract/deidentified_records.txt" type="text/plain" style="width:100%; height:800px;"></div>
+<!-- Container for PDF files -->
+<div id="pdf-container" style="width: 100%;">{% for pdf_file in pdf_files %}<iframe src="{{ url_for('display_file', filename=pdf_file) }}" style="width:100%; height:800px;" frameborder="0"></iframe>{% endfor %}</div>
+
+
+<div id="List" class="file-view" style="display:none;"><h3>PDFs</h3>
+    <div class="vertical-grid-container">
+        {% for file in pdf_files %}
+        <a href="{{ url_for('display_file', filename=file) }}" target="_blank" class="link-box">{{ file }}</a>
+        {% endfor %}
+    </div>
+
+    <h3>XMLs</h3>
+    <h4>Styles file required to view</h4>
+    <div class="vertical-grid-container">
+        {% for file in xml_files %}
+        <a href="{{ url_for('display_file', filename=file) }}" target="_blank" class="link-box">{{ file }}</a>
+        {% endfor %}
+    </div>
+
+    <h3>DICOMs</h3>
+    <div class="vertical-grid-container">
+        {% for file in dicom_files %}
+        <a href="{{ url_for('display_file', filename=file) }}" target="_blank" class="link-box">{{ file }}</a>
+        {% endfor %}
+    </div>
+    </div>
     
-    <!-- New form embedded within text__container -->
-    <div id="zip" style="display:none;"> <!-- wrap the button with a div -->
-    <form method="POST" action="/zip_summary" enctype="multipart/form-data">
-        <p id="description" class="description"></p>
-        <button id="submitButton" type="submit" class="login__button"><i class="fas fa-upload"></i> ZIP IT</button>
-    </form>
-</div>
+<div id="intent" class="file-view" style="display:none;"><embed src="/ocr_files/Darna_tesseract/USPTF_Intent.txt" type="text/plain" style="width:100%; height:800px;"></div>
+
+<div id="wordcloud" class="file-view" style="display:none;"><embed src="/ocr_files/Darna_tesseract/darnahi_ocr.png" style="width:100%; height:800px"></div>
+
+<div id="deidentified" class="file-view" style="display:none;"><embed src="/ocr_files/Darna_tesseract/deidentified_records.txt" type="text/plain" style="width:100%; height:800px;"></div>
+    
+<!-- New form embedded within text__container -->
+<div id="zip" style="display:none;"><form method="POST" action="/zip_summary" enctype="multipart/form-data"><p id="description" class="description"></p><button id="submitButton" type="submit" class="login__button"><i></i> ZIP IT</button></form></div>
+
 </div>
 
 <script>
+
+   
+        
     function showFile() {
-        // Hide all divs
-        document.querySelectorAll('.file-view').forEach((div) => {
+        // Hide all divs including the PDF container
+        document.querySelectorAll('.file-view, #pdf-container').forEach((div) => {
             div.style.display = 'none';
         });
 
         // Show the selected div
         const selectedType = document.getElementById('fileType').value;
-        if (document.getElementById(selectedType)) {
+        if (selectedType === 'pdf') {
+            // Show PDF container for 'pdf' selection
+            document.getElementById('pdf-container').style.display = 'block';
+        } else if (document.getElementById(selectedType)) {
+            // Show other selected div based on 'intent' or 'deidentified' or 'zip'
             document.getElementById(selectedType).style.display = 'block';
         }
     }
@@ -111,11 +174,12 @@
         zipDiv.style.display = 'none';  // Hide the wrapper div
     }
 }
-
-
-    // Initialize the file view and description based on the initially selected option
-    showFile();
+   
+window.onload = function() {
+    showFile(); // This will hide or show elements based on the initial selection
     showDescription();
+};
+
 </script>
 
 
