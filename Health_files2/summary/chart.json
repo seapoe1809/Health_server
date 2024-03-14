@@ -1,0 +1,230 @@
+{
+  "resourceType": "Questionnaire",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/4.0/StructureDefinition/Questionnaire"
+    ],
+    "tag": [
+      {
+        "code": "lformsVersion: 34.3.0"
+      }
+    ]
+  },
+  "title": "__________ DARNA.HI RECORD __________",
+  "status": "draft",
+  "date": "2024-03-09",
+  "code": [
+    {
+      "code": "phr",
+      "display": "Health Record"
+    }
+  ],
+  "item": [
+    {
+      "item": [
+        {
+          "type": "open-choice",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/questionnaire-item-control",
+                    "code": "drop-down",
+                    "display": "Drop down"
+                  }
+                ],
+                "text": "Auto-complete"
+              }
+            },
+            {
+              "url": "http://lhcforms.nlm.nih.gov/fhir/StructureDefinition/questionnaire-externallydefined",
+              "valueUri": "https://clinicaltables.nlm.nih.gov/api/conditions/v3/search"
+            }
+          ],
+          "linkId": "/conditions/condition",
+          "code": [
+            {
+              "system": "Custom",
+              "code": "condition",
+              "display": "PAST MEDICAL HISTORY"
+            }
+          ],
+          "text": "PAST MEDICAL HISTORY",
+          "required": false
+        },
+        {
+          "type": "date",
+          "linkId": "/conditions/cond_started",
+          "code": [
+            {
+              "system": "Custom",
+              "code": "cond_started",
+              "display": "Started"
+            }
+          ],
+          "text": "Started",
+          "required": false
+        }
+      ],
+      "type": "group",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "gtable",
+                "display": "Group Table"
+              }
+            ],
+            "text": "Group Table"
+          }
+        }
+      ],
+      "linkId": "/conditions",
+      "code": [
+        {
+          "system": "Custom",
+          "code": "conditions",
+          "display": "PAST MEDICAL HISTORY"
+        }
+      ],
+      "text": "PAST MEDICAL HISTORY:",
+      "_text": {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/rendering-style",
+            "valueString": ".your-class-name {\n    color: black; /* Text color */\n    font-weight: bold; /* Bold text */\n    font-size: 1.5em; /* H4 size approximation */\n    background-color: orange; /* Background color */\n}"
+          }
+        ]
+      },
+      "required": false,
+      "repeats": true
+    },
+    {
+      "item": [
+        {
+          "type": "open-choice",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/questionnaire-item-control",
+                    "code": "drop-down",
+                    "display": "Drop down"
+                  }
+                ],
+                "text": "Auto-complete"
+              }
+            },
+            {
+              "url": "http://lhcforms.nlm.nih.gov/fhir/StructureDefinition/questionnaire-externallydefined",
+              "valueUri": "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=STRENGTHS_AND_FORMS,RXCUIS"
+            }
+          ],
+          "linkId": "/medications/med_name",
+          "code": [
+            {
+              "system": "Custom",
+              "code": "med_name",
+              "display": "MEDICATIONS"
+            }
+          ],
+          "text": "MEDICATIONS",
+          "required": false
+        },
+        {
+          "type": "open-choice",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/questionnaire-item-control",
+                    "code": "drop-down",
+                    "display": "Drop down"
+                  }
+                ],
+                "text": "Drop down"
+              }
+            },
+            {
+              "url": "http://lhcforms.nlm.nih.gov/fhirExt/dataControl",
+              "valueString": "[{\"source\":{\"sourceType\":\"INTERNAL\",\"sourceLinkId\":\"/medications/med_name\"},\"construction\":\"ARRAY\",\"dataFormat\":{\"code\":\"value.data.RXCUIS\",\"text\":\"value.data.STRENGTHS_AND_FORMS\"},\"onAttribute\":\"answers\"}]"
+            }
+          ],
+          "linkId": "/medications/med_strength",
+          "code": [
+            {
+              "system": "Custom",
+              "code": "med_strength",
+              "display": "Strength"
+            }
+          ],
+          "text": "Strength",
+          "required": false
+        },
+        {
+          "type": "text",
+          "linkId": "/medications/med_instructions",
+          "code": [
+            {
+              "system": "Custom",
+              "code": "med_instructions",
+              "display": "Instructions"
+            }
+          ],
+          "text": "Instructions",
+          "required": false
+        },
+        {
+          "type": "date",
+          "linkId": "/medications/med_resupply",
+          "code": [
+            {
+              "system": "Custom",
+              "code": "med_resupply",
+              "display": "Resupply"
+            }
+          ],
+          "text": "Resupply",
+          "required": false
+        }
+      ],
+      "type": "group",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "gtable",
+                "display": "Group Table"
+              }
+            ],
+            "text": "Group Table"
+          }
+        }
+      ],
+      "linkId": "/medications",
+      "text": "MEDICATIONS:",
+      "_text": {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/rendering-style",
+            "valueString": ".your-class-name {\n    color: black; /* Text color */\n    font-weight: bold; /* Bold text */\n    font-size: 1.5em; /* H4 size approximation */\n    background-color: orange; /* Background color */\n}"
+          }
+        ]
+      },
+      "required": false,
+      "repeats": true
+    }
+  ]
+}
