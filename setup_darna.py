@@ -151,8 +151,8 @@ subprocess.run(["darnavenv/bin/python3", "setupapp.py"])
 
 #set up darnabot
 print('        ☕ Setting up virtual Env for Darnabot llmvenv. TensorRT required☕')
-subprocess.run(['python3', '-m',  'venv', 'darnabot/darnavenv'])
-subprocess.run(["darnabot/darnavenv/bin/pip", "install", "--force-reinstall", "-r", "requirements.txt"])
+subprocess.run(['python3', '-m',  'venv', 'darnabot/llmvenv'])
+subprocess.run(["darnabot/llmvenv/bin/pip", "install", "--force-reinstall", "-r", "darnabot/requirements.txt"])
 #subprocess.run(["darnavenv/bin/python3", "setupapp.py"])
 
 
@@ -201,7 +201,9 @@ content2 = f"""#!/bin/bash
 cd {HS_path}
 source darnavenv/bin/activate
 #gunicorn -w 2 -b 0.0.0.0:3001 darna:app
-nohup python3 darna.py &"""
+nohup python3 darna.py &> darna.log &
+nohup ./darnabot.sh &
+"""
 
 # Define the path to the .desktop file
 file_path = f'{HS_path}/darna_launch.sh'
@@ -218,7 +220,7 @@ source llmvenv/bin/activate
 export HF_HOME={HS_path}/darnabot/cache/hub
 export HUGGINGFACE_HUB_CACHE={HS_path}/darnabot/cache/huggingface/hub
 export TRANSFORMERS_CACHE={HS_path}/darnabot/cache/
-nohup python3 darnabot.py &
+nohup python3 darnabot.py &> darnabot.log &
 """
 
 # Define the path to the .desktop file
