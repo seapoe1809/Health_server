@@ -19,8 +19,8 @@
 import pytesseract
 from pdf2image import convert_from_path
 import os, subprocess
-import variables
-import variables2
+import variables.variables as variables
+import variables.variables2 as variables2
 import re
 import fitz
 from PIL import Image, ImageFile
