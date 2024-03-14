@@ -1,0 +1,8 @@
+pip-tools
+torch
+requests
+transformers
+gradio
+accelerate
+chromadb
+
