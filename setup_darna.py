@@ -175,7 +175,7 @@ url =f'{ip_address}:3001'
 content = f"HS_path = '{HS_path}'\nip_address= '{ip_address}'\nupload_dir ='{upload_dir}'\nHealth_files = '{Health_files}'\nocr_files = '{ocr_files}'\n"	
 
 # Open the file in write mode and write the content
-file_path =f'{HS_path}/variables.py'
+file_path =f'{HS_path}/variables/variables.py'
 with open(file_path, 'w') as file:
     file.write(content) 
 

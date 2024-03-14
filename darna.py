@@ -30,7 +30,7 @@ import webbrowser
 import os, subprocess
 from subprocess import run, CalledProcessError
 import getpass
-import variables.variables
+import variables.variables as variables
 import qrcode
 import pyzipper
 from pdf2image import convert_from_path
@@ -769,7 +769,7 @@ def analyze():
         formatted_ignore_words = ignore_words.replace(' ', '|')
 
         content = f"age = '{age}'\nsex = '{sex}'\nignore_words = '{formatted_ignore_words}'\n"
-        file_path = f"{HS_path}/variables2.py"
+        file_path = f"{HS_path}/variables/variables2.py"
 
         try:
             with open(file_path, 'w') as file:
