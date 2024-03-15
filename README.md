@@ -52,7 +52,7 @@ Please note that this is only the second version of the project, and I plan on a
 
 Make sure you have python3. If not go to https://www.python.org/. Once done do the following:
 
-(optional) Install Git and git clone Darna_local repo: 
+(Optional) Install Git and git clone Darna_local repo: 
  (skip this step if git already installed)
  
     sudo apt-get install git
@@ -61,7 +61,7 @@ Make sure you have python3. If not go to https://www.python.org/. Once done do t
               
     git clone https://github.com/seapoe1809/Health_server
 
-(optional) Make sure pip is installed to help install python modules 
+(Optional) Make sure pip is installed to help install python modules 
  (skip this step if pip is already installed)
 
     sudo apt-get install python3-pip
@@ -72,12 +72,24 @@ Change directory into the Health_server directory
 
 Now install 'distro' and subsequently run Setup. This should also start your Server.
 
-    pip install pip-tools distro
-              
-              
+    pip install pip-tools distro      
     python3 setup_darna.py
 
-The server should be active at port :3001. The flask server when launched will give you the IP address at which it launched. You could now navigate to that http://your_ip_adddress:3001 with any mobile device and access the server.             
+Once started the server should be active at port :3001. The browser should auto launch and take you there. You could easily access on the home computer at http://localhost:3001 .The flask server when launched will give you the IP address at which it launched. You could now navigate to that http://your_ip_adddress:3001 with any mobile device and access the server.  
+
+SHUTDOWN THE SERVER
+===================
+The app allows you to shut down the server remotely from anywhere. Go to the 'INFORMATION' section and scroll to the bottom to find the 'kill switch' option. Using this will shut down the server and the local language model running on it. However, to restart the server, you need to be physically at your home computer.
+
+Note: This might not shutdownt he docker containers from the sky store. You would have to remove them on your home computer.
+
+RESTART THE SERVER
+==================
+Click on the Darnahi icon from launcher. 
+OR go to Health_server directory and type:
+
+    cd Health_server
+    ./darna_launch.sh
         
 To give feedback, please go to 'Information' card and send email to me. Or you could start a debug here itself.
 
