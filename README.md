@@ -41,8 +41,8 @@ basic requirements
 #git
 #docker (if you wish to use dockerized apps in sky market)
 
-SAFE
-=====
+SAFE AND SECURE
+===============
 We are trying to take all steps to keep it safe and secure. Please note this is still a beta version. All software runs in python Virtual Env and dockerized containers. To delete it, delete the Health_server folder and thats it!
 
 Please note that this is only the second version of the project, and I plan on adding more features and making improvements in the future. You can expect constant improvement in the future.
