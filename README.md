@@ -5,6 +5,8 @@ ADMIN 'health', USER1 'wellness'; swipe left to navigate
 
 "No Fear! Forward looking open source Health server initiative!"
 
+1 MIN VIDEO DEMO:
+
 https://video.nostr.build/358cac41849256f74c66312e01732276957b922500673223e01d3315aab758e5.mp4
 
 ##DARNA Healthy Intent v2- An open source intiative - self custody of your health data
