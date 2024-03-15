@@ -100,20 +100,18 @@ FEEDBACK
         
 To give feedback, please go to 'Information' card and click on last link that allows you to email me. Or you could start a debug thread on github itself.
 
-**Step 2: Download your health data in the health_server folder:**
+**Step 2: Upload your health data in the health_server folder:**
 =================================================================
 
-a) Download ios health files: On apple health app, click the profile icon, then choose "Export All Health Data" and save the zip file in files. Then click on 'UPLOAD' card on your flask server and download to your server.
+a) Upload health files: On health app, search how to 'get your data', then choose "Export All Health Data" and save the file in iOS files. Then click on 'UPLOAD' icon (+) on your Darnahi server, choose file and upload to your server.
  
-b) If you have data on EPIC MyChart or your doctors gateway, login and go to Menu, search 'sharing' or 'export', click 'yourself' and download a zip file to 'files'.  Then click on 'UPLOAD' card on your flask server and download to your server.
+b) If you have data on EPIC MyChart or Cerner er Athena etc or your doctors gateway. Go to 'Sky App Store', click on the 'Portal Access Card', choose your EMR provider, login and go to Menu, search 'sharing' or 'export', click 'yourself' and download a zip file to 'files'.  Then click on 'UPLOAD' card on your flask server and download to your server.
  
-c) PDF's and JPGS on mobile: 'UPLOAD' card of server and follow instructions to download to your server.
+c) PDF's and JPGS on mobile: 'UPLOAD' (+) icon on the Darnahi server and follow instructions to upload to your server.
 
-d) Once files are downloaded, to UPLOAD directory, click tha 'RUN SYNC' card to move files and start Grafana.
+d) Tips are in 'INFORMATION' card of server. 
 
-e) Tips are in 'INFORMATION' card of server. 
-
-f)  The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish. For Grafana is user:'admin', password:'health'.
+e)  The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish. For Grafana is user:'admin', password:'health'.
 
 
 **Troubleshooting**
