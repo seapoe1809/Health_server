@@ -27,7 +27,7 @@ I created this project because I had trouble moving my own health data when I sw
 
 This is version 2.2 of the project, and I anticipate that there will be many more iterations and help from OSS community before it takes a good form. My goal is to make it easier for people to take ownership of their health data and store it in one place on their own computer. They can shoose to interact with local LLM or use their deidentified data to interact with powerful public LLM if they wish. Darnahi provides both- a way to interact with local LLM and also to deidentify their data seamlessly/ This way, they can decide who to share it with, how to use it and finally have more control over their own health.
 
-License?
+License? 
 ========
 This program is free software; you can redistribute it and/or modify it under the terms of the Darna modified GNU General Public License as published by the Free Software Foundation.
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You would of course have to credit Darnahi.
