@@ -187,9 +187,7 @@ It is maintained by another user.
 
 ****Why XMR here?********
 
-In the realm of financial privacy, the use of cryptocurrencies like Monero can play a role in enhancing users' security. Monero is a privacy-focused cryptocurrency that provides anonymity and obfuscation of transaction details. This can be particularly relevant in healthcare contexts.
-
-https://github.com/pnmeka/install_module/tree/main/XMRIG
+In the realm of financial privacy, the use of cryptocurrencies like Monero can play a role in enhancing users' security. Monero is a privacy-focused cryptocurrency that provides anonymity and obfuscation of transaction details. This can be particularly relevant in healthcare contexts. You could support the XMR network by running a node on your computer. More nodes make the network more resilient and futureproofs it.
 
 ========================================================================================
 
