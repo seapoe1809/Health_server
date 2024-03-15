@@ -15,8 +15,7 @@ https://video.nostr.build/358cac41849256f74c66312e01732276957b922500673223e01d33
 What is this project?
 ======================
 DARNA. HI v2 is a Forward looking project.
-
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/darnav2_mktg.png" width =300, height=550>
+ <img src="https://github.com/seapoe1809/assets/blob/main/darnahi2.2/darnav2_mktg.png" width =300, height=550>
 
 We are getting ready for the day when powerful Language models would run locally on your device and you can ask it in a very Privacy centered questions very specific to your health . In Darnahi v2.2 a language model (llama 1B) is being used to process personal health data and provide answers to questions specific to an individual's health situation. Additionally, natural language preprocessing (NLP) techniques are being used, along with a retrieval augmented architecture (RAG) to process and understand the health data by the local LLM.
 
@@ -127,6 +126,9 @@ Here it what the Analyze care does once you enter your age, sex, and words to de
     It creates a word cloud of your recent uploaded data
     It creates a vectorized database for the local LLM
  This allows the LLM to access your data and provide personalized answers to your medical questions
+
+ <img src="https://github.com/seapoe1809/assets/blob/main/darnahi2.2/darna_information.png" width =300, height=550>
+
 
  CHART IT CARD:
  ============== 
