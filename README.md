@@ -3,7 +3,7 @@ Health_Server is DARNA.HI V2
 DEMO version with features turned off: http://seapoe1809.pythonanywhere.com/login
 ADMIN 'health', USER1 'wellness'; swipe left to navigate
 
-"Swipe left! Forward looking open source Health server initiative!"
+"No Fear! Forward looking open source Health server initiative!"
 
 ##DARNA Healthy Intent v2- An open source intiative - self custody of your health data
 ##Early stage. Beta and under development and isnt secure. Please take all steps to safeguard your data. 
