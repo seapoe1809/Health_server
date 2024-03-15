@@ -192,16 +192,6 @@ Snapshots:
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5867.jpeg" width =300, height=550>
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5868.png" width =300, height=550>
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5869.jpeg" width =300, height=550>
-<img src="https://user-images.githubusercontent.com/82007659/243430051-478d54cd-5e25-4134-ba6c-21a67220b5f7.jpg" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5870.jpeg" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5871.jpeg" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5872.png" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5873.jpeg" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5874.png" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5877.jpeg" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5878.png" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/darna_information.png" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/deidentify.png" width =300, height=550>
 
 
 
@@ -221,11 +211,6 @@ In the realm of financial privacy, the use of cryptocurrencies like Monero can p
 You could choose to support the XMR network by running a node on your computer. More nodes make the network more resilient and futureproofs it.
 
 ========================================================================================
-
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5885.jpeg" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5892.jpeg" width =300, height=550>
-
-
 
 
 
