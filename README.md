@@ -1,11 +1,11 @@
-Health_Server is DARNA.HI V2
+**Health_Server is DARNA.HI V2.2**
 
 DEMO version with features turned off: http://seapoe1809.pythonanywhere.com/login
 ADMIN 'health', USER1 'wellness'; swipe left to navigate
 
 "No Fear! Forward looking open source Health server initiative!"
 
-1 MIN VIDEO DEMO:
+**1 MIN VIDEO DEMO:**
 
 https://video.nostr.build/358cac41849256f74c66312e01732276957b922500673223e01d3315aab758e5.mp4
 
