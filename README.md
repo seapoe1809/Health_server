@@ -14,24 +14,29 @@ DARNA. HI v2 is a Forward looking project.
 
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/darnav2_mktg.png" width =300, height=550>
 
-We are getting ready for the day the Language models would run locally on your device and you can ask it in a very Privacy centered way questions very specific to your health . This project is an open-source software that helps bring together your health data that is currently saved in different places like electronic health records, fitness apps, and wearable devices. 
+We are getting ready for the day when powerful Language models would run locally on your device and you can ask it in a very Privacy centered questions very specific to your health . In Darnahi v2.2 a language model (llama 1B) is being used to process personal health data and provide answers to questions specific to an individual's health situation. Additionally, natural language preprocessing (NLP) techniques are being used, along with a retrieval augmented architecture (RAG) to process and understand the health data by the local LLM.
 
-We wish for a way to aggregate your health data. One stop to bring all your health data together on your secure computer at home. When you visit a new doctor, you can choose to share your health data with them on demand through email, link etc. This way, you have full custody of your health data and can decide who to share it with and what to do with it.
+In future we hope to have a trained lightweight large language model (LLM) being employed to interpret the processed data and generate relevant health intents or responses tailored to an individual's queries about their health. To summarize Darnahi aims to leverage advanced language AI capabilities to give personalized health insights and recommendations by analyzing someone's specific health information and answering their questions in that context.
 
+The core components are NLP for understanding natural language, a RAG model for retrieving and processing relevant data, and a local LLM that ties it together by mapping the data to the queries and providing contextualized health-related output.
 
+This project is an Free and open-source software that helps bring together your health data that is currently saved in different places like electronic health records, fitness apps, and wearable devices. We wish to provide a way to aggregate your health data. One stop to bring all your health data together on your secure computer at home. When you visit a new doctor, you can choose to share your encrypted health data with them on demand through QR code, email, link etc. This way, you have full custody of your health data and can decide who to share it with and what to do with it.
+
+WHY I CARE ABOUT THIS:
 I created this project because I had trouble moving my own health data when I switched healthcare providers. As someone who works in the healthcare space, I see that current EHR solutions make it difficult to port your data, even though there are regulatory requirements to do so. It's frustrating to see that some institutions still rely on fax and scan to move data around, which shows how outdated and hidden these data porting techniques are. Given this pain point, I also see an exciting oppportunity with LLM's. I look forward to the day when superior Language models will run on your device at home.
 
-This is version 2 of the project, and I anticipate that there will be many more iterations before it takes a good form. But my goal is to make it easier for people to take ownership of their health data and store it in one place on their own computer. They can shoose to interact with LLM's with their deidentified data if they wis. This way, they can decide who to share it with and have more control over their own health.
+This is version 2.2 of the project, and I anticipate that there will be many more iterations and help from OSS community before it takes a good form. My goal is to make it easier for people to take ownership of their health data and store it in one place on their own computer. They can shoose to interact with local LLM or use their deidentified data to interact with powerful public LLM if they wish. Darnahi provides both- a way to interact with local LLM and also to deidentify their data seamlessly/ This way, they can decide who to share it with, how to use it and finally have more control over their own health.
 
 License?
 ========
 This program is free software; you can redistribute it and/or modify it under the terms of the Darna modified GNU General Public License as published by the Free Software Foundation.
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You would of course have to credit Darnahi.
 
 
 basic requirements
 =======================================
 #linux os (Debian or Ubuntu distro preferred)
+#GPU enabled computer (preferred for running local LLM)
 #python3
 #git
 #docker
