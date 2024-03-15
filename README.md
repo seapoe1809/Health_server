@@ -39,16 +39,20 @@ basic requirements
 #GPU enabled computer (preferred for running local LLM)
 #python3
 #git
-#docker
+#docker (if you wish to use dockerized apps in sky market)
 
-Please note that this is only the second version of the project, and I plan on adding more features and making improvements in the future.
+SAFE
+=====
+We are trying to take all steps to keep it safe and secure. Please note this is still a beta version. All software runs in python Virtual Env and dockerized containers. To delete it, delete the Health_server folder and thats it!
+
+Please note that this is only the second version of the project, and I plan on adding more features and making improvements in the future. You can expect constant improvement in the future.
 
 **step 1: Git clone and install Health_server**
 ==============================================
 
 Make sure you have python3. If not go to https://www.python.org/. Once done do the following:
 
-Install Git and git clone Darna_local repo: 
+(optional) Install Git and git clone Darna_local repo: 
  (skip this step if git already installed)
  
     sudo apt-get install git
@@ -57,7 +61,7 @@ Install Git and git clone Darna_local repo:
               
     git clone https://github.com/seapoe1809/Health_server
 
- Make sure pip is installed to help install python modules 
+(optional) Make sure pip is installed to help install python modules 
  (skip this step if pip is already installed)
 
     sudo apt-get install python3-pip
