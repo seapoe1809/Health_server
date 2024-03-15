@@ -113,6 +113,43 @@ d) Tips are in 'INFORMATION' card of server.
 
 e)  The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish. For Grafana is user:'admin', password:'health'.
 
+ANALYZE CARD:
+============
+Here it what the Analyze care does once you enter your age, sex, and words to de-identify separated by "|"
+    It generates a list of recommended medical screenings for your age based on USPSTF guidelines
+    It uses OCR to extract data from your uploaded files
+    It runs simple NLP to get medical data organized by headings
+    It vectorizes and chunks up the data
+    It creates a word cloud of your recent uploaded data
+    It creates a vectorized database for the local LLM
+ This allows the LLM to access your data and provide personalized answers to your medical questions
+
+ CHART IT CARD:
+ ============== 
+ It allows you to enter your past medical history and update your list of medications in a standard FHIR format.
+    This information gets stored in the 'summary' folder.
+    When you share an encrypted zip file with your healthcare provider, they can access your past medical history and current medication list in a format compatible with electronic medical records (EMRs).
+    Additionally, it creates a database from your entered information that the vectorizer can use when you ask health-related questions to the local language model.
+
+So in summary, it lets you securely share your medical details with providers while also building a personalized database to enable the AI to provide tailored health insights based on your specific medical background.
+
+HEALTH FILES CARD:
+==================
+The dropdown menu provides several options:
+    Access a 'summary.pdf' file stored in the 'summary' folder in PDF format.
+    View the personalized health intents generated when you run the 'Analyze' function.
+    View your de-identified data, which could be useful for interacting with public language models.
+    View your word cloud visualization.
+    Encrypt and zip the health files stored in the 'summary' folder.
+
+So in essence, the menu allows you to access your medical summary PDF, personalized health insights, de-identified data, data visualization, and create an encrypted package to securely share your health information.
+
+VIEW FILES
+==========
+This card allows you to view the folders on your server. You can access and view XML files, PDF files as well as DICOM files. DICOM files are a standard format used for medical imaging data like X-rays, CT scans, etc. A sample DICOM file is included on the server for demonstration purposes.
+
+So in simple terms, this gives you the ability to navigate the server's file system and open XML document files or medical imaging files in the DICOM format, with an example DICOM file provided.
+Note: some XML health files need a supporting styles.xsl file alongwith to allow viewing.
 
 **Troubleshooting**
 ===================
