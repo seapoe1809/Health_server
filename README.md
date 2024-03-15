@@ -213,13 +213,6 @@ https://github.com/pnmeka/install_module/
 Install Module is a set of **dockerized container apps** that you could add to the 'Pie in Sky'. It is completely optional.
 It is maintained by another user.
 
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5880.png" width =300, height=550>
-
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5881.jpeg" width =300, height=550>
-
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5884.jpeg" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5895.png" width =300, height=550>
-
 ****Why XMR here?****
 =====================
 
@@ -233,11 +226,6 @@ You could choose to support the XMR network by running a node on your computer. 
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5892.jpeg" width =300, height=550>
 
 
-
-
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5887.jpeg" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5894.jpeg" width =300, height=550>
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/pic11.png" width =300, height=550>
 
 
 
