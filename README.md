@@ -198,13 +198,11 @@ In the realm of financial privacy, the use of cryptocurrencies like Monero can p
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5886.jpeg" width =300, height=550>
 
 
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5893.jpeg" width =300, height=550>
 
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5887.jpeg" width =300, height=550>
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5894.jpeg" width =300, height=550>
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/pic11.png" width =300, height=550>
 
-<img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5889.jpeg" width =300, height=550>
 
 
 
