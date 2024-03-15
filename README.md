@@ -90,8 +90,15 @@ OR go to Health_server directory and type:
 
     cd Health_server
     ./darna_launch.sh
+
+DELETE THE SERVER
+=================
+If you don't want to use the health server app anymore, you can simply delete the entire 'Health_server' folder. Since the software is running in virtual environments, deleting that folder will completely remove it with just one click. No need for any special shutdown process, just delete the folder to get rid of it all.
+
+FEEDBACK
+========
         
-To give feedback, please go to 'Information' card and send email to me. Or you could start a debug here itself.
+To give feedback, please go to 'Information' card and click on last link that allows you to email me. Or you could start a debug thread on github itself.
 
 **Step 2: Download your health data in the health_server folder:**
 =================================================================
