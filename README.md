@@ -203,7 +203,7 @@ https://github.com/pnmeka/install_module/
 Install Module is a set of **dockerized container apps** that you could add to the 'Pie in Sky'. It is completely optional.
 It is maintained by another user.
 
-****Why XMR here?****
+**Why we support XMR?**
 =====================
 
 In the realm of financial privacy, the use of cryptocurrencies like Monero can play a role in enhancing users' security. Monero is a privacy-focused cryptocurrency that provides anonymity and obfuscation of transaction details. This can be particularly relevant in healthcare contexts.
