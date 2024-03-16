@@ -1,7 +1,7 @@
 @media (max-width: 500px) {
     body {
         background-position: top;
-        background: linear-gradient(to right, #686868, #484848); 
+        background: linear-gradient(to top, #C1E1C1, #C1E1C1); 
         background-size: stretch; /* Stretch the background image to cover the entire screen */
         font-family: 'Roboto', sans-serif;
     }
@@ -21,7 +21,7 @@
 @media (min-width: 501px) {
     body {
         background-position: top;
-        background: linear-gradient(to right, #686868, #484848); 
+        background: linear-gradient(to top, #C1E1C1, #C1E1C1); 
         font-family: 'Roboto', sans-serif; 
     }
 }
