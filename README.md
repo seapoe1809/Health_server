@@ -7,7 +7,11 @@
 This tool wants to be your personal health assistant. In the future, very smart computer programs called language models will run on your own devices like phones or computers. These smart programs will understand all your personal health information while keeping it private and secure just for you. You'll be able to ask the program any health questions you have, and it will provide answers specifically based on your own medical details. It's like having a knowledgeable health concierge available whenever you need, but the concierge is actually an intelligent computer program giving you personalized health advice while protecting your privacy.
 
 DEMO version with features turned off: http://seapoe1809.pythonanywhere.com/login
-ADMIN 'health', USER1 'wellness'; swipe left to navigate
+ADMIN 
+password'health' 
+USER1 
+password 'wellness'
+
 
 "Forward looking open source Health server initiative! Put simply, it aspires to be your personal health concierge."
 
