@@ -18,7 +18,7 @@ LINUX, python, Open Source.
 
 **Vision: **
 
-This will be an open source, linux based personal Health coach which additionally allows self custody data.
+This will be an open source, personal Health concierge.
 
 What is this project?
 ======================
@@ -164,6 +164,11 @@ This card allows you to view the folders on your server. You can access and view
 
 So in simple terms, this gives you the ability to navigate the server's file system and open XML document files or medical imaging files in the DICOM format, with an example DICOM file provided.
 Note: some XML health files need a supporting styles.xsl file alongwith to allow viewing.
+
+**DARNA BOT**
+============
+
+It is a locally running Llama 1B with fair lexicon of health information. It has a RAG architecture that allows a relevant piece of your history to be processed along with your quesry making the response more personalized. 
 
 **Troubleshooting**
 ===================
