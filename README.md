@@ -3,7 +3,7 @@
 DEMO version with features turned off: http://seapoe1809.pythonanywhere.com/login
 ADMIN 'health', USER1 'wellness'; swipe left to navigate
 
-"No Fear! Forward looking open source Health server initiative!"
+"Forward looking open source Health server initiative! Put simply, it aspires to be your personal health concierge."
 
 **1 MIN VIDEO DEMO:**
 
