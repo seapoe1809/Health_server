@@ -53,23 +53,17 @@
  3.  <a href="#upload"> What are the tags in 'Upload' and what are the directories for?</a> </p>
 
  <p>
- 4.  <a href="#rsync"> What does 'INDEX IT' do?.</a> </p>
+ 4.  <a href="#rsync"> What does Analyze card do?.</a> </p>
  <p>
- 5. <a href="#hi">How to generate personalized Health Intents for yourself?</a> 
+ 5. <a href="#hi">How to generate personalized Health Intents and wordcloud for yourself?</a> 
  </p> 
  <p>
  6. <a href="#deid">How to deidentify your Health data and why?</a> 
  </p> 
   <p>
  7. <a href="#pi"> What is Sky Store?</a></p>
- <p>
- 8. <a href="#using_grafana"> How to view your dashboards on 'View my Device Data' via Grafana.</a> 
- </p>
   <p>
- 9. <a href="#xmr"> How to earn while you run your server? Why Monero?</a> 
- </p>
-<p>
- 10. <a href="mailto:pmqa1980@gmail.com"> Email feedback to Darna creator </a></p>
+ 8. <a href="mailto:pmqa1980@gmail.com"> Email feedback to Darna creator </a></p>
 
  
 
@@ -80,7 +74,7 @@
     <img src="{{ url_for('static', filename='qrcode.png') }}" width="150" height="150" alt="QR Code">
     <br><br>
     <span>Scan QR Code to Connect other Devices</span>
-    <span>Please Scan QR Code above with your device camera to connect to Darnahi Server.</span>
+    <span>Please Scan QR Code above with your device camera to connect other devices to Darnahi Server on local network.</span>
   </div>
 
 <div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px;">
@@ -89,11 +83,11 @@
  </p> <p>
 This guide allows you to connect other devices to your Darna Server. It does require you to have camera enabled to scan QR codes:
  </p> <p>
- 1.  Open "camera app" on your iOS. When pointed to QR code at top of screen it should give you a link to click on. Click on link.
+ 1.  Open "camera app" on your iOS or Android. When pointed to QR code at top of screen it should give you a link to click on. Click on link.
  </p> <p>
  2.  On the bottom ribbon of browser window on your iOS device, click on '⮹'. Then choose 'Add to home screen'. 
   </p> <p>
- 3.  This link will now allow you to launch the server directly from your home screen when connected to local WIFI where the server is enabled.
+ 3.  This link will now allow you to launch the server directly from your home screen when connected to local WIFI where the server is enabled as a WebApp.
   </p> <p>
   
 </div>
@@ -102,36 +96,42 @@ This guide allows you to connect other devices to your Darna Server. It does req
 <h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">What are the tags in 'Upload' and what are the directories for?</h3>
 <p id="upload">
  </p> <p>
-Upload allows you to uload files from any other device or phone to upload files to the Darna.HI server. With drop down menu you could either tag it as a 'Health File' or a 'Regular File'.
+Upload allows you to upload files from any other device or phone to upload files to the Darna.HI server. With drop down menu you could either tag it as a 'Health File' or a 'Regular File'.
  </p> <p>
  1. Health File: It is any health document you would like to save for obvious reasons. Tagging it allows it to be catalogued to the right subdirectory. The Health subdirectories are 'summary' and 'ocr_files'. 
  </p> <p>
- 2.  Regular Files: Is any non health file that you would like to store on your health server. It gets stored in the main folder 'Health_files'. Please note however iOS health file, 'export.zip' is preferred to be stored via this tag as that allows Darna.HI to identify and run Grafana and ingester to prepare dashboards.
+ 2.  Regular Files: Are any non health file that you would like to store on your health server but isnt a HealthFile. It gets stored in the main folder but untagged. Please note however iOS health file, 'export.zip' is preferred to be stored via this tag.
   </p> <p>
-                 If 'Export.zip' file containing your iOS health kit is available in 'Upload' directory and tagged a 'Regular File', it unzips that file, initates Grafana and Influxdb, populates influxdb with your records.
+                 In future 'Export.zip' file containing your iOS health kit is available in 'Upload' directory and tagged a 'Regular File', it will unzip that file, initate Grafana and Influxdb, populate influxdb with your records.
   </p>
   <p>
- 3. The 'summary' folder is where you 'Health' tagged files are stored. When you want to make a secure zip file to share, all the files in 'summary' get zipped. The default password is '2023'. You could change it in the darna.py code if you wish.
+ 3. The 'summary' folder is where you 'Health' tagged files are stored. When you want to make a secure zip file to share, all the files in 'summary' get zipped. The default password is '2023'. You could change it in the darna.py code if you wish. It is hardcoded for obvious reasons.
   </p>
   <p>
- 4. The 'ocr_files' folder is where your 'Health' tagged files which are of pdf, jpg, png ext are stored. When Analyze-card is run it OCR's the files and stores it in a text dump in Darna_tesseract subdirectory.
+ 4. The 'ocr_files' folder is where your 'Health' tagged files of pdf, jpg, png and even json ext are stored. When Analyze-card is run it OCR's the files and stores it as a deidentified text dump in Darna_tesseract subdirectory.
   </p>
    <p>
- 5. The 'Darna_tesseract' folder is where your 'Analyze' card stores relevant files. Files such as deidentified records, Personalized Health intents are stored in this subdirectory.
+ 5. The 'Darna_tesseract' folder is where your 'Analyze' card stores relevant files. Files such as deidentified records, Personalized Health intents, wordclouds, NLP generated jsons are stored.
   </p>
   </div>
   
   <div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px;">
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">What does 'INDEX IT' do?.</h3>
+<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">What does 'Analyze it' card do?.</h3>
 <p id="rsync">
  </p> <p>
-Im glad you asked. 'INDEX IT' is many functions mashed into one. Broadly it sends tagged files to the right subdirectory. It started as just 'rsync' function that would move files from 'Upload' folder to the main folder 'Health_files'. However it has morphed as the Darna project has evolved. It does the following:
+Im glad you asked. 'ANALYZE IT' has many functions mashed into one. Once you enter your age, sex, and words to de-identify separated by "|" It generates a list of recommended medical screenings for your age based on USPSTF guidelines.
  </p> <p>
- 1.  Runs 'rsync' to move tagged files from 'Upload' folder to 'Health_files', 'summary' and 'ocr_files' folder. It additionally screens for health files with .PDF, .JPG, .PNG, .TXT files and keeps a copy in ocr_files. This allows Tesseract in 'Analyze-card' to read those documents.
+ It uses OCR to extract data from your uploaded files It runs simple NLP to get medical data organized by headings It vectorizes and chunks up the data It creates a word cloud of your recent uploaded data
  </p> <p>
- 2.  Initiates 'Caffeine' to keep you computer awake so that your server doesnt sleep when you are away. You dont need to turn off lockscreen while caffeine is running.
-  </p> <p>
- 3.  If 'Export.zip' file containing your iOS health kit is available in 'Upload' directory as a tagged 'Regular File', it unzips that file, initates Grafana and Influxdb, populates influxdb with your records.
+It creates a vectorized database for the local LLM This allows the LLM to access your data and provide personalized answers to your medical questions.
+
+</p> <p>
+How about the 'Chart it' Card?
+</p> <p>
+</p> <p>
+ It allows you to enter your past medical history and update your list of medications in a standard FHIR format. This information gets stored in the 'summary' folder. When you share an encrypted zip file with your healthcare provider, they can access your past medical history and current medication list in a format compatible with electronic medical records (EMRs). Additionally, it creates a database from your entered information that the vectorizer can use when you ask health-related questions to the local language model.
+</p> <p>
+So in summary, it lets you securely share your medical details with providers while also building a personalized database to enable the AI to provide tailored health insights based on your specific medical background.
   </p>
   </div>
 
@@ -141,7 +141,7 @@ Im glad you asked. 'INDEX IT' is many functions mashed into one. Broadly it send
  </p> 
  <!-- fourth Container --> 
  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 40px;">
- <span> Darna.HI has an analytic engine that can generate personalized Health Intents for you depending on your age and sex. Please note however Darna.HI is beta and might contain errors. Please go to USPTF for comprehensive information.</span> <br><br>
+ <span> As outlined above, Darna.HI has an analytic engine that can generate personalized Health Intents for you depending on your age and sex. Please note however Darna.HI is beta and might contain errors. Please go to USPTF for comprehensive information. The intents are guidelines based.</span> <br><br>
   <img src="{{ url_for('static', filename='darna_information.png') }}" width="340" height="600" alt="health intent"> 
 </div>
   
@@ -152,86 +152,56 @@ Im glad you asked. 'INDEX IT' is many functions mashed into one. Broadly it send
 <p id="deid">
  </p> <!-- fifth Container --> 
 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 40px;">
-<span> Darna.HI has an analytic engine that can deidentify your health data so that you can engage with LLM's. Please note however Darna.HI is beta and might contain errors. Please review file thoroughly before sharing. </span> <br><br>
+<span> Darna.HI has an analytic engine that can deidentify your health data so that you can engage with LLM's. Please note however Darna.HI is beta. Please review file thoroughly before sharing. </span> <br><br>
   <img src="{{ url_for('static', filename='deidentify.png') }}" width="340" height="600" alt="deidentify"> 
 </div>
   
-</div>
-
-
-<div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px;">
-
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">How to view your dashboards on 'View my Device Data' via Grafana.</h3>
-<p id="using_grafana">
- </p> <p>
-This guide allows you to connect other devices to the Grafana Viewer via Darna Server. It does require you to upload your device data:
- </p> <p>
- 1.  Open "Health app" on your iOS. Then download iOS health files: On Apple "Health app", click the profile icon to the top right, scroll all the way down, then choose "Export All Health Data", click "Export" and save the zip file to iOS Files folder.
- </p> <p>
- 2.  On the Darna Server, choose 'Uploads' card, click 'choose file' on next page, navigate to iOS files folder and choose 'export.zip' and finally choose 'upload'. 
-  </p> <p>
- 3.  Once the 'export.zip' is in the 'uploads' folder with 'Regular File' tag, click 'INDEX IT' card on the Darna Server. In the background, the Grafana and ingester will start. This could take time (around 5-10 min) as they could be upto 100,000 records to transfer.
-  </p> <p>
- 4.  Once the records are transferred, click on the 'View my Device Data'. This should open a new webbrowser.
-  </p> <p>
- 5.  Login using user: admin, password: health which are the default username and password
-  </p> <p>
- 6.  Once logged in click on '≡' located at top left. That is the 'Toggle Menu'.
-  </p> <p>
- 7.  Once on 'Toggle Menu', click 'Dashboards'. That will open all the active dashboards to choose from.
-  </p> <p>
- 8.  Click on any of them to view your data. If you dont see any data, you might have to start steps all over again.
-  </p> <p>
- 
- </p>
- 
  </div>
  <div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px;">
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">What is Pie in Sky? </h3>
+<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">What is Sky Store? </h3>
 <p id="pi">
  </p> <p>
-Pie in Sky is a optional card installer. It's a one click docker container installer that launches a static site to interact with the docker container.
+The Sky store is a optional card installer. It is Docker based. It's a one click docker container installer that launches a static site to interact with the docker container.
  </p> <p>
- 1.  Once set up, clicking in the card will launch the static site to interact with the docker container.
+ 1.  Click Install to begin installing the Card.
  </p> <p>
  2.  It does require docker to be installed on your computer. 
   </p> <p>
   
- 3.  Tailscale is highly recommended to be installed. It allows enterprise grade remote access to Darna Server. Once again we are not involved in development or maintenance of Tailscale. Tailscale additionally requires an iOS or Android app to be able to remote access your Darna.HI server.
+ 3.  Tailscale is highly recommended to be installed. It allows enterprise grade remote access to Darna Server. We are not involved in development or maintenance of Tailscale. Tailscale additionally requires an iOS or Android app to be able to remote access your Darna.HI server.
   </p><p>
- 4.  We hope to add more cards in future to the Pie in Sky.
+ 4.  We hope to add more cards in future to the Sky Store.
   </p>
   
 </div>
+
  <div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px;">
- 
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">How to earn while you run your server? Why Monero?</h3>
-<p id="xmr">
-In the realm of financial privacy, the use of cryptocurrencies like Monero can play a role in enhancing users' security. Monero is a privacy-focused cryptocurrency that provides anonymity and obfuscation of transaction details. This can be particularly relevant in healthcare contexts where financial transactions may be involved, such as payment for medical services or insurance claims. 
+<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">Wht Monero Node card is in Sky Store? </h3>
+<p id="pi">
  </p> <p>
-Darna.HI believes that there natural synchronization between healthcare security under HIPAA and individuals' security underscores the importance of safeguarding personal health information. By adhering to HIPAA guidelines, healthcare organizations demonstrate their commitment to protecting patient data. Simultaneously, individuals must be proactive in safeguarding their own data, employing secure practices and recognizing their role in maintaining privacy. Additionally, leveraging privacy-focused cryptocurrencies like Monero can further enhance financial security within healthcare transactions. 
- </p> <p>
-1. XMR Node Card: Allows users to run a monero node in a docker container. However please note that Single board computers will not be compatible. The requirements are docker, and X86 computer.
- </p> <p>
-2.  XMR miner: Allows user to run XMRIG pool miner in a docker container. Please note it can slow your computer
- </p> <p>
-3.  The developer of Darna.HI have no role in either developing or maintaining the XMR ecosystem 
- </p> <p>
-4.  Use at your own risk.
- </p> <p>
-5.  To stop container use $docker stop xmrig_container 
+ We support Monero!
+ </p> <p> 
+In the realm of financial privacy, the use of cryptocurrencies like Monero can play a role in enhancing users' security. Monero is a privacy-focused cryptocurrency that provides anonymity and obfuscation of transaction details. This can be particularly relevant in healthcare contexts.
 
-</p>
+ </p> <p>
+ 1.  Click Install to begin installing the Card.
+ </p> <p>
+ 2.  It does require docker to be installed on your computer. 
+  </p> <p>
+  
 
+You could choose to support the XMR network by running a node on your computer. More nodes make the network more resilient and futureproofs it.
+  </p>
+  
 </div>
 
  <div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px;">
 <h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">Kill Switch </h3>
 <p id="pi">
  </p> <p>
-Kill Switch shuts down the Server on your home computer.
+Kill Switch shuts down the Server on your home computer. It also shuts down the Darnabot running on port :3012.
  </p> <p>
-Please note it can only be restarted when you are near your home computer,
+Please note it can only be restarted when you are near your home computer.
  </p> <p>
 It might not shut down the running docker containers.
   </p> 
