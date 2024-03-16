@@ -11,6 +11,10 @@ https://video.nostr.build/358cac41849256f74c66312e01732276957b922500673223e01d33
 
 ##DARNA Healthy Intent v2- An open source intiative - self custody of your health data
 ##Early stage. Beta and under development and isnt secure. Please take all steps to safeguard your data. 
+**
+Key words:** LINUX, python, Open Source.
+
+**Vision: **This will be an open source, linux based personal Health coach which additionally allows self custody data.
 
 What is this project?
 ======================
