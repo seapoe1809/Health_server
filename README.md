@@ -1,4 +1,8 @@
 **Health_Server is DARNA.HI V2.2**
+Darnahi's Vision:
+=================
+
+This tool wants to be your personal health assistant. In the future, very smart computer programs called language models will run on your own devices like phones or computers. These smart programs will understand all your personal health information while keeping it private and secure just for you. You'll be able to ask the program any health questions you have, and it will provide answers specifically based on your own medical details. It's like having a knowledgeable health concierge available whenever you need, but the concierge is actually an intelligent computer program giving you personalized health advice while protecting your privacy.
 
 DEMO version with features turned off: http://seapoe1809.pythonanywhere.com/login
 ADMIN 'health', USER1 'wellness'; swipe left to navigate
@@ -24,6 +28,27 @@ What is this project?
 ======================
 DARNA. HI v2 is a Forward looking project.
  <img src="https://github.com/seapoe1809/assets/blob/main/darnahi2.2/darnav2_mktg.png" width =300, height=550>
+
+ About Darnahi
+=============
+Darnahi is a home computer program that securely manages your medical details and can provide personalized health recommendations and answers using artificial intelligence.
+
+- Darnahi is a personal health assistant that runs on Linux. 
+- It keeps your medical data safe at home. 
+- It can suggest health checkups based on your age and gender. 
+- It stores your medication list and medical history. 
+- It analyzes your health information using language processing. 
+- It has a smart program that can answer simple questions about your saved health data.
+
+ 
+Who is it for:
+==============
+- If you want to take control of your medical information and share it easily with new doctors, this tool is for you. 
+- You are privacy conscious.
+- You have some computer skills and an ability to use Linux or set up a virtual Linux machine. 
+- open source afficionado
+
+With this program you can create an encrypted health passport. This allows you to safely share your medical details whenever you need to see a new doctor. 
 
 We are getting ready for the day when powerful Language models would run locally on your device and you can ask it in a very Privacy centered questions very specific to your health . In Darnahi v2.2 a language model (llama 1B) is being used to process personal health data and provide answers to questions specific to an individual's health situation. Additionally, natural language preprocessing (NLP) techniques are being used, along with a retrieval augmented architecture (RAG) to process and understand the health data by the local LLM.
 
@@ -168,7 +193,14 @@ Note: some XML health files need a supporting styles.xsl file alongwith to allow
 **DARNA BOT**
 ============
 
-It is a locally running Llama 1B with fair lexicon of health information. It has a RAG architecture that allows a relevant piece of your history to be processed along with your quesry making the response more personalized. 
+
+Darnahi currenlty uses a lightweight but smart computer program called 1b Llama. It works by combining two important parts:
+
+RAG architecture: This helps the program quickly find and understand the specific health information it needs from your medical data.
+    
+ChromaDB: This is like a special database that organizes and stores your health details in a way the computer program can easily access.
+
+By using RAG and ChromaDB together, the 1b Llama program can efficiently retrieve your personal medical information and then provide health-related answers just for you based on that data.
 
 **Troubleshooting**
 ===================
