@@ -24,11 +24,16 @@ https://video.nostr.build/358cac41849256f74c66312e01732276957b922500673223e01d33
 
 **Key words:** 
 
-LINUX, python, Open Source.
+- LINUX,
+- python,
+- Open Source,
+- Self Hosted,
+- AI/ML
+- lightweight LLM BOT
 
 **Vision: **
 
-This will be an open source, personal Health concierge.
+This will be an open source, self hosted personal Health concierge.
 
 What is this project?
 ======================
@@ -37,19 +42,26 @@ DARNA. HI v2 is a Forward looking project.
 
  About Darnahi
 =============
-Darnahi is a home computer program that securely manages your medical details and can provide personalized health recommendations and answers using artificial intelligence.
+Darnahi is a home computer program that securely manages your medical details, is self hosted and can provide personalized health recommendations and answers using artificial intelligence.
 
-- Darnahi is a personal health assistant that runs on Linux. 
+- Darnahi is a personal health assistant that runs on Linux.
+- Is Locally Self Hosted
 - It keeps your medical data safe at home. 
 - It can suggest health checkups based on your age and gender. 
 - It stores your medication list and medical history. 
 - It analyzes your health information using language processing. 
 - It has a smart program that can answer simple questions about your saved health data.
 
+**Disclaimer: **
+
+Use at your own Risk. See License document. It is still in beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
+This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
+
  
 Who is it for:
 ==============
-- If you want to take control of your medical information and share it easily with new doctors, this tool is for you. 
+- If you want to take control of your medical information and share it easily with new doctors, this tool is for you.
+- You are able to Self Host
 - You are privacy conscious.
 - You have some computer skills and an ability to use Linux or set up a virtual Linux machine. 
 - open source afficionado
@@ -63,6 +75,11 @@ In future we hope to have a trained lightweight large language model (LLM) being
 The core components are NLP for understanding natural language, a RAG model for retrieving and processing relevant data, and a local LLM that ties it together by mapping the data to the queries and providing contextualized health-related output.
 
 This project is an Free and open-source software that helps bring together your health data that is currently saved in different places like electronic health records, fitness apps, and wearable devices. We wish to provide a way to aggregate your health data. One stop to bring all your health data together on your secure computer at home. When you visit a new doctor, you can choose to share your encrypted health data with them on demand through QR code, email, link etc. This way, you have full custody of your health data and can decide who to share it with and what to do with it.
+
+**Disclaimer: **
+
+Use at your own Risk. See License document. It is still beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
+This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
 
 WHY I CARE ABOUT THIS:
 I created this project because I had trouble moving my own health data when I switched healthcare providers. As someone who works in the healthcare space, I see that current EHR solutions make it difficult to port your data, even though there are regulatory requirements to do so. It's frustrating to see that some institutions still rely on fax and scan to move data around, which shows how outdated and hidden these data porting techniques are. Given this pain point, I also see an exciting oppportunity with LLM's. I look forward to the day when superior Language models will run on your device at home.
@@ -168,6 +185,10 @@ Here it what the Analyze care does once you enter your age, sex, and words to de
 
  <img src="https://github.com/seapoe1809/assets/blob/main/darnahi2.2/darna_information.png" width =300, height=550>
 
+**Disclaimer: **
+
+Use at your own Risk. See License document. It is still beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
+This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
 
  CHART IT CARD:
  ============== 
@@ -189,6 +210,11 @@ The dropdown menu provides several options:
 
 So in essence, the menu allows you to access your medical summary PDF, personalized health insights, de-identified data, data visualization, and create an encrypted package to securely share your health information.
 
+**Disclaimer: **
+
+Use at your own Risk. See License document. It is still beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
+This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
+
 VIEW FILES
 ==========
 This card allows you to view the folders on your server. You can access and view XML files, PDF files as well as DICOM files. DICOM files are a standard format used for medical imaging data like X-rays, CT scans, etc. A sample DICOM file is included on the server for demonstration purposes.
@@ -207,6 +233,11 @@ RAG architecture: This helps the program quickly find and understand the specifi
 ChromaDB: This is like a special database that organizes and stores your health details in a way the computer program can easily access.
 
 By using RAG and ChromaDB together, the 1b Llama program can efficiently retrieve your personal medical information and then provide health-related answers just for you based on that data.
+
+**Disclaimer: **
+
+Use at your own Risk. See License document. It is still beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
+This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
 
 **Troubleshooting**
 ===================
@@ -268,7 +299,12 @@ You could choose to support the XMR network by running a node on your computer. 
 
 
 
-**PIE IN SKY:** I imagine it a way download external dockerized apps to run on your server. It adds more functionalities and dimensions to our server. Cheers! 
+**PIE IN SKY:** I imagine it a way download external dockerized apps to run on your server. It adds more functionalities and dimensions to our server. We aim to add more apps in future. Cheers! 
+
+**Disclaimer: **
+
+Use at your own Risk. See License document. It is still beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
+This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
  
  Hope you like it! Please share feedback and let me know if you woudl like to contribute to this project. You could send feedback by commenting on this repo or going to 'INFORMATiON' card and clicking on link saying 'email' the writer of repo.
  
