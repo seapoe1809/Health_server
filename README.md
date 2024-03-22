@@ -6,6 +6,8 @@
 
 This tool wants to be your personal health assistant. In the future, very smart computer programs called language models will run on your own devices like phones or computers. These smart programs will understand all your personal health information while keeping it private and secure just for you. You'll be able to ask the program any health questions you have, and it will provide answers specifically based on your own medical details. It's like having a knowledgeable health concierge available whenever you need, but the concierge is actually an intelligent computer program giving you personalized health information while protecting your privacy.
 
+NOTE: This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
+
 DEMO version with features turned off: http://seapoe1809.pythonanywhere.com/login
 ADMIN 
 password'health' 
@@ -19,8 +21,10 @@ password 'wellness'
 
 https://video.nostr.build/358cac41849256f74c66312e01732276957b922500673223e01d3315aab758e5.mp4
 
-##DARNA Healthy Intent v2- An open source intiative - self custody of your health data
+##DARNA Healthy Intent v2.2- An open source intiative - self custody of your health data
 ##Early stage. Beta and under development and isnt secure. Please take all steps to safeguard your data. 
+##This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
+
 
 **Key words:** 
 
@@ -42,7 +46,7 @@ DARNA. HI v2 is a Forward looking project.
 
  About Darnahi
 =============
-Darnahi is a home computer program that securely manages your medical details, is self hosted and can provide personalized health recommendations and answers using artificial intelligence.
+Darnahi is a home computer program that securely manages your medical details, is self hosted and can provide personalized health suggestions and answers using artificial intelligence.
 
 - Darnahi is a personal health assistant that runs on Linux.
 - Is Locally Self Hosted
