@@ -268,6 +268,8 @@ Error creating venv could mean venv need to be installed or upgraded
 
     python -m pip install --upgrade venv
 
+If computer sleeps and wakes, the CUDA breaks while running Darnabot as part of its memory offload mechanism. Restarting fixes it. will add a fix next update. 
+
 
 
 Snapshots:
