@@ -34,7 +34,6 @@ from transformers import pipeline
 #pip install --upgrade transformers
 #gemma wouldnt answer medical questions but is useful for other things
 #pipe = pipeline("text-generation", model="google/gemma-2b-it", device_map="auto", torch_dtype=torch.bfloat16, token="{hf_access_token_from_your_hf_profile_settings}")
-#pipe = pipeline("text-generation", model="google/gemma-2b-it", device_map="auto", torch_dtype=torch.bfloat16, token="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")
 
 #Currently set to use tiny llama
 pipe = pipeline("text-generation", model="TinyLlama/TinyLlama-1.1B-Chat-v1.0", torch_dtype=torch.bfloat16, device_map="auto")
