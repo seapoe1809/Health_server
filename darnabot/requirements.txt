@@ -1,8 +1,10 @@
 pip-tools
-torch
 requests
-transformers
 gradio
-accelerate
 chromadb
+ollama
+Pillow
+reportlab 
+unidecode
+fpdf
 
