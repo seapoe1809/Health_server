@@ -27,12 +27,12 @@
         <ul>
             <li>
                 <a href="#" class="flip">
-                    <img src="{{ url_for('serve_install_module', filename=app_folder ~ '/pic1.png') }}" alt="App Image" style="max-width: 100%; height: 100%;">
+                    <img src="{{ url_for('serve_install_module', filename=app_folder ~ '/pic1.png') }}" alt="App Image" class="responsive-img"">
                 </a>
             </li>
             <li>
                 <a href="#" class="flip">
-                    <img src="{{ url_for('serve_install_module', filename=app_folder ~ '/pic2.png') }}" alt="App Image" style="max-width: 100%; height: 100%;">
+                    <img src="{{ url_for('serve_install_module', filename=app_folder ~ '/pic2.png') }}" alt="App Image" class="responsive-img">
                 </a>
             </li>
             <!-- Add more image tiles as needed -->
@@ -41,11 +41,13 @@
 
     <div class="form-container">
         <div id="app-info">
-        <h2>App Information</h2>
+        <h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold; text-align: center;">App Information</h3>
+        <div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px; padding: 5px; margin-left: 20px; margin-bottom:80px;">
         <p><strong>App Name:</strong> <span id="app-name">Loading...</span></p>
         <p><strong>Port:</strong> <span id="app-port">Loading...</span></p>
         <p><strong>Requirements:</strong> <span id="app-requirements">Loading...</span></p>
         <p><strong>Description:</strong> <span id="app-description">Loading...</span></p>
+        </div>
        
 
 
