@@ -1,191 +1,114 @@
-@media (max-width: 500px) {
-    body {
-        background-position: top;
-        background: linear-gradient(to right, #87CEEB, #A7C7E7); 
-        background-size: cover; /* Stretch the background image to cover the entire screen */
-        font-family: 'Roboto', sans-serif;
-
-    }
-
-    .form_container ul {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Two equal columns */
-        gap: 1rem; /* Gap between columns */
-        justify-items: center; /* Center items horizontally within each column */
-        align-items: start; /* Align items to the top of each column */
-        padding: 1rem; /* Add padding as desired */
-        background-color: hsla(244, 16%, 92%, 0.6); /* Added background color */
-    }
-}
-
-
-@media (min-width: 501px) {
-    body {
-        background-position: top;
-        background: linear-gradient(to right, #87CEEB, #A7C7E7);
-        font-family: 'Roboto', sans-serif; 
-    }
-}
 
 h1 {
-  margin-bottom: 0.25rem; /* Adjust the margin-bottom value as desired */
-}
+    margin-top: 0rem;
+    margin-bottom: 0rem; /* Adjust the margin-bottom value as desired */
+    }
 
 h2 {
   margin-top: 0.25rem; /* Adjust the margin-top value as desired */
   margin-bottom: 0.25rem; /* Adjust the margin-top value as desired */
-}
+    }
 
 body {
-    margin: 55px;
+    margin: 0px;
     padding: 0;
-    background-size: 140%;
+    background-size: 100%;
     font-family: 'Roboto', sans-serif;
-}
-
-   .a {
-        stroke: black;
-        stroke-width: 500;
-        fill: none;
-    }
-    .indicator {
-        width: 2rem;
-        height: 2rem;
-        position: fixed;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 1000;
-    }
-    .indicator[data-u="arrowleft"] {
-        left: 0;
-    }
-    .indicator[data-u="arrowright"] {
-        right: 0;
-    }
-    .indicator svg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
+    background-color: #C0C0C0;
     
-
-.icon {
-    width: 200px; /* Adjust the width as needed */
-    height: 240px; /* Adjust the height as needed */
 }
+
 
 .container {
-    display: flex;
-    justify-content: flex-start;
-    margin: 0.6rem;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin-top: 0.3in;
-    row-gap: 0.5rem;
-    scroll-snap-type: x mandatory;
-    perspective: 1000px; /* Add perspective for 3D transformations */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50vh;
+            min-width:50vh;
+            margin: 0;
+            padding: 10px;
+            background: radial-gradient(circle, #5D3FD3, #C0C0C0);
+            overflow:visible;
+        }
+        .responsive-img {
+            max-width: 100%; /* Ensures the image doesn't exceed the container's width */
+            height: auto;    /* Maintains the aspect ratio */
+            display: block;  /* Avoids extra space below the image */
+            margin: 0 auto;  /* Centers the image horizontally if needed */
 }
 
-ul {
-    display: flex;
-    flex-wrap: nowrap; /* Prevent tiles from wrapping to new lines */
-    justify-content: center;
-    margin: 0.1rem;
-    padding: 0.1rem;
-}
 
-ul li {
-    list-style: none;
-    margin: 20px;
-    width: 200px;
-    height: 240px;
-    background-color: hsla(244, 16%, 92%, 0.6); /* Added background color */
-    border: 2px solid hsla(244, 16%, 92%, 0.75); /* Added border */
-    backdrop-filter: blur(20px); /* Added backdrop filter */
-    border-radius: 10px; /* Added border radius for rounded edges */
-    margin-inline: 1.5rem; /* Updated margin between tiles */
-    row-gap: 1.25rem; /* Added row gap */
-    scroll-snap-align: center;
-    transform-style: preserve-3d; /* Enable 3D transformations */
-}
+        .icons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            padding: 0.25rem;
+            margin: 0rem;
+        }
 
-ul li a .fa {
-    font-size: 40px;
-    color: rgba(38, 38, 38, 0.8); /* Updated icon color to 20% transparent */
-    line-height: 80px;
-    padding-left: 10px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
+        .icons li {
+            list-style: none;
+            width: 160px;
+            height: 180px;
+            background-color: hsla(244, 16%, 92%, 0.6);
+            border: 2px solid hsla(244, 16%, 92%, 0.75);
+            backdrop-filter: blur(20px);
+            border-radius: 11px;
+        }
 
-ul li a { /*designs the cards*/
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: .5s;
-    box-shadow: -5px 5px 10px rgba(0, 0, 0, .8);
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    background-color: orange;
-    background-repeat: no-repeat;
-    background-size: cover; 
-    background-position: center;
-}
+        .icons li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            transition: .5s;
+            box-shadow: -5px 5px 10px rgba(0, 0, 0, .3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
 
-ul li a:before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: -8px;
-    height: 100%;
-    width: 8px;
-    background: #8a6f6f;
-    transform: 1s;
-    transform: rotate(0deg) skewY(-45deg);
-    backface-visibility: hidden; /* Hide the backface of the container */
-}
+        .icon {
+            width: 160px;
+            height: 180px;
+            
+        }
 
-ul li a:after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: -4px;
-    height: 8px;
-    width: 100%;
-    background: gray;
-    transform: 1s;
-    transform: rotate(0deg) skewX(-45deg);
-    backface-visibility: hidden; /* Hide the backface of the element */
-}
+        .icons li a:hover {
+            transform: translateY(-5px);
+            box-shadow: -8px 8px 15px rgba(0, 0, 0, .4);
+        }
 
-ul li a.flip:after {
-    /* Additional styles for the back face */
-    background: red; /* Set a different background color for the back face */
-    transform: rotateY(180deg) skewX(-45deg); /* Apply the necessary transformations */
-}
-
-.form_container ul li::before {
-    font-size: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
 .form_container {
     font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0.6rem;
-    height: 100vh;
-    margin-bottom: 20px;
+    height: 50vh;
+    position: absolute; /* or you could use 'fixed' depending on your needs */  top: 0in;
+    bottom: 1in;
+    left: 50%;
+    transform: translateX(-50%); /* this will ensure it stays horizontally centered */
 }
+
+.login__user {
+            width: 80%;
+            padding: 12px 12px;
+            border-radius: 6px;
+            border: 2px solid var(--text-color);
+            background-color: hsla(244, 16%, 92%, 0.6);
+            text-align: center;
+            color: var(--title-color);
+            font-size: var(--smaller-font-size);
+            font: "Roboto";
+            font-weight: var(--font-medium);
+            transition: border 0.4s;
+            margin: 0 auto;
+            margin-bottom: 20px; /* Add margin below the element */
+        }
+
 
 .login__button {
     width: 70%; /* Adjust the width as desired */
@@ -207,6 +130,19 @@ ul li a.flip:after {
     color: var(--first-color);
     box-shadow: none;
 }
+
+ .done-button {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background-color: #F28C28;
+      color: black;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
 
 /* Corrected and improved CSS */
 .form-container-choice-button {
@@ -279,16 +215,73 @@ ul li a.flip:after {
   padding: 20px; /* Example padding */
 }
 
- .done-button {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      background-color: #F28C28;
-      color: black;
-      padding: 10px;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
+@media (min-width: 501px) {
+    body {
+        background-position: top;
+        background: linear-gradient(to right, #87CEEB, #C0C0C0);
+        font-family: 'Roboto', sans-serif; 
     }
+    .icons {
+        display: flex;
+        justify-content: space-around;
+        
+    }
+    
+    .icons li {
+        width: 200px;
+        height: 240px;
+        
+    }
+    
+    .icon {
+        width: 200px;
+        height: 240px;
+        background-color: #F28C28;
+    }
+    
+    .container {
+        display: flex;
+        justify-content: flex-start;
+        margin: 3rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-top: 5rem;
+        row-gap: 0.5rem;
+        scroll-snap-type: x mandatory;
+        scroll-padding: 1rem; /* Ensure proper padding for smooth snapping */
+        perspective: 1000px; /* Add perspective for 3D transformations */
+    }
+    .container .item {
+        scroll-snap-align: center; /* Align items centrally within the snap */
+        flex-shrink: 0; /* Prevent items from shrinking */
+        min-width: 150px; /* Set a minimum width to avoid being cut off */
+        margin-right: 1rem; /* Add some space between items */
+        transform: rotateY(0deg); /* Adjust for 3D effect */
+    }
+
+ul {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent tiles from wrapping to new lines */
+    justify-content: center;
+    margin: 0.1rem;
+    padding: 0.1rem;
+}
+
+ul li {
+    list-style: none;
+    margin: 20px;
+    width: 200px;
+    height: 240px;
+    background-color: hsla(244, 16%, 92%, 0.6); /* Added background color */
+    border: 2px solid hsla(244, 16%, 92%, 0.75); /* Added border */
+    backdrop-filter: blur(20px); /* Added backdrop filter */
+    border-radius: 10px; /* Added border radius for rounded edges */
+    margin-inline: 1.5rem; /* Updated margin between tiles */
+    row-gap: 1.25rem; /* Added row gap */
+    scroll-snap-align: center;
+    transform-style: preserve-3d; /* Enable 3D transformations */
+}
+}
+
 
 
