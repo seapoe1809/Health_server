@@ -1,0 +1,9 @@
+#README
+This module works along with DarnaV2.3 at : https://github.com/seapoe1809/Health_server
+
+This module will take input from user and then scans your data using OCR, deidentifies it based on your input and finallys generate useful health intent/ information. Please note this is a build on Darna.HI local and builds on the cognition of the Darna.HI which allows self custody of your data. There are several parts to the module
+
+a) analyze.py is a Tesseract based OCR engine, deidentifier and an USPTF based recommendation algorithm that analyzes files in Darna_local that are auto filtered to ocr_files depending on their extension. It creates a text dump and tries to tag information accumulated into a file called ocr_results.txt 
+b) It then runs a deidentification engine that removes identifying data. This could help is interacting with AI LLM models to get answers or also to generate useful prompts for the AI LLM model. 
+
+c) Finally using USPTF based algorithm it lists out Grade A recommendations which are usually followed by your Primary Physician for your age and sex and enters them in a text document. Please note this is just health intent document and isnt designed to provide medical advice. You should consult your doctor for it d) All files are stored in the Darna_tesseract subdirectory of ocr_files

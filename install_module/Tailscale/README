@@ -1,0 +1,34 @@
+#README
+This module works along with DarnaV2 at : https://github.com/seapoe1809/Health_server
+
+Installing repo this will allow you to add Tailscale to it. Tailscale allows you to access your Darna.HI server remotely outside your wifi network.
+This is highly recommended as it allows you to access your running laptop remotely.
+
+What is Tailscale?
+
+Tailscale is a free and open source service, based on WireGuard®, that helps users build no-hassle virtual private networks. Once you’ve created a Tailscale network (tailnet), you can securely access services and devices on that tailnet from anywhere in the world.
+
+
+With a personal tailnet, you can:
+a) Remote access
+
+b) Add devices to your tailnet, to access them from anywhere in the world.
+Filter DNS
+
+c) Block malicious traffic, ads, and trackers to help secure your network with NextDNS.
+Encrypt traffic
+
+Route and encrypt internet traffic through an Exit Node on your tailnet.
+
+
+HOW TO STOP THE CONTAINER: If you wish to stop the container for some reason. You could stop it from Yacht Local or go to terminal directly and type:
+
+	docker ps -a #would list the name of container
+
+To stop the container
+
+	docker stop <container>
+	
+To permanently remove the container
+
+	docker rm <container>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DARNA.HEALTH</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="/static/styles2.css">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.png"">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/styles2.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+</head>
+
+<body onload="hideAddressBar()">
+  <div class="text">
+   
+  
+  </div>
+  
+  <div class="container">
+  
+   <ul class="icons">
+    
+    
+    <li><a href="/pabv" target="_blank" class="EHR"><img class="icon" src="/static/icons/pabv.png" alt="EHR"></a></li>
+    
+    <li><a id="Weight_Tracker-link" target="_blank" class="Weight_Tracker">
+    <img class="icon" src="/static/icons/Weight_Tracker.png" alt="Weight_Tracker"></a></li>
+    <script src="/static/Weight_Tracker_script.js"></script>
+    
+    <li><a id="Immunization_Tracker-link" target="_blank" class="Immunization_Tracker">
+    <img class="icon" src="/static/icons/Immunization_Tracker.png" alt="Weight_Tracker"></a></li>
+    <script src="/static/Immunization_Tracker_script.js"></script>
+    
+    <li><a id="Ibs_Module-link" target="_blank" class="Weight_Tracker">
+    <img class="icon" src="/static/icons/Ibs_Module.png" alt="Weight_Tracker"></a></li>
+    <script src="/static/Ibs_Module_script.js"></script>
+    
+    <!--<li><a id="Applehealth-link" target="_blank" class="install">
+    <img class="icon" src="/static/icons/graph.png" alt="Install"></a></li>
+    <script src="/static/Applehealth_script.js"></script> greyed out for darnahi v2.2-->
+    
+    
+    <li><a id="Tailscale-link" target="_blank" class="tailscale">
+    <img class="icon" src="/static/icons/tailscale.png" alt="tailscale"></a></li>
+    <script src="/static/Tailscale_script.js"></script>
+    
+    
+       
+    <li><a id="Dock-link" target="_blank" class="install">
+    <img class="icon" src="/static/icons/Dock.png" alt="Install"></a></li>
+    <script src="/static/Dock_script.js"></script>
+    
+    <li><a href="https://wormhole.app/" target="_blank" class="wormhole"><img class="icon" src="/static/icons/portal.png" alt="wormhole"></a></li>
+    
+    <li><a href="https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=" target="_blank" class="AI"><img class="icon" src="/static/icons/AI.png" alt="AI"></a></li>
+   
+    </ul>
+   
+    </div>
+ 
+    
+<div class="form-container-choice-button">
+  <!-- Button with the robot icon -->
+<a href="/gradio_user" target="_blank">
+<button type="button" class="choice_button" style="background-image: linear-gradient(60deg, #36454F, #E5E4E2);"><div class="button_content"><i class="fas fa-robot"></i><span></span></div></button>
+
+
+<!-- Central orange button to go home -->
+<a href="/">
+<button type="button" class="choice_button" style="background-image: radial-gradient(circle, #FFAC1C, #CC5500);"><div class="button_content"><i class="fas fa-home"></i><span></span></div></button></a>
+
+<!--  a third button -->
+<a href="/upload" target="_blank" class="upload">
+<button type="button" class="choice_button" style="background-image: linear-gradient(135deg, #E5E4E2, #36454F);"><div class="button_content"><i class="fas fa-plus"></i></div></button></a>
+
+</div>
+
+<script>
+    function hideAddressBar() {
+      if (window.innerHeight > window.innerWidth) {
+        // Portrait orientation, assume mobile device
+        window.scrollTo(0, 1);
+      }
+    }
+  </script>
+</body>
+</html>
+

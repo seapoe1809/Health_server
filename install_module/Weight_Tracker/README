@@ -1,0 +1,22 @@
+#README
+This module works along with DarnaV2.3 at : https://github.com/seapoe1809/Health_server
+
+This module offers a comprehensive solution for monitoring your health metrics on a daily basis, enabling you to record and store your weight, glucose levels, and blood pressure readings all in one place. Beyond simple tracking, it employs data visualization through interactive graphs to help you observe trends over time, allowing for more informed insights into your wellbeing. Moreover, Darnabot goes beyond mere measurement by encouraging hydration with gentle reminders to drink water throughout the day. Module also provides helpful hints and tips tailored to enhance your overall health journey.
+
+What is Weight Tracker?
+
+Darnahi Weight Tracker module offers a comprehensive solution for monitoring your health metrics on a daily basis for several persona's, enabling your family to record and store your weight, glucose levels, and blood pressure readings all in one place.
+
+
+
+HOW TO STOP THE CONTAINER: If you wish to stop the container for some reason. You could stop it from Yacht Local or go to terminal directly and type:
+
+	docker ps -a #would list the name of container
+
+To stop the container
+
+	docker stop <container>
+	
+To permanently remove the container
+
+	docker rm <container>

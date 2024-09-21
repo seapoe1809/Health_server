@@ -1,12 +1,24 @@
-**Health_Server is DARNA.HI V2.2**
 
+**DARNA HEALTH INTELLIGENCE V2.3**
+
+**Self Hosted Health_Server is DARNA.HI V2.3**
 
 **Darnahi's Vision:**
 =================
 
-This tool wants to be your personal health assistant. In the future, very smart computer programs called language models will run on your own devices like phones or computers. These smart programs will understand all your personal health information while keeping it private and secure just for you. You'll be able to ask the program any health questions you have, and it will provide answers specifically based on your own medical details. It's like having a knowledgeable health concierge available whenever you need, but the concierge is actually an intelligent computer program giving you personalized health information while protecting your privacy.
+This tool wants to be your personal health intelligent assistant. It aims to be built around AI core. The local running LLM will be able to understand your personal health information while being private and secure. For example you'll be able to ask Darnabot any health questions you have, and it will provide answers specifically based on your own health details. It's like having a knowledgeable health assistant available whenever you need, but the assitant is actually intelligent , local running program giving you personalized suggestions while protecting your privacy.
 
-NOTE: This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
+CAUTION: This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based and has risk of hallucinations.
+
+**Key words:** 
+
+- Self Hosted (This means you have to run this on your own linux computer and all your data stays on your computer; your data does not leave your computer and security is limited by your own computer security),
+- Liinux,
+- python,
+- Open Source,
+- Free,
+- AI/ML,
+- LLM (ollama, mistral-nemo)
 
 DEMO version with features turned off: http://seapoe1809.pythonanywhere.com/login
 ADMIN 
@@ -15,70 +27,87 @@ USER1
 password 'wellness'
 
 
-"Forward looking open source Health server initiative! Put simply, it aspires to be your personal health concierge."
+"Forward looking open source Health server initiative! Put simply, it aspires to be your personal health assistant."
 
-**1 MIN VIDEO DEMO:**
+**Short VIDEO DEMO:**
 
-https://video.nostr.build/358cac41849256f74c66312e01732276957b922500673223e01d3315aab758e5.mp4
+1. Darnahi Home:
+https://nostter.app/nevent1qqszfh00rkj2yjqzt0h3gaq0qvdqtqtr24d6dqrc53uptjhs9sl9gzq7mrxe9
 
-##DARNA Healthy Intent v2.2- An open source intiative - self custody of your health data
+    1. Chartit to log your basic information in FHIR R4 format
+    2. Ability to upload and save your files to your self hosted file server
+    3. Ability to view dicom files, xml files, health suggestions for your age
+    4. Ability to encrypt and zip your files securely and remotely
+
+2. Darnabot
+https://nostter.app/nevent1qqs8yhr3tm6azugsf7ttlgemx7w299zhqnjj6p022cyvhfkgqpxyvhcr0wqke
+New and improved Darnabot, Darnahi's AI engine
+#requires ollama and mistral-nemo
+    1. ask questions of your medical records that is stored as structured and unstructured RAG
+    2. Local running LLM and Local running darnahi #privacy
+    3. AI engine that uses NLP to analyze your health files to create health screening recommendations (USPTF based), wordclouds, RAG for darnabot
+    4. Symptom logger (optional use of AI to generate notes) for storage in darnahi file server). Can be shared with your provider if you wish in pdf's 
+
+3. Darnahi Optional Modules
+https://nostter.app/nevent1qqsphk0xrww9qm0nly04hjwt2umlldh502xyl975mg30rrvyz8k5rlcz7gqda
+
+Darnahi optional modules include: 
+    1. weight/ bp/ glucose/ water tracker
+    2. IBS module- tracks your dietary and bowel habits; AI FODMAP engine; exercises to manage your IBS; know your IBS
+    3. Immunization passport- to track and keep record of your immunizations; AI travel advisor; travel map
+    4. Tailscale to allow remote access
+    5. Portal to share your encrypted zipped health docs securely
+    6. Remote docker container manager
+    
+##DARNA Healthy Intelligence v2.3- An open source, self hosted intiative - self custody of your health data
+
 ##Early stage. Beta and under development and isnt secure. Please take all steps to safeguard your data. 
-##This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
 
 
-**Key words:** 
 
-- LINUX,
-- python,
-- Open Source,
-- Self Hosted,
-- AI/ML
-- lightweight LLM BOT
+
 
 **Vision: **
 
-This will be an open source, self hosted personal Health concierge.
+This is a forever open source, self hosted personal Health intelligent assistant.
+
 
 What is this project?
 ======================
-DARNA. HI v2 is a Forward looking project.
+DARNA. HI v2.3 is a Forward looking project.
+
  <img src="https://github.com/seapoe1809/assets/blob/main/darnahi2.2/darnav2_mktg.png" width =300, height=550>
 
- About Darnahi
+About Darnahi
 =============
-Darnahi is a home computer program that securely manages your medical details, is self hosted and can provide personalized health suggestions and answers using artificial intelligence.
+Darnahi is a self hosted app that allows you to securely self manage your medical records and can provide personalized health suggestions and answers using local running LLM's. To summarize:
 
 - Darnahi is a personal health assistant that runs on Linux.
 - Is Locally Self Hosted
-- It keeps your medical data safe at home. 
-- It can suggest health checkups based on your age and gender. 
-- It stores your medication list and medical history. 
-- It analyzes your health information using language processing. 
-- It has a smart program that can answer simple questions about your saved health data.
+- It keeps your medical data safe at home (as safe as you keep your computer). 
+- It can suggest health screening (USPTF) based on your age and gender. 
+- It stores your medication list and medical history in FHIR R4 format. 
+- It analyzes your health information using natural language processing and AI. 
+- It can answer simple questions about your saved health data using local LLM
 
 **Disclaimer: **
 
 Use at your own Risk. See License document. It is still in beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
-This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
+
+This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based. LLMs are known to hallucinate.
 
  
 Who is it for:
 ==============
-- If you want to take control of your medical information and share it easily with new doctors, this tool is for you.
-- You are able to Self Host
+- If you want to take control of your medical information and share it easily with new doctors, this tool is for you. With this program you can create an encrypted health passport. 
+- If you wish to Self Host
 - You are privacy conscious.
 - You have some computer skills and an ability to use Linux or set up a virtual Linux machine. 
-- open source afficionado
+- Support Open Source
 
-With this program you can create an encrypted health passport. This allows you to safely share your medical details whenever you need to see a new doctor. 
 
-We are getting ready for the day when powerful Language models would run locally on your device and you can ask it in a very Privacy centered questions very specific to your health . In Darnahi v2.2 a language model (llama 1B) is being used to process personal health data and provide answers to questions specific to an individual's health situation. Additionally, natural language preprocessing (NLP) techniques are being used, along with a retrieval augmented architecture (RAG) to process and understand the health data by the local LLM.
-
-In future we hope to have a trained lightweight large language model (LLM) being employed to interpret the processed data and generate relevant health intents or responses tailored to an individual's queries about their health. To summarize Darnahi aims to leverage advanced language AI capabilities to give personalized health insights and recommendations by analyzing someone's specific health information and answering their questions in that context.
-
-The core components are NLP for understanding natural language, a RAG model for retrieving and processing relevant data, and a local LLM that ties it together by mapping the data to the queries and providing contextualized health-related output.
-
-This project is an Free and open-source software that helps bring together your health data that is currently saved in different places like electronic health records, fitness apps, and wearable devices. We wish to provide a way to aggregate your health data. One stop to bring all your health data together on your secure computer at home. When you visit a new doctor, you can choose to share your encrypted health data with them on demand through QR code, email, link etc. This way, you have full custody of your health data and can decide who to share it with and what to do with it.
+This project is an Free and open-source local hostedd software that helps bring together your health data that is currently saved in different places like electronic health records, fitness apps, and wearable devices. Darnahi wishes to provide a way to aggregate your health data. One stop to bring all your health data together on your secure computer at home. When you visit a new doctor, you can choose to share your encrypted health data with them on demand through QR code, email, link etc. This way, you have full custody of your health data and can decide who to share it with and what to do with it. 
+In not so distant future we hope to have specialized trained lightweight large language model (LLM) running on your laptop or phone to interpret your health data, generate relevant health intents and responses tailored to an individual's queries about their health. At this time we rely on Mistral-nemo running using Ollama.
 
 **Disclaimer: **
 
@@ -86,9 +115,9 @@ Use at your own Risk. See License document. It is still beta. Take all steps to 
 This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
 
 WHY I CARE ABOUT THIS:
-I created this project because I had trouble moving my own health data when I switched healthcare providers. As someone who works in the healthcare space, I see that current EHR solutions make it difficult to port your data, even though there are regulatory requirements to do so. It's frustrating to see that some institutions still rely on fax and scan to move data around, which shows how outdated and hidden these data porting techniques are. Given this pain point, I also see an exciting oppportunity with LLM's. I look forward to the day when superior Language models will run on your device at home.
+I created this project because I had trouble moving my own health data when I switched healthcare providers. As someone who works in the healthcare space, I see that current EHR solutions make it difficult to port your data, even though there are regulatory requirements to do so. It's frustrating to see that some institutions still rely on fax and scan to move data around, which shows how outdated and hidden these data porting techniques are.
 
-This is version 2.2 of the project, and I anticipate that there will be many more iterations and help from OSS community before it takes a good form. My goal is to make it easier for people to take ownership of their health data and store it in one place on their own computer. They can shoose to interact with local LLM or use their deidentified data to interact with powerful public LLM if they wish. Darnahi provides both- a way to interact with local LLM and also to deidentify their data seamlessly/ This way, they can decide who to share it with, how to use it and finally have more control over their own health.
+This is version 2.3 of the project, and I anticipate that there will be many more iterations and help from OSS community before it takes a good form. My goal is to make it easier for people to take ownership of their health data and store it in one place on their own computer. They can shoose to interact with local LLM or use their deidentified data to interact with powerful public LLM if they wish. Darnahi provides both- a way to interact with local LLM and also to deidentify their data seamlessly/ This way, they can decide who to share it with, how to use it and finally have more control over their own health.
 
 License? 
 ========
@@ -99,16 +128,19 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 basic requirements
 =======================================
 #linux os (Debian or Ubuntu distro preferred)
+#ollama and model mistral-nemo
 #GPU enabled computer (preferred for running local LLM)
 #python3
 #git
-#docker (if you wish to use dockerized apps in sky market)
+#docker (for optional docker apps)
 
 SAFE AND SECURE
 ===============
-We are trying to take all steps to keep it safe and secure. Please note this is still a beta version. All software runs in python Virtual Env and dockerized containers. To delete it, delete the Health_server folder and thats it!
+We are trying to take all steps to keep it safe and secure. Please note this is still a beta version. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
+Darnahi is Self Hosted -This means you have to run this on your own linux computer and all your data stays on your computer; your data does not leave your computer and security is limited by your own computer security
 
-Please note that this is only the second version of the project, and I plan on adding more features and making improvements in the future. You can expect constant improvement in the future.
+
+
 
 **step 1: Git clone and install Health_server**
 ==============================================
@@ -120,15 +152,21 @@ Make sure you have python3. If not go to https://www.python.org/. Once done do t
  
     sudo apt-get install git
 
- Git clone the Darna_local repo
-              
-    git clone https://github.com/seapoe1809/Health_server
 
 (Optional) Make sure pip is installed to help install python modules 
  (skip this step if pip is already installed)
 
     sudo apt-get install python3-pip
+    
+(Optional) Make sure venv is availabls 
+ (skip this step if pip is already installed)
 
+    sudo apt install python3.10-venv    
+
+Git clone the Darna_local repo
+              
+    git clone https://github.com/seapoe1809/Health_server
+    
 Change directory into the Health_server directory
               
     cd Health_server
@@ -138,24 +176,39 @@ Now install 'distro' and subsequently run Setup. This should also start your Ser
     pip install pip-tools distro      
     python3 setup_darna.py
 
-Once started the server should be active at port :3001. The browser should auto launch and take you there. You could easily access on the home computer at http://localhost:3001 .The flask server when launched will give you the IP address at which it launched. You could now navigate to that http://your_ip_adddress:3001 with any mobile device and access the server.  
+Once started the server should be active at port :3001. The browser should auto launch and take you there. You could easily access on the home computer at http://localhost:3001 .The flask server when launched will give you the IP address at which it launched. You could now navigate to that http://your_ip_adddress:3001 with any mobile device and access the server.
+
+INSTALLING OLLAMA for Local LLM
+===============================
+
+Darnahi currently uses Ollama for its stable Local LLMs 
+
+    curl -fsSL https://ollama.com/install.sh | sh
+    
+Time to get the model
+    
+    ollama run mistral-nemo
+    
+
 
 SHUTDOWN THE SERVER
 ===================
 The app allows you to shut down the server remotely from anywhere. Go to the 'INFORMATION' section and scroll to the bottom to find the 'kill switch' option. Using this will shut down the server and the local language model running on it. However, to restart the server, you need to be physically at your home computer.
 
-Note: This might not shutdownt he docker containers from the sky store. You would have to remove them on your home computer.
+Note: This might not shutdownt he docker containers from the sky store. You would have to remove them on your home computer individually.
 
-RESTART THE SERVER
-==================
+RESTARTING THE SERVER
+=====================
 Click on the Darnahi icon from launcher. 
 OR go to Health_server directory and type:
 
     cd Health_server
     ./darna_launch.sh
 
-DELETE THE SERVER
-=================
+
+DELETING DARNAHI
+================
+All software runs in python Venv and dockerized containers.
 If you don't want to use the health server app anymore, you can simply delete the entire 'Health_server' folder. Since the software is running in virtual environments, deleting that folder will completely remove it with just one click. No need for any special shutdown process, just delete the folder to get rid of it all.
 
 FEEDBACK
@@ -163,7 +216,14 @@ FEEDBACK
         
 To give feedback, please go to 'Information' card and click on last link that allows you to email me. Or you could start a debug thread on github itself.
 
-**Step 2: Upload your health data in the health_server folder:**
+DONATIONS:
+==========
+
+Donations are always appreciated to help continue making Darnahi better.
+They could be in either your developer time or in Btc or XMR. Your help is appreciated:
+
+
+**USING DARNAHI: Upload your health data in the health_server folder:**
 =================================================================
 
 a) Upload health files: On health app, search how to 'get your data', then choose "Export All Health Data" and save the file in iOS files. Then click on 'UPLOAD' icon (+) on your Darnahi server, choose file and upload to your server.
@@ -176,48 +236,38 @@ d) Tips are in 'INFORMATION' card of server.
 
 e)  The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish. For Grafana is user:'admin', password:'health'.
 
-ANALYZE CARD:
-============
-Here it what the Analyze care does once you enter your age, sex, and words to de-identify separated by "|"
-    It generates a list of recommended medical screenings for your age based on USPSTF guidelines
-    It uses OCR to extract data from your uploaded files
-    It runs simple NLP to get medical data organized by headings
-    It vectorizes and chunks up the data
-    It creates a word cloud of your recent uploaded data
-    It creates a vectorized database for the local LLM
- This allows the LLM to access your data and provide personalized answers to your medical questions
+f) Update Chartit with your basic demographic information that is stored in FHIR R4 format
+
+RUN AI via Darnabot:
+===================
+Here it what the Run AI does. It might need you to enter words to de-identify separated by "|"
+    -It generates a list of USPTF recommended medical screenings for your age/ sex based on US guidelines
+    -It uses OCR to extract data from your uploaded files
+    -It runs NLP to get medical data organized by type
+    -It vectorizes and chunks up the data and creates a database
+    -It creates a visual word cloud 
+    -It creates a RAG for the local LLM which allows the local LLM to provide personalized answers to your health related questions
 
  <img src="https://github.com/seapoe1809/assets/blob/main/darnahi2.2/darna_information.png" width =300, height=550>
 
-**Disclaimer: **
 
-Use at your own Risk. See License document. It is still beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
-This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
 
- CHART IT CARD:
- ============== 
- It allows you to enter your past medical history and update your list of medications in a standard FHIR format.
+CHART IT CARD:
+============== 
+ It allows you to enter your personal basic demographics, allergies, past medical history and update your list of medications in a standard FHIR R4 format.
     This information gets stored in the 'summary' folder.
     When you share an encrypted zip file with your healthcare provider, they can access your past medical history and current medication list in a format compatible with electronic medical records (EMRs).
-    Additionally, it creates a database from your entered information that the vectorizer can use when you ask health-related questions to the local language model.
 
-So in summary, it lets you securely share your medical details with providers while also building a personalized database to enable the AI to provide tailored health insights based on your specific medical background.
 
 HEALTH FILES CARD:
 ==================
 The dropdown menu provides several options:
-    Access a 'summary.pdf' file stored in the 'summary' folder in PDF format.
+    View health files stored in the 'summary' folder including visualizing data in dicom format.
     View the personalized health intents generated when you run the 'Analyze' function.
     View your de-identified data, which could be useful for interacting with public language models.
     View your word cloud visualization.
-    Encrypt and zip the health files stored in the 'summary' folder.
+    Create Encrypted zip of the health files stored in the 'summary' folder.
 
-So in essence, the menu allows you to access your medical summary PDF, personalized health insights, de-identified data, data visualization, and create an encrypted package to securely share your health information.
-
-**Disclaimer: **
-
-Use at your own Risk. See License document. It is still beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
-This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
 
 VIEW FILES
 ==========
@@ -230,13 +280,25 @@ Note: some XML health files need a supporting styles.xsl file alongwith to allow
 ============
 
 
-Darnahi currenlty uses a lightweight but smart computer program called 1b Llama. It works by combining two important parts:
+Darnahi currenlty uses Ollama for local LLM's and specifically Mistral-Nemo:
 
-RAG architecture: This helps the program quickly find and understand the specific health information it needs from your medical data.
+Structured and Unstructured RAG architecture: This helps the LLM quickly find and understand the specific health information it needs from your medical data.
     
-ChromaDB: This is like a special database that organizes and stores your health details in a way the computer program can easily access.
+ChromaDB: This database that organizes and stores your health details in for Darnabot.
 
-By using RAG and ChromaDB together, the 1b Llama program can efficiently retrieve your personal medical information and then provide health-related answers just for you based on that data.
+
+
+**OPTIONAL APPS:** 
+==================
+Install module includes optional apps that can be downloaded on Darnahi. They are dockerized apps and run in containers. Cheers! 
+More information is available within Darnahi
+1. weight/ bp/ glucose/ water tracker
+2. IBS module- tracks your dietary and bowel habits; AI FODMAP engine; exercises to manage your IBS; know your IBS
+3. Immunization passport- to track and keep record of your immunizations; AI travel advisor; travel map
+4. Tailscale to allow remote access
+5. Portal to share your encrypted zipped health docs securely
+6. Remote docker container manager
+7. A portal for you to be able to download your information from local health providers. It isnt exhaustive.
 
 **Disclaimer: **
 
@@ -273,7 +335,7 @@ If computer sleeps and wakes, the CUDA breaks while running Darnabot as part of 
 
 
 Snapshots:
-=============
+==========
 
 
 <img src="https://github.com/seapoe1809/assets/blob/main/DARNA_HI_v2_assets/IMG_5864.jpeg" width =300, height=550>
@@ -285,34 +347,10 @@ Snapshots:
 
 
 
-**Code for Install Module is at : **
-========================================
 
-https://github.com/pnmeka/install_module/
-
-Install Module is a set of **dockerized container apps** that you could add to the 'Pie in Sky'. It is completely optional.
-It is maintained by another user.
-
-**Why we support XMR?**
-=====================
-
-In the realm of financial privacy, the use of cryptocurrencies like Monero can play a role in enhancing users' security. Monero is a privacy-focused cryptocurrency that provides anonymity and obfuscation of transaction details. This can be particularly relevant in healthcare contexts.
-
-You could choose to support the XMR network by running a node on your computer. More nodes make the network more resilient and futureproofs it.
-
-========================================================================================
-
-
-
-
-**PIE IN SKY:** I imagine it a way download external dockerized apps to run on your server. It adds more functionalities and dimensions to our server. We aim to add more apps in future. Cheers! 
-
-**Disclaimer: **
-
-Use at your own Risk. See License document. It is still beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
-This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
- 
- Hope you like it! Please share feedback and let me know if you woudl like to contribute to this project. You could send feedback by commenting on this repo or going to 'INFORMATiON' card and clicking on link saying 'email' the writer of repo.
+##FEEDBACK##
+=============
+ Hope you like it! Please share feedback and let me know if you would like to contribute to this project. You could send feedback by commenting on this repo or going to 'INFORMATiON' card and clicking on link saying 'email' the writer of repo.
  
 
 

@@ -41,8 +41,8 @@ from pydicom.pixel_data_handlers.util import apply_voi_lut
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-
+##UPDATE ZIP PASSWORD HERE
+create_zip_password = "2023"
 
 app = Flask(__name__)
 #app.config.update(
@@ -298,19 +298,14 @@ def serve_file_or_subfolder(subfolder, filename, nested_subfolder=''):
         # Serve file
         return send_from_directory(folder_path, decoded_filename, as_attachment=False)
 
-"""
-@app.route('/summary')
-@login_required
-def summary():
-    return render_template('summary.html')
-    """
+
 
 @app.route('/zip_summary', methods=['POST'])
 @login_required
 def zip_summary():
     folderpath = session.get('folderpath')
     folder = folderpath
-    zip_password = '2023'.encode('utf-8')  # CHANGE PASSWORD TO YOUR CHOICE HERE FOR ZIP ENCRYPT
+    zip_password = f'{create_zip_password}'.encode('utf-8')  # PASSWORD TO YOUR CHOICE HERE FOR ZIP ENCRYPT
     folder_to_zip = f'{folder}/summary'
     zip_filename = f'{folder}/my_summary.zip'
 
@@ -330,164 +325,7 @@ def zip_summary():
         return render_template('error.html', message=str(e))
 
 #The Following 3 sections are removed in ver 2.2 as sudo in app is security risk    
-"""
-@app.route('/launch-program')
-@login_required
-def launch_program():
-    return redirect('/sudopwd')
 
-@app.route('/sudopwd', methods=['GET', 'POST'])
-@login_required
-def sudopwd():
-    if request.method == 'POST':
-        password1 = request.form['sudopwd']
-
-        # Set the sudo password in the session
-        session['sudopwd'] = password1
-
-        return redirect('/execute-command')
-
-    return render_template('sudopwd.html')
-
-@app.route('/execute-command')
-@login_required
-def execute_command():
-    if 'sudopwd' not in session:
-        return redirect('/sudopwd')
-
-    command1 = ['sudo', '-S', 'rsync', '-avz', '--chmod=750']
-    
-    folderpath = session.get('folderpath')
-    upload_dir = os.path.join(folderpath, 'upload')        
-    source_dir = upload_dir
-    destination_dir1 = os.path.join(folderpath, 'ocr_files')
-    destination_dir2 = folderpath
-    destination_dir3 =  os.path.join(folderpath, 'summary')
-    
-    password1 = session.get('sudopwd', '')
-    
-        
-    #Step1 Rsyncing files to parent directory Health_files except ones beginning with HL_, fist code to execute
-    command1_all_files = ['sudo', '-S', 'rsync', '-avz', '--chmod=750', '--exclude=HL_*', f"{upload_dir}/", f"{folderpath}/"]
-    try:
-        process_all_files_sync=subprocess.Popen(
-           command1_all_files,
-           stdin=subprocess.PIPE,
-           stdout=subprocess.PIPE,
-           universal_newlines=True
-        )
-        output, error = process_all_files_sync.communicate(input=password1 + '\n')
-        if process_all_files_sync.returncode != 0:
-            return "Unable to run due to non-superuser status!"
-    except subprocess.CalledProcessError as e:
-        return "Error occurred while indexing files in the upload directory."
-    
-    # Function to execute rsync command
-    def run_rsync(command, password):
-        try:
-            process = subprocess.Popen(
-                command,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                universal_newlines=True
-            )
-            output, error = process.communicate(input=password + '\n')
-
-            if process.returncode != 0:
-                print("Unable to run due to non-superuser status!")
-            else:
-                print("Synchronization successful!")
-            
-        except subprocess.CalledProcessError as e:
-            print(f"Error occurred while running rsync command: {str(e)}")
-        
-    files_to_rsync_for_summary = []
-    files_to_rsync_for_ocr = []
-
-    # Step 2 and Step 3 combined rsync to ocr_files and summary folder
-    for filename in os.listdir(source_dir):
-        file_path = os.path.join(source_dir, filename)
-        if os.path.isfile(file_path):
-            if filename.startswith('HL_'):
-                files_to_rsync_for_summary.append(file_path)
-
-                if any(filename.endswith(ext) for ext in ['.pdf', '.png', '.jpg', '.txt', '.jpeg']):
-                    files_to_rsync_for_ocr.append(file_path)
-   
-
-    # Rsync files for /summary directory
-    if files_to_rsync_for_summary:
-        command1 = ['sudo', '-S', 'rsync', '-avz', '--chmod=750']
-        command1.extend(files_to_rsync_for_summary)
-        command1.append(destination_dir3)
-        run_rsync(command1, password1)
-    else:
-        print("No files to synchronize for /summary!")
-
-    # Rsync files for ocr_files directory
-    if files_to_rsync_for_ocr:
-        command1 = ['sudo', '-S', 'rsync', '-avz', '--chmod=750']
-        command1.extend(files_to_rsync_for_ocr)
-        command1.append(destination_dir1)
-        run_rsync(command1, password1)
-    else:
-        print("No files to synchronize for ocr_files!")
-   
-   
-        
-    #Step 4 running caffeine to keep computer awake
-    command2 = ['caffeine']
-    #command2a = ['gsettings set org.gnome.desktop.session idle-delay 600']
-
-    try:
-        process2 = subprocess.Popen(command2)
-    except subprocess.CalledProcessError as e:
-        return "Error occurred while running caffeine."
-    #try:
-        #process2a = subprocess.Popen(command2a)
-    #except subprocess.CalledProcessError as e:
-        #print("Error occurred while running gsettings.")
-    
-    #Step 5 setting up to run apple health grafana
-    command3 = ['sudo', '-S', 'docker-compose', '-f', 'apple-health-grafana/docker-compose.yml', '-p', 'apple-health-grafana', 'pull']
-    command4 = ['sudo', '-S', 'docker-compose', '-f', 'apple-health-grafana/docker-compose.yml', '-p', 'apple-health-grafana', 'up', '-d', 'grafana', 'influx']
-    command5 = ['sudo', '-S', 'docker-compose', '-f', 'apple-health-grafana/docker-compose.yml', '-p', 'apple-health-grafana', 'up', 'ingester']
-    
-
-    try:
-        export_zip_path = os.path.join(source_dir, 'export.zip')
-        if os.path.isfile(export_zip_path):
-            process3 = subprocess.Popen(
-                command3,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                universal_newlines=True
-            )
-            output, error = process3.communicate(input=password1 + '\n')
-
-            process4 = subprocess.Popen(
-                command4,
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                universal_newlines=True
-            )
-            output, error = process4.communicate(input=password1 + '\n')
-
-            process5 = subprocess.run(command5, check=True)
-            
-
-    except subprocess.CalledProcessError as e:
-        return "Error occurred while running Grafana Docker commands."
-     
-    #running command 6 to clear files in upload dir
-    command6 = f'rm -rf {source_dir}/*'
-    try:
-        process6 = subprocess.run(command6, check=True, shell=True)
-    except subprocess.CalledProcessError as e:
-        return "Error occurred while clearing files in the upload directory."
-    return render_template('success.html', success_message='"Programs launched successfully! Clearing files in the upload directory."')
-"""
 
 #the following are to chart your medications and past medical history in fhir format
 @app.route('/chart')
@@ -528,7 +366,7 @@ def pabv():
 @login_required
 def gradio_user():
     user_id = current_user.id  # Get the user's ID
-    current_ip = request.host.split(':')[0]  # Extract the IP part from the host
+    current_ip = request.host.split(':')[0]  # Extract the IP
     return redirect(f"http://{current_ip}:3012?user={user_id}")
            
 
@@ -628,49 +466,6 @@ def serve_dicom_slice(filename, slice_index):
     
     return send_file(buf, mimetype='image/png')  
           
-"""
-@app.route('/upload', methods=['GET', 'POST'])
-@login_required
-def upload_file():
-    if request.method == 'POST':
-        file_type = request.form['Type']
-        file = request.files['File']
-        
-        if file:
-            filename = file.filename
-            
-            if file_type == 'HL_File':
-                filename = f'HL_{filename}'
-            
-            folderpath = session.get('folderpath')        
-            upload_dir = os.path.join(folderpath, 'upload')
-            file_path = os.path.join(upload_dir, filename)
-            
-            # Save the file temporarily
-            file.save(file_path)
-            
-            try:
-                # Run clamscan on the uploaded file
-                result = subprocess.run(['clamscan', '-r', file_path], capture_output=True, text=True, check=True)
-                
-                if "Infected files: 0" in result.stdout:
-                    return render_template('success.html')
-                else:
-                    os.remove(file_path)  # Remove the infected file
-                    return render_template('upload.html', message='File is infected!')
-                    
-            except subprocess.CalledProcessError:
-                print("clamscan found an infected file.")
-                os.remove(file_path)  # Remove the infected file
-                return render_template('upload.html', message='File is infected!')
-                
-            except Exception as e:
-                # This block will be executed if clamscan is not available
-                print(f"An error occurred. Clamscan is not available: {e}")
-                return render_template('success.html')  # Ignore the scan if clamscan is not available
-
-    return render_template('upload.html')
-"""
 
 @app.route('/upload', methods=['GET', 'POST'])
 @login_required
@@ -775,7 +570,8 @@ def pi():
     with open('install_module/templates/index2.html', 'r') as f:
         content = f.read()
     return Response(content, content_type='text/html')
-        
+
+"""        
 @app.route('/analyze', methods=['GET', 'POST'])
 @login_required
 def analyze():
@@ -803,7 +599,8 @@ def analyze():
         folderpath = session.get('folderpath')
         env_vars = os.environ.copy()
         env_vars['FOLDERPATH'] = folderpath
-        command = f'nohup python3 {HS_path}/analyze.py > /dev/null 2>&1 &'
+        command = f'python3 {HS_path}/analyze.py'
+        #command = f'nohup python3 {HS_path}/analyze.py > /dev/null 2>&1 &'
         #subprocess.Popen(command, shell=True, env=env_vars)
         print("Process time is 3 minutes")
         try:
@@ -816,7 +613,7 @@ def analyze():
 
     return render_template('analyze.html', submitted=True)
 
-
+"""
     
 @app.route('/install_module/<path:filename>')
 @login_required
@@ -844,30 +641,34 @@ def install():
 def execute_script():
     try:
         print("Inside /execute_script")
+        
+        # List of allowed app names
+        allowed_app_names = ['Ibs_Module', 'Immunization_Tracker', 'Weight_Tracker', 'Tailscale', 'Dock']
+        
         app_name = session.get('app_name_file', '').replace('.js', '')
         if not app_name:
             return jsonify(success=False, error="Missing app_name")
-
+        
+        # Validate app_name
+        if app_name not in allowed_app_names:
+            return jsonify(success=False, error=f"Invalid app_name. Allowed values are: {', '.join(allowed_app_names)}")
+        
         app_name_file = session['app_name_file']
         # import ip_address from variables and pass to env_var to install app_name
-        app_name = request.json.get('app_name')
         url = f"http://{ip_address}"
         env_vars = os.environ.copy()
         env_vars['URL'] = url
-
         cmd = ['python3', f'install_module/{app_name}/{app_name}.py']
+        print(cmd)
         proc = subprocess.Popen(cmd, env=env_vars, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
         stdout, stderr = proc.communicate()
-
         if proc.returncode == 0:
             return jsonify(success=True, message="Please Refresh App")
         else:
             print(f'Subprocess output: {stdout}')
             print(f'Subprocess error: {stderr}')
             return jsonify(success=False, error="Non-zero return code")
-
         print(f"Session variables: {session}")
-
     except Exception as e:
         return jsonify(success=False, error=str(e))
 

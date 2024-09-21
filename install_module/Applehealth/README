@@ -1,0 +1,18 @@
+#README Applehealth
+This module works along with DarnaV2 at : https://github.com/seapoe1809/Health_server
+
+Tool to import your Apple Health Data in Influx and visualize them in Grafana. It is maintained by this user: https://github.com/k0rventen/apple-health-grafana
+
+Visualization and next steps
+
+Head to http://localhost:3000, and log in with the grafana creds from the compose file (defaults to admin:health).
+
+You should see some graphs with metrics in them. 3 dashboards are created by default:
+
+    a generic one displaying every metric available,
+    a more refined one for specific metrics that are probably present , like walking distance, hearth related metrics..
+    a workout routes one, that shows a GPS map of your outdoor routes (walking/running/biking).
+
+
+Note: Depending on the amount of data the export has, it can take a few minutes to work through. As an example, loading nearly 3 years of data (2 millions+ data points, 200+ workout routes) on a 10th gen i5 took 2 minutes and around 11 minutes on a Raspberry Pi 4.
+

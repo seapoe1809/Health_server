@@ -1,0 +1,7 @@
+#Making Apps for Pie in Sky
+1. Making Apps is simple. You can code in any language. All you need is a code that displays a static website.
+2. Step 2 is to the dockerize your app and display the static site on a non conflicting port.
+3. Adjust all the variables in this folder marked with '***'.
+4. Add this line in the index2.html located in /install_module/templates that links to your info.js file.
+	<li style="display: flex; justify-content: center; align-items: center; font-family: 'Roboto', sans-serif; font-size: 35px; font-weight: bold; color: black; text-align: center;"><a id="App-link" target="_blank" class="install">***INSTALL APP MODULE</a></li>
+    <script src="/static/App_script.js"></script>

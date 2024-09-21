@@ -1,0 +1,28 @@
+#README Yacht Local
+This module works along with DarnaV2 at : https://github.com/seapoe1809/Health_server
+
+A web interface for managing docker containers with an emphasis on templating to provide one-click deployments of dockerized applications. Think of it like a decentralized app store for servers that anyone can make packages for. More information is at : https://yacht.sh/docs/
+Features#
+
+    Container templating compatibility (Portainer compatible)
+    Basic container management
+    Easy template updating
+    Template Variables to allow for a one-click experience
+    Guided container deployment
+    Dashboard for monitoring all of your docker containers in one place
+    Docker-compose compatibility and editor
+    One click editing of containers
+
+
+
+HOW TO STOP THE CONTAINER: If you wish to stop the container for some reason. You could stop it from Yacht Local or go to terminal directly and type:
+
+	docker ps -a #would list the name of container
+
+To stop the container
+
+	docker stop <container>
+	
+To permanently remove the container
+
+	docker rm <container>

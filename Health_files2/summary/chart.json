@@ -1,230 +1,991 @@
 {
-  "resourceType": "Questionnaire",
-  "meta": {
-    "profile": [
-      "http://hl7.org/fhir/4.0/StructureDefinition/Questionnaire"
+    "lformsVersion": "34.0.0",
+    "PATH_DELIMITER": "/",
+    "code": "phr",
+    "codeList": [
+        {
+            "code": "phr",
+            "display": "Health Record"
+        }
     ],
-    "tag": [
-      {
-        "code": "lformsVersion: 34.3.0"
-      }
-    ]
-  },
-  "title": "__________ DARNA.HI RECORD __________",
-  "status": "draft",
-  "date": "2024-03-09",
-  "code": [
-    {
-      "code": "phr",
-      "display": "Health Record"
-    }
-  ],
-  "item": [
-    {
-      "item": [
+    "identifier": null,
+    "name": "                      ________________\u270e  DARNA HEALTH INTELLIGENCE RECORD  \u270e ________________                     ",
+    "template": "table",
+    "items": [
         {
-          "type": "open-choice",
-          "extension": [
-            {
-              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-              "valueCodeableConcept": {
-                "coding": [
-                  {
-                    "system": "http://hl7.org/fhir/questionnaire-item-control",
-                    "code": "drop-down",
-                    "display": "Drop down"
-                  }
-                ],
-                "text": "Auto-complete"
-              }
+            "header": true,
+            "dataType": "SECTION",
+            "question": "ABOUT ME",
+            "codeList": [
+                {
+                    "system": "custom",
+                    "code": "birthdate",
+                    "display": "BIRTHDATE"
+                }
+            ],
+            "questionCode": "birthdate",
+            "questionCodeSystem": "custom",
+            "linkId": "679676784038",
+            "questionCardinality": {
+                "max": "1",
+                "min": "1"
             },
-            {
-              "url": "http://lhcforms.nlm.nih.gov/fhir/StructureDefinition/questionnaire-externallydefined",
-              "valueUri": "https://clinicaltables.nlm.nih.gov/api/conditions/v3/search"
+            "items": [
+                {
+                    "dataType": "DT",
+                    "question": "DATE OF BIRTH",
+                    "questionCode": "593486088490",
+                    "questionCodeSystem": "LinkId",
+                    "linkId": "593486088490",
+                    "questionCardinality": {
+                        "max": "1",
+                        "min": "1"
+                    },
+                    "codeList": [],
+                    "answerCardinality": {
+                        "min": "0",
+                        "max": "1"
+                    },
+                    "value": "1900-01-01"
+                },
+                {
+                    "dataType": "CWE",
+                    "question": "BIOLOGICAL SEX",
+                    "questionCode": "571347576477",
+                    "questionCodeSystem": "LinkId",
+                    "linkId": "571347576477",
+                    "answerCardinality": {
+                        "max": "1",
+                        "min": "0"
+                    },
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "RADIO_CHECKBOX"
+                        }
+                    },
+                    "answers": [
+                        {
+                            "text": "M"
+                        },
+                        {
+                            "text": "F"
+                        }
+                    ],
+                    "codeList": [],
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    },
+                    "value": {
+                        "text": "F"
+                    }
+                }
+            ],
+            "displayControl": {
+                "questionLayout": "vertical"
+            },
+            "answerCardinality": {
+                "min": "0",
+                "max": "1"
             }
-          ],
-          "linkId": "/conditions/condition",
-          "code": [
-            {
-              "system": "Custom",
-              "code": "condition",
-              "display": "PAST MEDICAL HISTORY"
-            }
-          ],
-          "text": "PAST MEDICAL HISTORY",
-          "required": false
         },
         {
-          "type": "date",
-          "linkId": "/conditions/cond_started",
-          "code": [
-            {
-              "system": "Custom",
-              "code": "cond_started",
-              "display": "Started"
-            }
-          ],
-          "text": "Started",
-          "required": false
-        }
-      ],
-      "type": "group",
-      "extension": [
-        {
-          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-          "valueCodeableConcept": {
-            "coding": [
-              {
-                "system": "http://hl7.org/fhir/questionnaire-item-control",
-                "code": "gtable",
-                "display": "Group Table"
-              }
+            "dataType": "ST",
+            "question": "ALLERGIES",
+            "questionCode": "4547915263358",
+            "questionCodeSystem": "LinkId",
+            "linkId": "4547915263358",
+            "questionCardinality": {
+                "max": "1",
+                "min": "1"
+            },
+            "items": [
+                {
+                    "header": true,
+                    "dataType": "SECTION",
+                    "question": "Allergies and Other Dangerous Reactions",
+                    "codeList": [
+                        {
+                            "system": "Custom",
+                            "code": "allergies",
+                            "display": "Allergies and Other Dangerous Reactions"
+                        }
+                    ],
+                    "questionCode": "allergies",
+                    "questionCodeSystem": "Custom",
+                    "linkId": "/allergies",
+                    "questionCardinality": {
+                        "max": "*",
+                        "min": "1"
+                    },
+                    "displayControl": {
+                        "questionLayout": "horizontal"
+                    },
+                    "items": [
+                        {
+                            "dataType": "CWE",
+                            "question": "Name",
+                            "codeList": [
+                                {
+                                    "system": "Custom",
+                                    "code": "allergy_name",
+                                    "display": "Name"
+                                }
+                            ],
+                            "questionCode": "allergy_name",
+                            "questionCodeSystem": "Custom",
+                            "linkId": "/allergies/allergy_name",
+                            "answerCardinality": {
+                                "max": "1",
+                                "min": "0"
+                            },
+                            "displayControl": {
+                                "answerLayout": {
+                                    "type": "COMBO_BOX"
+                                }
+                            },
+                            "answers": [
+                                {
+                                    "code": "food",
+                                    "text": "Food allergies"
+                                },
+                                {
+                                    "code": "FOOD-2",
+                                    "text": "Chocolate"
+                                },
+                                {
+                                    "code": "FOOD-22",
+                                    "text": "Crab"
+                                },
+                                {
+                                    "code": "FOOD-4",
+                                    "text": "Egg"
+                                },
+                                {
+                                    "code": "FOOD-5",
+                                    "text": "Fish"
+                                },
+                                {
+                                    "code": "FOOD-7",
+                                    "text": "Gluten"
+                                },
+                                {
+                                    "code": "FOOD-19",
+                                    "text": "Milk"
+                                },
+                                {
+                                    "code": "FOOD-16",
+                                    "text": "Monosodium Glutamate (MSG)"
+                                },
+                                {
+                                    "code": "FOOD-9",
+                                    "text": "Peanut"
+                                },
+                                {
+                                    "code": "FOOD-10",
+                                    "text": "Pork"
+                                },
+                                {
+                                    "code": "FOOD-18",
+                                    "text": "Sesame"
+                                },
+                                {
+                                    "code": "FOOD-12",
+                                    "text": "Shellfish"
+                                },
+                                {
+                                    "code": "FOOD-21",
+                                    "text": "Shrimp"
+                                },
+                                {
+                                    "code": "FOOD-13",
+                                    "text": "Soy"
+                                },
+                                {
+                                    "code": "FOOD-14",
+                                    "text": "Tomatoes"
+                                },
+                                {
+                                    "code": "FOOD-17",
+                                    "text": "Tree Nuts"
+                                },
+                                {
+                                    "code": "FOOD-20",
+                                    "text": "Wheat"
+                                },
+                                {
+                                    "code": "FOOD-23",
+                                    "text": "Cochineal extract (Carmine) red dye"
+                                },
+                                {
+                                    "code": "FOOD-24",
+                                    "text": "FD&C Blue No. 1 dye"
+                                },
+                                {
+                                    "code": "FOOD-25",
+                                    "text": "FD&C Yellow No. 2 dye"
+                                },
+                                {
+                                    "code": "environmental",
+                                    "text": "Environmental allergies"
+                                },
+                                {
+                                    "code": "OTHR-18",
+                                    "text": "Cat"
+                                },
+                                {
+                                    "code": "OTHR-4",
+                                    "text": "Cockroach"
+                                },
+                                {
+                                    "code": "OTHR-5",
+                                    "text": "Cold Weather"
+                                },
+                                {
+                                    "code": "OTHR-17",
+                                    "text": "Dog"
+                                },
+                                {
+                                    "code": "OTHR-6",
+                                    "text": "Dust Mites"
+                                },
+                                {
+                                    "code": "OTHR-7",
+                                    "text": "Hay Fever"
+                                },
+                                {
+                                    "code": "OTHR-1",
+                                    "text": "Iodinated x-ray contrast"
+                                },
+                                {
+                                    "code": "OTHR-2",
+                                    "text": "Latex"
+                                },
+                                {
+                                    "code": "OTHR-8",
+                                    "text": "Mold"
+                                },
+                                {
+                                    "code": "OTHR-9",
+                                    "text": "Nickel"
+                                },
+                                {
+                                    "code": "OTHR-10",
+                                    "text": "Pet Dander"
+                                },
+                                {
+                                    "code": "OTHR-19",
+                                    "text": "Pollen"
+                                },
+                                {
+                                    "code": "OTHR-11",
+                                    "text": "Ragweed"
+                                },
+                                {
+                                    "code": "OTHR-12",
+                                    "text": "Semen"
+                                },
+                                {
+                                    "code": "OTHR-13",
+                                    "text": "Sun"
+                                },
+                                {
+                                    "code": "OTHR-3",
+                                    "text": "Wasp, hornet, bee sting"
+                                },
+                                {
+                                    "code": "medClass",
+                                    "text": "Medication class allergies"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-1",
+                                    "text": "ACE Inhibitors"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-2",
+                                    "text": "Aminoglycosides"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-3",
+                                    "text": "Antihistamines"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-4",
+                                    "text": "Benzodiazepines"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-5",
+                                    "text": "Beta Blockers"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-6",
+                                    "text": "Calcium Channel Blockers"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-7",
+                                    "text": "Cephalosporins"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-8",
+                                    "text": "Diuretics"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-9",
+                                    "text": "H2 Blockers"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-10",
+                                    "text": "Insulins"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-11",
+                                    "text": "Iodine Containing Medications"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-12",
+                                    "text": "Local Anesthetics"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-13",
+                                    "text": "Macrolides (like Erythromycin)"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-14",
+                                    "text": "Muscle Relaxants, Skeletal"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-15",
+                                    "text": "Narcotic Analgesics"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-16",
+                                    "text": "Nonsteroidal Anti Inflam. Agents (NSAID)"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-24",
+                                    "text": "Penicillin and Derivatives"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-17",
+                                    "text": "Phenothiazines"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-18",
+                                    "text": "Proton Pump Inhibitors"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-19",
+                                    "text": "Quinolone Antibiotics"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-20",
+                                    "text": "Serotonin Re-Uptake Inhibitors"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-21",
+                                    "text": "Statins"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-22",
+                                    "text": "Sulfa Drugs"
+                                },
+                                {
+                                    "code": "DRUG-CLASS-23",
+                                    "text": "Tetracycline"
+                                },
+                                {
+                                    "code": "medication",
+                                    "text": "Medication allergies"
+                                },
+                                {
+                                    "code": "MED-57",
+                                    "text": "ALEVE (Naproxen)"
+                                },
+                                {
+                                    "code": "MED-2",
+                                    "text": "AMBIEN (Zolpedem)"
+                                },
+                                {
+                                    "code": "MED-97",
+                                    "text": "Amoxicillin"
+                                },
+                                {
+                                    "code": "MED-6",
+                                    "text": "Aspirin (ASA)"
+                                },
+                                {
+                                    "code": "MED-7",
+                                    "text": "ATIVAN  (Lorazapam)"
+                                },
+                                {
+                                    "code": "MED-8",
+                                    "text": "ATROVENT  (Ipartropium)"
+                                },
+                                {
+                                    "code": "MED-55",
+                                    "text": "AVINZA (Morphine)"
+                                },
+                                {
+                                    "code": "MED-9",
+                                    "text": "Bacitracin"
+                                },
+                                {
+                                    "code": "MED-10",
+                                    "text": "BACTRIM  (Sulfamethoxazol/trimethaprim)"
+                                },
+                                {
+                                    "code": "MED-11",
+                                    "text": "BENADRYL  (Diphenhydramine )"
+                                },
+                                {
+                                    "code": "MED-13",
+                                    "text": "BUMEX  (Bumetanide)"
+                                },
+                                {
+                                    "code": "MED-16",
+                                    "text": "CARDIZEM  (Diltizzam)"
+                                },
+                                {
+                                    "code": "MED-99",
+                                    "text": "CEFZIL (Cefprozil)"
+                                },
+                                {
+                                    "code": "MED-18",
+                                    "text": "CIPROFLOXACIN  (Cipro)"
+                                },
+                                {
+                                    "code": "MED-19",
+                                    "text": "Codeine"
+                                },
+                                {
+                                    "code": "MED-20",
+                                    "text": "COLACE (Docusate Sodium)"
+                                },
+                                {
+                                    "code": "MED-21",
+                                    "text": "COMPAZINE (Prochlorperazine Maleate)"
+                                },
+                                {
+                                    "code": "MED-22",
+                                    "text": "COUMADIN (Warfarin)"
+                                },
+                                {
+                                    "code": "MED-23",
+                                    "text": "DALMANE  (Flurazepam)"
+                                },
+                                {
+                                    "code": "MED-52",
+                                    "text": "DEMEROL (Meperidine)"
+                                },
+                                {
+                                    "code": "MED-88",
+                                    "text": "DEPAKOTE ER (Valproic Acid)"
+                                },
+                                {
+                                    "code": "MED-26",
+                                    "text": "DILANTIN (Phenytoin)"
+                                },
+                                {
+                                    "code": "MED-28",
+                                    "text": "DULCOLAX (Bisacodyl)"
+                                },
+                                {
+                                    "code": "MED-29",
+                                    "text": "E-MYCIN (Erythromycin)"
+                                },
+                                {
+                                    "code": "MED-30",
+                                    "text": "GASTROGRAFIN(Diatrizoate Meglumine)"
+                                },
+                                {
+                                    "code": "MED-31",
+                                    "text": "GLUCOPHAGE (Metformin)"
+                                },
+                                {
+                                    "code": "MED-32",
+                                    "text": "HALCION (Triazolam)"
+                                },
+                                {
+                                    "code": "MED-33",
+                                    "text": "HALDOL (Haloperidol)"
+                                },
+                                {
+                                    "code": "MED-35",
+                                    "text": "HUMALIN (human insulin)"
+                                },
+                                {
+                                    "code": "MED-37",
+                                    "text": "IMDUR (Isosorbide)"
+                                },
+                                {
+                                    "code": "MED-64",
+                                    "text": "ISONIAZID (Isoniazide)"
+                                },
+                                {
+                                    "code": "MED-41",
+                                    "text": "KAYEVELATE (Sodium Polystyrene Sulfonate)"
+                                },
+                                {
+                                    "code": "MED-42",
+                                    "text": "KLONOPIN (Clonazepam)"
+                                },
+                                {
+                                    "code": "MED-43",
+                                    "text": "Lactose"
+                                },
+                                {
+                                    "code": "MED-44",
+                                    "text": "LASIX (Furosemide)"
+                                },
+                                {
+                                    "code": "MED-45",
+                                    "text": "LEVAQUIN (Levofloxacin)"
+                                },
+                                {
+                                    "code": "MED-46",
+                                    "text": "LIBRIUM (Chlordiazepoxide)"
+                                },
+                                {
+                                    "code": "MED-47",
+                                    "text": "Lidocaine, Local"
+                                },
+                                {
+                                    "code": "MED-48",
+                                    "text": "LIPITOR (Atorvastatin)"
+                                },
+                                {
+                                    "code": "MED-49",
+                                    "text": "LOPRESSOR (Metroprolol)"
+                                },
+                                {
+                                    "code": "MED-50",
+                                    "text": "LOVENOX (Enoxaparin)"
+                                },
+                                {
+                                    "code": "MED-51",
+                                    "text": "MELLARIL (Thioridazine)"
+                                },
+                                {
+                                    "code": "MED-36",
+                                    "text": "MOTRIN/ADVIL (Ibuprofen)"
+                                },
+                                {
+                                    "code": "MED-59",
+                                    "text": "NORVASC (Amlodipine)"
+                                },
+                                {
+                                    "code": "MED-98",
+                                    "text": "OMNICEF (Cefdinir)"
+                                },
+                                {
+                                    "code": "MED-96",
+                                    "text": "Penicillin"
+                                },
+                                {
+                                    "code": "MED-61",
+                                    "text": "PEPCID (Famotidine)"
+                                },
+                                {
+                                    "code": "MED-62",
+                                    "text": "PERMITIL (Fluphenazine)"
+                                },
+                                {
+                                    "code": "MED-65",
+                                    "text": "PLAVIX (Clopidogrel)"
+                                },
+                                {
+                                    "code": "MED-67",
+                                    "text": "PREVACID (Lansoprazole)"
+                                },
+                                {
+                                    "code": "MED-68",
+                                    "text": "PROLIXIN (Fluphenazine)"
+                                },
+                                {
+                                    "code": "MED-70",
+                                    "text": "REGLAN (Metoclopramide)"
+                                },
+                                {
+                                    "code": "MED-71",
+                                    "text": "RESTORIL (Temazepam)"
+                                },
+                                {
+                                    "code": "MED-53",
+                                    "text": "ROBAXIN (Methocarbamol)"
+                                },
+                                {
+                                    "code": "MED-72",
+                                    "text": "SENOKOT (Senna)"
+                                },
+                                {
+                                    "code": "MED-73",
+                                    "text": "SERAX (Oxazepam)"
+                                },
+                                {
+                                    "code": "MED-74",
+                                    "text": "SERENTIL (Mesoridazine)"
+                                },
+                                {
+                                    "code": "MED-66",
+                                    "text": "SLOW-K (Potassium)"
+                                },
+                                {
+                                    "code": "MED-75",
+                                    "text": "SOLU MEDROL (Methylprednisolone )"
+                                },
+                                {
+                                    "code": "MED-77",
+                                    "text": "STELAZINE (Trifluoperazine)"
+                                },
+                                {
+                                    "code": "MED-79",
+                                    "text": "SYNTHROID (Thyroxin)"
+                                },
+                                {
+                                    "code": "MED-15",
+                                    "text": "TEGRETOL (Carbamazepine)"
+                                },
+                                {
+                                    "code": "MED-82",
+                                    "text": "THORAZINE (Chlorpromazine)"
+                                },
+                                {
+                                    "code": "MED-83",
+                                    "text": "TOPROL (Metoprolol)"
+                                },
+                                {
+                                    "code": "MED-84",
+                                    "text": "TRANXENE (Clorazepate)"
+                                },
+                                {
+                                    "code": "MED-85",
+                                    "text": "TRILAFON (Perphenazie)"
+                                },
+                                {
+                                    "code": "MED-86",
+                                    "text": "TYLENOL (Acetaminophen)"
+                                },
+                                {
+                                    "code": "MED-25",
+                                    "text": "VALIUM (Diastat)"
+                                },
+                                {
+                                    "code": "MED-87",
+                                    "text": "VALIUM (Diazepam)"
+                                },
+                                {
+                                    "code": "MED-89",
+                                    "text": "VASOTEC (Enalapril)"
+                                },
+                                {
+                                    "code": "MED-90",
+                                    "text": "VITAMIN K1 (Phytonadione)"
+                                },
+                                {
+                                    "code": "MED-91",
+                                    "text": "XANAX (Alprazolam)"
+                                },
+                                {
+                                    "code": "MED-92",
+                                    "text": "ZAROXOLYN (Metolazone)"
+                                },
+                                {
+                                    "code": "MED-93",
+                                    "text": "ZOLOFT (Sertraline)"
+                                },
+                                {
+                                    "code": "MED-94",
+                                    "text": "ZOSYN (Piperacillin/Tazobactam)"
+                                },
+                                {
+                                    "code": "MED-95",
+                                    "text": "ZYPREXA (Olanzapine)"
+                                }
+                            ],
+                            "questionCardinality": {
+                                "min": "1",
+                                "max": "1"
+                            }
+                        },
+                        {
+                            "dataType": "TX",
+                            "question": "Comment",
+                            "codeList": [
+                                {
+                                    "system": "Custom",
+                                    "code": "allergy_comment",
+                                    "display": "Comment"
+                                }
+                            ],
+                            "questionCode": "allergy_comment",
+                            "questionCodeSystem": "Custom",
+                            "linkId": "/allergies/allergy_comment",
+                            "questionCardinality": {
+                                "max": "1",
+                                "min": "1"
+                            },
+                            "answerCardinality": {
+                                "min": "0",
+                                "max": "1"
+                            }
+                        }
+                    ],
+                    "answerCardinality": {
+                        "min": "0",
+                        "max": "1"
+                    }
+                }
             ],
-            "text": "Group Table"
-          }
-        }
-      ],
-      "linkId": "/conditions",
-      "code": [
+            "codeList": [],
+            "answerCardinality": {
+                "min": "0",
+                "max": "1"
+            }
+        },
         {
-          "system": "Custom",
-          "code": "conditions",
-          "display": "PAST MEDICAL HISTORY"
+            "header": true,
+            "dataType": "SECTION",
+            "question": "PAST MEDICAL HISTORY:",
+            "codeList": [
+                {
+                    "system": "Custom",
+                    "code": "conditions",
+                    "display": "PAST MEDICAL HISTORY"
+                }
+            ],
+            "questionCode": "conditions",
+            "questionCodeSystem": "Custom",
+            "linkId": "/conditions",
+            "questionCardinality": {
+                "max": "*",
+                "min": "1"
+            },
+            "displayControl": {
+                "questionLayout": "horizontal"
+            },
+            "items": [
+                {
+                    "externallyDefined": "https://clinicaltables.nlm.nih.gov/api/conditions/v3/search",
+                    "dataType": "CWE",
+                    "question": "PAST MEDICAL HISTORY",
+                    "codeList": [
+                        {
+                            "system": "Custom",
+                            "code": "condition",
+                            "display": "PAST MEDICAL HISTORY"
+                        }
+                    ],
+                    "questionCode": "condition",
+                    "questionCodeSystem": "Custom",
+                    "linkId": "/conditions/condition",
+                    "answerCardinality": {
+                        "max": "1",
+                        "min": "0"
+                    },
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "COMBO_BOX"
+                        }
+                    },
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    }
+                },
+                {
+                    "dataType": "DT",
+                    "question": "Started",
+                    "codeList": [
+                        {
+                            "system": "Custom",
+                            "code": "cond_started",
+                            "display": "Started"
+                        }
+                    ],
+                    "questionCode": "cond_started",
+                    "questionCodeSystem": "Custom",
+                    "linkId": "/conditions/cond_started",
+                    "questionCardinality": {
+                        "max": "1",
+                        "min": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "0",
+                        "max": "1"
+                    },
+                    "value": "2022-01-04"
+                }
+            ],
+            "answerCardinality": {
+                "min": "0",
+                "max": "1"
+            }
+        },
+        {
+            "header": true,
+            "dataType": "SECTION",
+            "question": "MEDICATIONS:",
+            "obj_text": {
+                "extension": [
+                    {
+                        "url": "http://hl7.org/fhir/StructureDefinition/rendering-style",
+                        "valueString": ".your-class-name {\n    color: black; /* Text color */\n    font-weight: bold; /* Bold text */\n    font-size: 1.5em; /* H4 size approximation */\n    background-color: orange; /* Background color */\n}"
+                    }
+                ]
+            },
+            "questionCode": "/medications",
+            "questionCodeSystem": "LinkId",
+            "linkId": "/medications",
+            "questionCardinality": {
+                "max": "*",
+                "min": "1"
+            },
+            "displayControl": {
+                "questionLayout": "horizontal"
+            },
+            "items": [
+                {
+                    "externallyDefined": "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=STRENGTHS_AND_FORMS,RXCUIS",
+                    "dataType": "CWE",
+                    "question": "MEDICATIONS",
+                    "codeList": [
+                        {
+                            "system": "Custom",
+                            "code": "med_name",
+                            "display": "MEDICATIONS"
+                        }
+                    ],
+                    "questionCode": "med_name",
+                    "questionCodeSystem": "Custom",
+                    "linkId": "/medications/med_name",
+                    "answerCardinality": {
+                        "max": "1",
+                        "min": "0"
+                    },
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "COMBO_BOX"
+                        }
+                    },
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    }
+                },
+                {
+                    "dataType": "CWE",
+                    "question": "Strength",
+                    "codeList": [
+                        {
+                            "system": "Custom",
+                            "code": "med_strength",
+                            "display": "Strength"
+                        }
+                    ],
+                    "questionCode": "med_strength",
+                    "questionCodeSystem": "Custom",
+                    "linkId": "/medications/med_strength",
+                    "answerCardinality": {
+                        "max": "1",
+                        "min": "0"
+                    },
+                    "displayControl": {
+                        "answerLayout": {
+                            "type": "COMBO_BOX"
+                        }
+                    },
+                    "dataControl": [
+                        {
+                            "source": {
+                                "sourceType": "INTERNAL",
+                                "sourceLinkId": "/medications/med_name"
+                            },
+                            "construction": "ARRAY",
+                            "dataFormat": {
+                                "code": "value.data.RXCUIS",
+                                "text": "value.data.STRENGTHS_AND_FORMS"
+                            },
+                            "onAttribute": "answers"
+                        }
+                    ],
+                    "answers": [],
+                    "questionCardinality": {
+                        "min": "1",
+                        "max": "1"
+                    }
+                },
+                {
+                    "dataType": "TX",
+                    "question": "Instructions",
+                    "codeList": [
+                        {
+                            "system": "Custom",
+                            "code": "med_instructions",
+                            "display": "Instructions"
+                        }
+                    ],
+                    "questionCode": "med_instructions",
+                    "questionCodeSystem": "Custom",
+                    "linkId": "/medications/med_instructions",
+                    "questionCardinality": {
+                        "max": "1",
+                        "min": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "0",
+                        "max": "1"
+                    }
+                },
+                {
+                    "dataType": "DT",
+                    "question": "Resupply",
+                    "codeList": [
+                        {
+                            "system": "Custom",
+                            "code": "med_resupply",
+                            "display": "Resupply"
+                        }
+                    ],
+                    "questionCode": "med_resupply",
+                    "questionCodeSystem": "Custom",
+                    "linkId": "/medications/med_resupply",
+                    "questionCardinality": {
+                        "max": "1",
+                        "min": "1"
+                    },
+                    "answerCardinality": {
+                        "min": "0",
+                        "max": "1"
+                    }
+                }
+            ],
+            "codeList": [],
+            "answerCardinality": {
+                "min": "0",
+                "max": "1"
+            }
         }
-      ],
-      "text": "PAST MEDICAL HISTORY:",
-      "_text": {
-        "extension": [
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/rendering-style",
-            "valueString": ".your-class-name {\n    color: black; /* Text color */\n    font-weight: bold; /* Bold text */\n    font-size: 1.5em; /* H4 size approximation */\n    background-color: orange; /* Background color */\n}"
-          }
-        ]
-      },
-      "required": false,
-      "repeats": true
+    ],
+    "templateOptions": {
+        "showQuestionCode": false,
+        "showCodingInstruction": false,
+        "allowMultipleEmptyRepeatingItems": false,
+        "allowHTMLInInstructions": false,
+        "displayControl": {
+            "questionLayout": "vertical"
+        },
+        "viewMode": "auto",
+        "defaultAnswerLayout": {
+            "answerLayout": {
+                "type": "COMBO_BOX",
+                "columns": "0"
+            }
+        },
+        "hideTreeLine": false,
+        "hideIndentation": false,
+        "hideRepetitionNumber": false,
+        "displayScoreWithAnswerText": true
     },
-    {
-      "item": [
-        {
-          "type": "open-choice",
-          "extension": [
-            {
-              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-              "valueCodeableConcept": {
-                "coding": [
-                  {
-                    "system": "http://hl7.org/fhir/questionnaire-item-control",
-                    "code": "drop-down",
-                    "display": "Drop down"
-                  }
-                ],
-                "text": "Auto-complete"
-              }
-            },
-            {
-              "url": "http://lhcforms.nlm.nih.gov/fhir/StructureDefinition/questionnaire-externallydefined",
-              "valueUri": "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?ef=STRENGTHS_AND_FORMS,RXCUIS"
-            }
-          ],
-          "linkId": "/medications/med_name",
-          "code": [
-            {
-              "system": "Custom",
-              "code": "med_name",
-              "display": "MEDICATIONS"
-            }
-          ],
-          "text": "MEDICATIONS",
-          "required": false
-        },
-        {
-          "type": "open-choice",
-          "extension": [
-            {
-              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-              "valueCodeableConcept": {
-                "coding": [
-                  {
-                    "system": "http://hl7.org/fhir/questionnaire-item-control",
-                    "code": "drop-down",
-                    "display": "Drop down"
-                  }
-                ],
-                "text": "Drop down"
-              }
-            },
-            {
-              "url": "http://lhcforms.nlm.nih.gov/fhirExt/dataControl",
-              "valueString": "[{\"source\":{\"sourceType\":\"INTERNAL\",\"sourceLinkId\":\"/medications/med_name\"},\"construction\":\"ARRAY\",\"dataFormat\":{\"code\":\"value.data.RXCUIS\",\"text\":\"value.data.STRENGTHS_AND_FORMS\"},\"onAttribute\":\"answers\"}]"
-            }
-          ],
-          "linkId": "/medications/med_strength",
-          "code": [
-            {
-              "system": "Custom",
-              "code": "med_strength",
-              "display": "Strength"
-            }
-          ],
-          "text": "Strength",
-          "required": false
-        },
-        {
-          "type": "text",
-          "linkId": "/medications/med_instructions",
-          "code": [
-            {
-              "system": "Custom",
-              "code": "med_instructions",
-              "display": "Instructions"
-            }
-          ],
-          "text": "Instructions",
-          "required": false
-        },
-        {
-          "type": "date",
-          "linkId": "/medications/med_resupply",
-          "code": [
-            {
-              "system": "Custom",
-              "code": "med_resupply",
-              "display": "Resupply"
-            }
-          ],
-          "text": "Resupply",
-          "required": false
-        }
-      ],
-      "type": "group",
-      "extension": [
-        {
-          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-          "valueCodeableConcept": {
-            "coding": [
-              {
-                "system": "http://hl7.org/fhir/questionnaire-item-control",
-                "code": "gtable",
-                "display": "Group Table"
-              }
-            ],
-            "text": "Group Table"
-          }
-        }
-      ],
-      "linkId": "/medications",
-      "text": "MEDICATIONS:",
-      "_text": {
-        "extension": [
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/rendering-style",
-            "valueString": ".your-class-name {\n    color: black; /* Text color */\n    font-weight: bold; /* Bold text */\n    font-size: 1.5em; /* H4 size approximation */\n    background-color: orange; /* Background color */\n}"
-          }
-        ]
-      },
-      "required": false,
-      "repeats": true
-    }
-  ]
+    "hasSavedData": true,
+    "fhirVersion": "R4"
 }

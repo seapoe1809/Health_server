@@ -140,6 +140,7 @@ def get_ip_address():
     return ip_address
 
 print('        ☕ Writing variables to variables.py ☕')
+print('        ☕ Installing install_module from Git ☕')
 print('        🢡 You could edit IP_address in variables.py if you ever change your device IP')
 
 
@@ -153,21 +154,8 @@ subprocess.run(["darnavenv/bin/python3", "setupapp.py"])
 print('        ☕ Setting up virtual Env for Darnabot llmvenv. TensorRT required☕')
 subprocess.run(['python3', '-m',  'venv', 'darnabot/llmvenv'])
 subprocess.run(["darnabot/llmvenv/bin/pip", "install", "--force-reinstall", "-r", "darnabot/requirements.txt"])
-#subprocess.run(["darnavenv/bin/python3", "setupapp.py"])
 
 
-print('        ☕ Installing install_module from Git ☕')
-#install_module gitclone
-install_module_repository='https://github.com/pnmeka/install_module'
-
-try:
-    result = subprocess.run(['git', 'clone', install_module_repository], cwd=HS_path)
-    if result.returncode == 0:
-        print("Repository cloned...")
-    else:
-        print("Failed to clone the repository :(")
-except Exception as e:
-    print(f"An error occurred while cloning the repository: {e}")
 
 ip_address = get_ip_address()
 url =f'{ip_address}:3001'
@@ -213,13 +201,15 @@ with open(file_path, 'w') as file:
     file.write(content2)
     
 #prepare content and write to darnabot.sh file
+#now using Ollama
 content3 = f"""#!/bin/bash
 cd {HS_path}/darnabot
 source llmvenv/bin/activate
+# Now using Ollama
 # Set the environment variable HF_HOME
-export HF_HOME={HS_path}/darnabot/cache/hub
-export HUGGINGFACE_HUB_CACHE={HS_path}/darnabot/cache/huggingface/hub
-export TRANSFORMERS_CACHE={HS_path}/darnabot/cache/
+# export HF_HOME={HS_path}/darnabot/cache/hub
+# export HUGGINGFACE_HUB_CACHE={HS_path}/darnabot/cache/huggingface/hub
+# export TRANSFORMERS_CACHE={HS_path}/darnabot/cache/
 nohup python3 darnabot.py &> darnabot.log &
 """
 
