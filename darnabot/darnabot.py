@@ -487,7 +487,7 @@ def list_files(directory):
         
         return files
     except OSError as e:
-        print(f"Pick a directory to list {directory}: {e}")
+        #print(f"Pick a directory to list {directory}: {e}")
         return []
 
 def display_file(filename):
