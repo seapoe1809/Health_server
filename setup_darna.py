@@ -45,7 +45,7 @@ print('*********|▓****▞|**▓***▚***▓▓▚***▓**▐**▓*▓***▚***
 print('*********|▓**▚▞/***▓▓▓▓▓▚**▓**▚**▓***▚*▓*▓▓▓▓▓▚*****▓****▓***▓************')
 print('*********|▓▓▞▘/****▓*****▚*▓***▚*▓****▚▓*▓*****▚*▓▓*▓****▓*▓▓▓▓▓|*********')
 print('**************************************************************************')
-print('        ☕ Step 1: Will try to install rsync to allow indexing Health_server files ☕,')
+print('        ☕ Step 1: Will try to install packages to allow indexing Health_server files ☕,')
 print('        ☕ Caffeine (to prevent the device from falling asleep while running Health_server.☕')
 print('        ☕ Check for python version and install pip if needed ☕')
 print('        ☕ Check for linux distro and install relevant modules ☕')
@@ -145,14 +145,16 @@ print('        🢡 You could edit IP_address in variables.py if you ever change
 
 
 
-print('        ☕ Setting up virtual Env for Darna at darnavenv☕')
+print('        ☕ Setting up virtual Env for Darna at darnavenv. ☕')
 subprocess.run(['python3', '-m',  'venv', 'darnavenv'])
+print('        ☕ Customizing virtual Env for Darna at darnavenv. Needed packages will be installed in Venv. ☕')
 subprocess.run(["darnavenv/bin/pip", "install", "--force-reinstall", "-r", "requirements.txt"])
 subprocess.run(["darnavenv/bin/python3", "setupapp.py"])
 
 #set up darnabot
-print('        ☕ Setting up virtual Env for Darnabot llmvenv. TensorRT required☕')
+print('        ☕ Setting up virtual Env for Darnabot llmvenv. ☕')
 subprocess.run(['python3', '-m',  'venv', 'darnabot/llmvenv'])
+print('        ☕ Customizing virtual Env for Darnabot at llmvenv. Needed packages will be installed in Venv. ☕')
 subprocess.run(["darnabot/llmvenv/bin/pip", "install", "--force-reinstall", "-r", "darnabot/requirements.txt"])
 
 
@@ -234,9 +236,9 @@ print('        ☕ The server will be available at: ☕')
 print(f"       ☕ On other devices, http://{ip_address}:3001 ☕ ")
 print("        ☕ On same computer access at http://localhost:3001 ☕ ")
 print("        ☝ One more thing to know:")
-print("              🢡The ADMIN password is 'health'🢤")
-print("              🢡The USER1 password is 'wellness'🢤")
-print("              🢡password can be changed under 'INFORMATION' card🢤")
+print("              🢡  The ADMIN password is 'health'  🢤")
+print("              🢡  The USER1 password is 'wellness'  🢤")
+print("              🢡  password can be changed under 'INFORMATION' card  🢤")
 webbrowser.open(url)
 
 
