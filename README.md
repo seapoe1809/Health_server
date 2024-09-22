@@ -1,5 +1,5 @@
 
-#### IN PROCESS OF UPDATING. DO NOT USE UNTIL SEPT 29 ######
+#### NOTE: IN PROCESS OF UPDATING. DO NOT USE UNTIL SEPT 29 AS ERRORS MIGHT OCCUR DUE TO UNFINISHED CODE ######
 **DARNA HEALTH INTELLIGENCE V2.3**
 
 
@@ -21,6 +21,7 @@ CAUTION: This tool is not a replacement for a Doctor. For medical advice, please
 - Free,
 - AI/ML,
 - LLM (ollama, mistral-nemo)
+- No Internet required to run it
 
 DEMO version with features turned off: http://seapoe1809.pythonanywhere.com/login
 ADMIN 
