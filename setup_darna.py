@@ -240,9 +240,15 @@ def run_whitelisted_command(command, whitelist):
     
     # Run the command without shell=True
     try:
-        result = subprocess.run(args, check=True, capture_output=True, text=True)
-        print(f"Command executed successfully: {command}")
-        print(f"Output: {result.stdout}")
+        if args[0] == 'caffeine':
+            # Run caffeine in the background
+            process = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            print(f"Command started in background: {command}")
+        else:
+            # For other commands, use subprocess.run
+            result = subprocess.run(args, check=True, capture_output=True, text=True)
+            print(f"Command executed successfully: {command}")
+            print(f"Output: {result.stdout}")
     except subprocess.CalledProcessError as e:
         print(f"Error executing command: {e}")
         print(f"Error output: {e.stderr}")
