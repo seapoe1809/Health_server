@@ -228,14 +228,41 @@ print('        🏃🏃 Waiting for final leg of installation to complete 🏃�
 
 
 #run caffeine as subprocess in background, start flask server and open browser with address.
-caffeine_command= "caffeine &"
-subprocess.run(caffeine_command, shell=True)
+import shlex
 
-subprocess.run(['./darna_launch.sh'], shell=True)
+def run_whitelisted_command(command, whitelist):
+    # Split the command into arguments
+    args = shlex.split(command)
+    
+    # Check if the command is in the whitelist
+    if args[0] not in whitelist:
+        raise ValueError(f"Command '{args[0]}' is not in the whitelist")
+    
+    # Run the command without shell=True
+    try:
+        result = subprocess.run(args, check=True, capture_output=True, text=True)
+        print(f"Command executed successfully: {command}")
+        print(f"Output: {result.stdout}")
+    except subprocess.CalledProcessError as e:
+        print(f"Error executing command: {e}")
+        print(f"Error output: {e.stderr}")
+
+# Define your whitelist of allowed commands
+WHITELIST = ['caffeine', './darna_launch.sh']
+
+# Example usage
+caffeine_command = "caffeine"
+darna_command = "./darna_launch.sh"
+
+run_whitelisted_command(caffeine_command, WHITELIST)
+run_whitelisted_command(darna_command, WHITELIST)
+
+
 print('        ☕ The server will be available at: ☕')
 print(f"       ☕ On other devices, http://{ip_address}:3001 ☕ ")
 print("        ☕ On same computer access at http://localhost:3001 ☕ ")
 print("        🤖 For Darnabot you will need Ollama Mistral-Nemo. Please Install 🤖 ")
+print("        👮 Install Clamscan for more security 👮 ")
 print("        ☝ One more thing to know:")
 print("              🢡  The ADMIN password is 'health'  🢤")
 print("              🢡  The USER1 password is 'wellness'  🢤")
