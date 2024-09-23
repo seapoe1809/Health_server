@@ -514,7 +514,7 @@ def upload_file():
                     if os.name == 'posix':  # Unix-based system
                         subprocess.run(['cp', file_path1, file_path2], check=True)
                     elif os.name == 'nt':  # Windows
-                        subprocess.run(['copy', file_path1, file_path2], shell=True, check=True)
+                        subprocess.run(['cmd', '/c', 'copy', file_path1, file_path2], check=True)
                 return render_template('success.html')  # Proceed if ClamAV scan is not performed
 
     return render_template('upload.html')
