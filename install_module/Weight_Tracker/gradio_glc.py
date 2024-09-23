@@ -20,6 +20,7 @@
 import gradio as gr
 import sqlite3
 import os
+import re
 from datetime import datetime, date
 import plotly.graph_objs as go
 import pandas as pd
@@ -36,49 +37,77 @@ def initialize_database():
         conn.close()
 
 # Function to create a persona with linked tables for glucose, BP, and weight
+# Function to create a persona with linked tables for glucose, BP, and weight
+def is_safe_persona_id(persona_id):
+    return re.match(r'^[a-zA-Z0-9_]+$', str(persona_id)) is not None
+
+def is_safe_persona_name(persona_name):
+    # Allow letters, numbers, spaces, and underscores, length between 1 and 50 characters
+    return re.match(r'^[\w\s]{1,50}$', persona_name) is not None
+
 def create_persona(persona_name):
-    if persona_name is not None:
-        conn = sqlite3.connect('personas.db')
-        c = conn.cursor()
-    
+    # If no name is entered, just update the list of personas
+    if not persona_name:
+        return gr.update(value=""), gr.update(choices=get_personas(), visible=True, value=None)
+
+    # Validate the persona name
+    if not is_safe_persona_name(persona_name):
+        return gr.update(value=""), gr.update(choices=get_personas(), visible=True, value="Use letters, numbers, spaces, and underscores")
+
+    conn = sqlite3.connect('personas.db')
+    c = conn.cursor()
+
+    try:
         # Check if the persona already exists
         c.execute("SELECT name FROM personas WHERE name = ?", (persona_name,))
         if c.fetchone():
-            conn.close()
-            return gr.update(), gr.update(choices=get_personas(), visible=True, value=None)
-    
+            return gr.update(value=""), gr.update(choices=get_personas(), visible=True, value="Persona already exists")
+
         # Insert new persona
         c.execute("INSERT INTO personas (name) VALUES (?)", (persona_name,))
         persona_id = c.lastrowid
-    
+
+        if not is_safe_persona_id(persona_id):
+            raise ValueError("Generated persona_id is not safe")
+
         # Create linked tables for glucose, BP, and weight
-        c.execute(f'''CREATE TABLE IF NOT EXISTS glucose_{persona_id} (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    value REAL,
-                    date TEXT,
-                    time TEXT,
-                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)''')
-    
-        c.execute(f'''CREATE TABLE IF NOT EXISTS bp_{persona_id} (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    systolic REAL,
-                    diastolic REAL,
-                    date TEXT,
-                    time TEXT,
-                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)''')
-    
-        c.execute(f'''CREATE TABLE IF NOT EXISTS weight_{persona_id} (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    value REAL,
-                    unit TEXT,
-                    date TEXT,
-                    time TEXT,
-                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)''')
-    
+        table_queries = [
+            f'''CREATE TABLE IF NOT EXISTS glucose_{persona_id} (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                value REAL,
+                date TEXT,
+                time TEXT,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)''',
+            f'''CREATE TABLE IF NOT EXISTS bp_{persona_id} (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                systolic REAL,
+                diastolic REAL,
+                date TEXT,
+                time TEXT,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)''',
+            f'''CREATE TABLE IF NOT EXISTS weight_{persona_id} (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                value REAL,
+                unit TEXT,
+                date TEXT,
+                time TEXT,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP)'''
+        ]
+
+        for query in table_queries:
+            c.execute(query)
+
         conn.commit()
-        conn.close()
-    
         return gr.update(value=""), gr.update(choices=get_personas(), visible=True, value=None)
+
+    except sqlite3.Error as e:
+        print(f"An error occurred: {e}")
+        return gr.update(value=""), gr.update(choices=get_personas(), visible=True, value=f"Error: {e}")
+    except ValueError as e:
+        print(f"Validation error: {e}")
+        return gr.update(value=""), gr.update(choices=get_personas(), visible=True, value=f"Error: {e}")
+    finally:
+        conn.close()
 
 # Function to get all personas
 def get_personas():
@@ -255,7 +284,10 @@ def submit_weight_and_update_graph(persona_name, weight_value, weight_unit, date
 def get_blood_pressure_data(persona_id):
     conn = sqlite3.connect('personas.db')
     c = conn.cursor()
-    c.execute(f"SELECT systolic, diastolic, date, time FROM bp_{persona_id} ORDER BY date, time")
+    table_name = f"bp_{persona_id}"
+    query = f"SELECT systolic, diastolic, date, time FROM {table_name} ORDER BY date, time"
+    c.execute(query)
+    #c.execute(f"SELECT systolic, diastolic, date, time FROM bp_{persona_id} ORDER BY date, time")
     readings = c.fetchall()
     conn.close()
 
@@ -337,7 +369,10 @@ def submit_BP_and_update_graph(persona_name, systolic_value, diastolic_value, da
 def get_glucose_data(persona_id):
     conn = sqlite3.connect('personas.db')
     c = conn.cursor()
-    c.execute(f"SELECT value, date, time FROM glucose_{persona_id} ORDER BY date, time")
+    table_name = f"glucose_{persona_id}"
+    query = f"SELECT value, date, time FROM {table_name} ORDER BY date, time"
+    c.execute(query)
+    #c.execute(f"SELECT value, date, time FROM glucose_{persona_id} ORDER BY date, time")
     readings = c.fetchall()
     conn.close()
 
