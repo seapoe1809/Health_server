@@ -830,8 +830,16 @@ def generate_output(heading_content_dict, directory):
         f.write(json_data)
 
 
-
-
+import shutil
+def whitelist_directory(directory, whitelist):
+    for filename in os.listdir(directory):
+        file_path = os.path.join(directory, filename)
+        if os.path.isfile(file_path) and filename not in whitelist:
+            try:
+                os.remove(file_path)
+                print(f"Removed: {file_path}")
+            except Exception as e:
+                print(f"Error removing {file_path}: {e}")
 
 
 ###########################################
@@ -907,7 +915,8 @@ def run_analyzer(age, sex, ocr_files, formatted_ignore_words):
         chromadb_embed(directory)
 
         # Cleanup OCR files, but leave Darna_tesseract files
-        subprocess.run(f'find {directory} -maxdepth 1 -type f -exec rm {{}} +', shell=True)
+        whitelist = ["combined_output.json"]       
+        whitelist_directory(directory, whitelist)
     
     except Exception as e:
         print(f"Error during processing: {e}")
