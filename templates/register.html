@@ -2,9 +2,9 @@
 <html>
 <head>
     <title>Change Password</title>
-       <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 </head>
@@ -115,6 +115,18 @@
             color: var(--first-color);
             box-shadow: none;
         }
+        
+        .done-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #F28C28;
+            color: black;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            }
     </style>
 <body>
 <button class="done-button" onclick="window.close()">Done</button>
