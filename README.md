@@ -150,21 +150,23 @@ Darnahi is Self Hosted -This means you have to run this on your own linux comput
 
 Make sure you have python3. If not go to https://www.python.org/. Once done do the following:
 
-(Optional) Install Git and git clone Darna_local repo: 
+*(Optional)* Install Git and git clone Darna_local repo: 
  (skip this step if git already installed)
  
     sudo apt-get install git
 
 
-(Optional) Make sure pip is installed to help install python modules 
+*(Optional)* Make sure pip is installed to help install python modules 
  (skip this step if pip is already installed)
 
     sudo apt-get install python3-pip
     
-(Optional) Make sure venv is availabls 
+*(Optional)* Make sure venv is availabls 
  (skip this step if pip is already installed)
 
     sudo apt install python3.10-venv    
+
+
 
 Git clone the Darna_local repo
               
