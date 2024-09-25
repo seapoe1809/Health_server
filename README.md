@@ -192,7 +192,7 @@ Darnahi currently uses Ollama for its stable Local LLMs
     
 Time to get the model
     
-    ollama run mistral-nemo
+    ollama pull mistral-nemo
     
 
 
