@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #/* DARNA.HI
 # * Copyright (c) 2023 Seapoe1809   <https://github.com/seapoe1809>
-# * Copyright (c) 2023 pnmeka   <https://github.com/pnmeka>
+# * 
 # * 
 # *
 # *   This program is free software: you can redistribute it and/or modify
