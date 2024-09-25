@@ -45,6 +45,7 @@ password 'wellness'
     4. Ability to encrypt and zip your files securely and remotely
 
 2. Darnabot
+   
 [darnabot2.webm](https://github.com/user-attachments/assets/cddca3d3-1012-4a01-9d09-cb1c2779978c)
 
 New and improved Darnabot, Darnahi's AI engine
