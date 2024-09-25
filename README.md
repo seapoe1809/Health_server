@@ -34,8 +34,10 @@ password 'wellness'
 
 **Short VIDEO DEMO:**
 
+[darnahi_landing.webm](https://github.com/user-attachments/assets/a6f61b33-9b1e-4f46-bf83-9a35bfce4b3b)
+
+
 1. Darnahi Home:
-https://nostter.app/nevent1qqszfh00rkj2yjqzt0h3gaq0qvdqtqtr24d6dqrc53uptjhs9sl9gzq7mrxe9
 
     1. Chartit to log your basic information in FHIR R4 format
     2. Ability to upload and save your files to your self hosted file server
@@ -43,7 +45,8 @@ https://nostter.app/nevent1qqszfh00rkj2yjqzt0h3gaq0qvdqtqtr24d6dqrc53uptjhs9sl9g
     4. Ability to encrypt and zip your files securely and remotely
 
 2. Darnabot
-https://nostter.app/nevent1qqs8yhr3tm6azugsf7ttlgemx7w299zhqnjj6p022cyvhfkgqpxyvhcr0wqke
+[darnabot2.webm](https://github.com/user-attachments/assets/cddca3d3-1012-4a01-9d09-cb1c2779978c)
+
 New and improved Darnabot, Darnahi's AI engine
 #requires ollama and mistral-nemo
     1. ask questions of your medical records that is stored as structured and unstructured RAG
@@ -52,7 +55,6 @@ New and improved Darnabot, Darnahi's AI engine
     4. Symptom logger (optional use of AI to generate notes) for storage in darnahi file server). Can be shared with your provider if you wish in pdf's 
 
 3. Darnahi Optional Modules
-https://nostter.app/nevent1qqsphk0xrww9qm0nly04hjwt2umlldh502xyl975mg30rrvyz8k5rlcz7gqda
 
 Darnahi optional modules include: 
     1. weight/ bp/ glucose/ water tracker
