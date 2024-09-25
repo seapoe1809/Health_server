@@ -79,7 +79,7 @@ What is this project?
 ======================
 DARNA. HI v2.3 is a Forward looking project.
 
- <img src="https://github.com/seapoe1809/assets/blob/main/darnahi2.2/darnav2_mktg.png" width =300, height=550>
+ <img src="https://github.com/seapoe1809/Health_server/blob/main/static/darnav2_mktg.png" width =300, height=550>
 
 About Darnahi
 =============
@@ -251,7 +251,7 @@ Here it what the Run AI does. It might need you to enter words to de-identify se
     -It creates a visual word cloud 
     -It creates a RAG for the local LLM which allows the local LLM to provide personalized answers to your health related questions
 
- <img src="https://github.com/seapoe1809/assets/blob/main/darnahi2.2/darna_information.png" width =300, height=550>
+ <img src="https://github.com/seapoe1809/Health_server/blob/main/static/darna_information.png" width =300, height=550>
 
 
 
@@ -326,7 +326,7 @@ Build python3 from source: https://github.com/seapoe1809/assets/blob/main/Python
 
 The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish.
 
-<img src="https://github.com/seapoe1809/assets/blob/main/darnahi2.2/deidentify.png" width =300, height=550>
+<img src="https://github.com/seapoe1809/Health_server/blob/main/static/deidentify.png" width =300, height=550>
 **
 Venv error:** 
 Error creating venv could mean venv need to be installed or upgraded
