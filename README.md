@@ -224,11 +224,6 @@ FEEDBACK
         
 To give feedback, please go to 'Information' card and click on last link that allows you to email me. Or you could start a debug thread on github itself.
 
-DONATIONS:
-==========
-
-Donations are always appreciated to help continue making Darnahi better.
-They could be in either your developer time or in Btc or XMR. Your help is appreciated:
 
 
 **USING DARNAHI: Upload your health data in the health_server folder:**
