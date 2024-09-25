@@ -56,6 +56,7 @@ New and improved Darnabot, Darnahi's AI engine
     4. Symptom logger (optional use of AI to generate notes) for storage in darnahi file server). Can be shared with your provider if you wish in pdf's 
 
 3. Darnahi Optional Modules
+*CLICK HERE*
 [darnahi optional modules](https://nostrcheck.me/media/49a2ed6afaabf19d0570adab526a346266be552e65ccbd562871a32f79df865d/ea9801cb687c5ff0e78d43246827d4f1692d4bccafc8c1d17203c0347482c2f9.mp4)
 
 
