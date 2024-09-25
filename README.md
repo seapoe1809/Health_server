@@ -10,7 +10,7 @@
 
 This tool wants to be your personal health intelligent assistant. It aims to be built around AI core. The local running LLM will be able to understand your personal health information while being private and secure. For example you'll be able to ask Darnabot any health questions you have, and it will provide answers specifically based on your own health details. It's like having a knowledgeable health assistant available whenever you need, but the assitant is actually intelligent , local running program giving you personalized suggestions while protecting your privacy.
 
-CAUTION: This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based and has risk of hallucinations.
+CAUTION: This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based and has risk of hallucinations. Early stage. Beta and under development and isnt secure. Please take all steps to safeguard your data. 
 
 **Key words:** 
 
@@ -186,7 +186,7 @@ Once started the server should be active at port :3001. The browser should auto 
 INSTALLING OLLAMA for Local LLM
 ===============================
 
-Darnahi currently uses Ollama for its stable Local LLMs 
+Darnahi currently uses Ollama for its stable Local LLMs (https://ollama.com/download)
 
     curl -fsSL https://ollama.com/install.sh | sh
     
