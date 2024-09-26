@@ -208,7 +208,9 @@ Darnahi currently uses Ollama for its stable Local LLMs (https://ollama.com/down
     
 Time to get the model
     
+    
     ollama pull mistral-nemo
+    ollama serve
     
 
 
