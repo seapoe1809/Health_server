@@ -257,6 +257,8 @@ Here it what the Run AI does. It might need you to enter words to de-identify se
  <img src="https://github.com/seapoe1809/Health_server/blob/main/static/darna_information.png" width =300, height=550>
 
 
+ <img src="https://github.com/seapoe1809/Health_server/blob/main/static/deidentify.png" width =300, height=550>
+
 
 CHART IT CARD:
 ============== 
@@ -340,9 +342,7 @@ You can check with:
 OR 
 Build python3 from source: https://github.com/seapoe1809/assets/blob/main/Python_from_source_LINUX
 
-The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish.
 
-<img src="https://github.com/seapoe1809/Health_server/blob/main/static/deidentify.png" width =300, height=550>
 **
 Venv error:** 
 Error creating venv could mean venv need to be installed or upgraded
