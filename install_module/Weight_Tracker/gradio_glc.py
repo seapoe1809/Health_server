@@ -700,7 +700,12 @@ def create_gradio_interface():
             
             
             gr.Markdown("## Some Tips for Healthy Living:\n\n")
-            gr.HTML("""<iframe src="https://www.wellnesseveryday.org/images/stigma-reduction/wellness-tips/EveryDayWellnessTips.pdf" 
+            gr.Markdown("""
+<div style="text-align: center;">
+    * In life, we can’t always control the first arrow. However, the second arrow is our reaction to the first. The second arrow is optional.*
+</div>
+""")
+            gr.HTML("""<iframe src="https://www.wellnesseveryday.org/adults" 
                 width="100%" height="500px//"></iframe>""")
             
             
