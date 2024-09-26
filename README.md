@@ -313,6 +313,15 @@ This tool is not a replacement for a Doctor. For medical advice, please consult 
 
 **Troubleshooting**
 ===================
+
+If you notice a newly installed module doesnt appear after installation. 
+
+    Click refresh of the browser of the home page of optional module 
+
+Newly installed Docker container is acting up
+
+    docker restart <docker-optional-module>
+    
 If you encounter the missing module _sqlite3 error when you start venv. Its a known error with older python Venv. You might need to uninstall python3 and reinstall. Its preferred if you download directly from python.org. 
 
     sudo apt update
