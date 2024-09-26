@@ -23,6 +23,7 @@ import docker
 # Label current dir and parent dir
 HS_path = os.getcwd()
 APP_dir = f"{HS_path}/install_module"
+home='/'
 
 current_dir = f"{APP_dir}/Tailscale" #replace this and following code in new app
 
@@ -37,7 +38,7 @@ client.images.pull(image)
 container = client.containers.run(
     image,
     network_mode='host',
-    volumes={'bind': '/var/lib', 'mode': 'rw'},
+    volumes={home: {'bind': '/var/lib', 'mode': 'rw'}},
     restart_policy={"Name": "always"},
     detach=True,
     command="sh -c 'tailscale web --listen 0.0.0.0:8240 & exec tailscaled --tun=userspace-networking'"
