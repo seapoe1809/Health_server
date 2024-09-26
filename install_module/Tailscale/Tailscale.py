@@ -37,7 +37,7 @@ client.images.pull(image)
 container = client.containers.run(
     image,
     network_mode='host',
-    volumes={HS_path: {'bind': '/var/lib', 'mode': 'rw'}},
+    volumes={'bind': '/var/lib', 'mode': 'rw'},
     restart_policy={"Name": "always"},
     detach=True,
     command="sh -c 'tailscale web --listen 0.0.0.0:8240 & exec tailscaled --tun=userspace-networking'"
