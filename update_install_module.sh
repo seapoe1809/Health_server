@@ -3,6 +3,8 @@
 
 set -e  # Exit immediately if a command exits with a non-zero status.
 
+##THIS FILE UPDATES  THE INSTALL MODULE WHEN MORE OPTIONAL MODULES ARE ADDED IN FUTURE
+
 # Directory containing the script
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
