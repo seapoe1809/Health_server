@@ -34,6 +34,8 @@ password 'wellness'
 
 **Short VIDEO DEMO:**
 
+VIDEO ABOUT DARNAHI LANDING PAGE
+
 [darnahi_landing.webm](https://github.com/user-attachments/assets/a6f61b33-9b1e-4f46-bf83-9a35bfce4b3b)
 
 
@@ -45,6 +47,8 @@ password 'wellness'
     4. Ability to encrypt and zip your files securely and remotely
 
 2. Darnabot
+
+   VIDEO ABOUT DARNABOT IN ACTION
    
 [darnabot2.webm](https://github.com/user-attachments/assets/cddca3d3-1012-4a01-9d09-cb1c2779978c)
 
@@ -56,17 +60,23 @@ New and improved Darnabot, Darnahi's AI engine
     4. Symptom logger (optional use of AI to generate notes) for storage in darnahi file server). Can be shared with your provider if you wish in pdf's 
 
 3. Darnahi Optional Modules
+   VIDEO ABOUT DARNAHI OPTIONAL MODULES IN ACTION
 *CLICK HERE*
 [darnahi optional modules](https://nostrcheck.me/media/49a2ed6afaabf19d0570adab526a346266be552e65ccbd562871a32f79df865d/ea9801cb687c5ff0e78d43246827d4f1692d4bccafc8c1d17203c0347482c2f9.mp4)
 
 
 Darnahi optional modules include: 
-    1. weight/ bp/ glucose/ water tracker
-    2. IBS module- tracks your dietary and bowel habits; AI FODMAP engine; exercises to manage your IBS; know your IBS
-    3. Immunization passport- to track and keep record of your immunizations; AI travel advisor; travel map
-    4. Tailscale to allow remote access
-    5. Portal to share your encrypted zipped health docs securely
-    6. Remote docker container manager
+1. weight/ bp/ glucose/ water tracker
+    
+2. IBS module- tracks your dietary and bowel habits; AI FODMAP engine; exercises to manage your IBS; know your IBS
+
+3. Immunization passport- to track and keep record of your immunizations; AI travel advisor; travel map
+
+4. Tailscale to allow remote access
+
+5. Portal to share your encrypted zipped health docs securely
+
+6. Remote docker container manager
     
 ##DARNA Healthy Intelligence v2.3- An open source, self hosted intiative - self custody of your health data
 
