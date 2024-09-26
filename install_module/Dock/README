@@ -1,7 +1,7 @@
 #README Yacht Local
 This module works along with DarnaV2 at : https://github.com/seapoe1809/Health_server
 
-A web interface for managing docker containers with an emphasis on templating to provide one-click deployments of dockerized applications. Think of it like a decentralized app store for servers that anyone can make packages for. More information is at : https://yacht.sh/docs/
+The user name is admin@yacht.local and pwd is pass. A web interface for managing docker containers with an emphasis on templating to provide one-click deployments of dockerized applications. Think of it like a decentralized app store for servers that anyone can make packages for. More information is at : https://yacht.sh/docs/
 Features#
 
     Container templating compatibility (Portainer compatible)
