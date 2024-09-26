@@ -312,6 +312,10 @@ More information is available within Darnahi
 =====================================
 Navigate in the browser to Darnahi at <ip_address>:3001. Then click [^] and choose 'Add to Home Screen' and 'Add'.
 
+**Update Install Module**
+==========================
+In the future as more optional modules are added, all you have to do is run update_install_module.sh and your folder will be updated to the latest git repo. This file serves this function
+
 **Disclaimer: **
 
 Use at your own Risk. See License document. It is still beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
