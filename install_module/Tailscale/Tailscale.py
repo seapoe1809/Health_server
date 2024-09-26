@@ -23,7 +23,7 @@ import docker
 # Label current dir and parent dir
 HS_path = os.getcwd()
 APP_dir = f"{HS_path}/install_module"
-home='/'
+home='/darnahi/tailscale/'
 
 current_dir = f"{APP_dir}/Tailscale" #replace this and following code in new app
 
