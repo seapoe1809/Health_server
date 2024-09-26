@@ -306,6 +306,10 @@ More information is available within Darnahi
 6. Remote docker container manager
 7. A portal for you to be able to download your information from local health providers. It isnt exhaustive.
 
+**Bookmark to your device iphone:**
+=====================================
+Navigate in the browser to Darnahi at <ip_address>:3001. Then click [^] and choose 'Add to Home Screen' and 'Add'.
+
 **Disclaimer: **
 
 Use at your own Risk. See License document. It is still beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
