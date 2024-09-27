@@ -1,6 +1,9 @@
 
 #### NOTE: IN PROCESS OF UPDATING. AVAILABLE FOR USE ON SEPT 29  ######
+<img src="https://github.com/seapoe1809/Health_server/blob/main/static/favicon.png" width =100, height=100>
+
 **DARNA HEALTH INTELLIGENCE V2.3**
+
 
 
 **Self Hosted Health_Server is DARNA.HI V2.3**
