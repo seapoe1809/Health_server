@@ -20,3 +20,5 @@ To stop the container
 To permanently remove the container
 
 	docker rm <container>
+
+Credits: FODMAP Information sourced from: https://github.com/oseparovic/fodmap_list
