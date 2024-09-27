@@ -1,8 +1,8 @@
 
 #### NOTE: IN PROCESS OF UPDATING. AVAILABLE FOR USE ON SEPT 29  ######
-<img src="https://github.com/seapoe1809/Health_server/blob/main/static/favicon.png" width =100, height=100>
+<img src="https://github.com/seapoe1809/Health_server/blob/main/static/favicon.png" width =150, height=150>
 
-**DARNA HEALTH INTELLIGENCE V2.3**
+***DARNA HEALTH INTELLIGENCE V2.3***
 
 
 
