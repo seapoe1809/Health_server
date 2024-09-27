@@ -199,6 +199,8 @@ Now install 'distro' and subsequently run Setup. This should also start your Ser
 
 Once started the server should be active at port :3001. The browser should auto launch and take you there. You could easily access on the home computer at http://localhost:3001 .The flask server when launched will give you the IP address at which it launched. You could now navigate to that http://your_ip_adddress:3001 with any mobile device and access the server.
 
+Go to the Information Card to change your password and familiarize yourself with Darnahi. Dont forget to Install Ollama and Mistral Nemo Model for full functionality
+
 INSTALLING OLLAMA for Local LLM
 ===============================
 
