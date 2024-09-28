@@ -190,7 +190,7 @@ Make sure you have python3. If not go to https://www.python.org/. Once done do t
 
 
 
-#Git clone the Darna_local repo#
+**Step 1: **Git clone the Darna_local repo
               
     git clone https://github.com/seapoe1809/Health_server
     
@@ -198,12 +198,12 @@ Change directory into the Health_server directory
               
     cd Health_server
 
-Now install 'distro' and subsequently run Setup. This should also start your Server.
+**Step 2:** Now install 'distro' and subsequently run Setup. This should also start your Server.
 
     pip install pip-tools distro      
     python3 setup_darna.py
 
-Once started the server should be active at port :3001. The browser should auto launch and take you there. You could easily access on the home computer at http://localhost:3001 .The flask server when launched will give you the IP address at which it launched. You could now navigate to that http://your_ip_adddress:3001 with any mobile device and access the server.
+Once started, the server should be active at port :3001. The browser should auto launch and take you there. You could easily access on the home computer at http://localhost:3001 .The flask server when launched will give you the IP address at which it launched. You could now navigate to that http://your_ip_adddress:3001 with any mobile device and access the server.
 
 Go to the Information Card to change your password and familiarize yourself with Darnahi. Dont forget to Install Ollama and Mistral Nemo Model for full functionality
 
@@ -245,7 +245,7 @@ If you don't want to use the health server app anymore, you can simply delete th
 FEEDBACK
 ========
         
-To give feedback, please go to 'Information' card and click on last link that allows you to email me. Or you could start a debug thread on github itself.
+To give feedback, please go to 'Information' card in Landing and click on last link that allows you to email me. Or you could start a debug thread on github itself.
 
 
 
