@@ -229,6 +229,7 @@ print('        🏃🏃 Waiting for final leg of installation to complete 🏃�
 
 
 #run caffeine as subprocess in background, start flask server and open browser with address.
+import subprocess
 import shlex
 
 def run_whitelisted_command(command, whitelist):
@@ -253,16 +254,26 @@ def run_whitelisted_command(command, whitelist):
     except subprocess.CalledProcessError as e:
         print(f"Error executing command: {e}")
         print(f"Error output: {e.stderr}")
+    except FileNotFoundError as e:
+        print(f"Command not found: {e.filename}")
 
 # Define your whitelist of allowed commands
 WHITELIST = ['caffeine', './darna_launch.sh']
 
 # Example usage
-caffeine_command = "caffeine"
-darna_command = "./darna_launch.sh"
+try:
+    caffeine_command = "caffeine"
+    darna_command = "./darna_launch.sh"
+    
+    try:
+        run_whitelisted_command(caffeine_command, WHITELIST)
+    except FileNotFoundError:
+        print("Caffeine not found, continuing with next command")
+    
+    run_whitelisted_command(darna_command, WHITELIST)
 
-run_whitelisted_command(caffeine_command, WHITELIST)
-run_whitelisted_command(darna_command, WHITELIST)
+except Exception as e:
+    print(f"An unexpected error occurred: {str(e)}")
 
 
 print('        ☕ The server will be available at: ☕')
