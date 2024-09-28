@@ -20,6 +20,9 @@ Encrypt traffic
 
 Route and encrypt internet traffic through an Exit Node on your tailnet.
 
+AFTER LOGGING INTO TAILSCALE
+You will get IP address. Add :3001 to the IP address and you will be at login page. The save to home screen. If needed, replace the variables/variable.py ip_address with the IP address from Tailscale
+
 
 HOW TO STOP THE CONTAINER: If you wish to stop the container for some reason. You could stop it from Yacht Local or go to terminal directly and type:
 
