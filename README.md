@@ -1,5 +1,5 @@
 
-#### NOTE: IN PROCESS OF UPDATING. AVAILABLE FOR USE ON SEPT 29  ######
+
 <img src="https://github.com/seapoe1809/Health_server/blob/main/static/favicon.png" width =150, height=150>
 
 ***DARNA HEALTH INTELLIGENCE V2.3***
@@ -18,7 +18,7 @@ CAUTION: This tool is not a replacement for a Doctor. For medical advice, please
 **Key words:** 
 
 - Self Hosted (This means you have to run this on your own linux computer and all your data stays on your computer; your data does not leave your computer and security is limited by your own computer security),
-- Liinux,
+- Linux,
 - python,
 - Open Source,
 - Free,
@@ -42,12 +42,14 @@ VIDEO ABOUT DARNAHI LANDING PAGE
 [darnahi_landing.webm](https://github.com/user-attachments/assets/a6f61b33-9b1e-4f46-bf83-9a35bfce4b3b)
 
 
-1. Darnahi Home:
+1. Darnahi Home/Landing:
 
     1. Chartit to log your basic information in FHIR R4 format
     2. Ability to upload and save your files to your self hosted file server
     3. Ability to view dicom files, xml files, health suggestions for your age
     4. Ability to encrypt and zip your files securely and remotely
+    5. Launch Darnabot
+    6. Launch Optional Modules
 
 2. Darnabot
 
@@ -64,9 +66,10 @@ New and improved Darnabot, Darnahi's AI engine
 
 3. Darnahi Optional Modules
    VIDEO ABOUT DARNAHI OPTIONAL MODULES IN ACTION
-*CLICK HERE*
+   
+>>>*CLICK HERE*
 [darnahi optional modules](https://nostrcheck.me/media/49a2ed6afaabf19d0570adab526a346266be552e65ccbd562871a32f79df865d/ea9801cb687c5ff0e78d43246827d4f1692d4bccafc8c1d17203c0347482c2f9.mp4)
-
+<<<
 
 Darnahi optional modules include: 
 1. weight/ bp/ glucose/ water tracker
@@ -169,25 +172,25 @@ Darnahi is Self Hosted -This means you have to run this on your own linux comput
 
 Make sure you have python3. If not go to https://www.python.org/. Once done do the following:
 
-*(Optional)* Install Git and git clone Darna_local repo: 
+*(Optional Step)* Install Git and git clone Darna_local repo: 
  (skip this step if git already installed)
  
     sudo apt-get install git
 
 
-*(Optional)* Make sure pip is installed to help install python modules 
+*(Optional Step)* Make sure pip is installed to help install python modules 
  (skip this step if pip is already installed)
 
     sudo apt-get install python3-pip
     
-*(Optional)* Make sure venv is availabls 
+*(Optional Step)* Make sure venv is availabls 
  (skip this step if pip is already installed)
 
     sudo apt install python3.10-venv    
 
 
 
-Git clone the Darna_local repo
+#Git clone the Darna_local repo#
               
     git clone https://github.com/seapoe1809/Health_server
     
