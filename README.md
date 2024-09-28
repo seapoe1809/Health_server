@@ -364,13 +364,26 @@ OR
 Build python3 from source: https://github.com/seapoe1809/assets/blob/main/Python_from_source_LINUX
 
 
+
 **
 Venv error:** 
 Error creating venv could mean venv need to be installed or upgraded
 
     python -m pip install --upgrade venv
 
-If computer sleeps and wakes, the CUDA breaks while running Darnabot as part of its memory offload mechanism. Restarting fixes it. will add a fix next update. 
+
+Installation error:
+
+    DEPRECATION: durationpy is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
+
+Fix:
+
+    pip install wheel
+
+OR add this to setup_darna.py
+
+    pip install --use-pep517 -r requirements.txt
+
 
 
 
