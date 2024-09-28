@@ -13,7 +13,8 @@ Features#
     Docker-compose compatibility and editor
     One click editing of containers
 
-
+TO ADD MORE APPS
+	To add apps to download, click on 'Resources', then 'Templates', '+'. Add title of 'App_Store' and paste URL 'https://rawgithubusercontent.com/master/Template/yacht.json' and 'Save'.
 
 HOW TO STOP THE CONTAINER: If you wish to stop the container for some reason. You could stop it from Yacht Local or go to terminal directly and type:
 
