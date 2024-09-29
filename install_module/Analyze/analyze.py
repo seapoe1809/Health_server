@@ -27,6 +27,7 @@ from datetime import datetime
 import json
 import fitz  # PyMuPDF
 import chromadb
+import shutil
 from tqdm import tqdm
 
 #from install_module.Analyze.pdf_sectionreader import *
@@ -137,8 +138,14 @@ def process_ocr_files(directory, age):
                             f.write(f"File: {file_name}\n")
                             f.write(text)
                             f.write('\n\n')
-
-    print('OCR completed. Results saved in', output_file)
+    try:
+        shutil.copy(output_file, os.path.join(directory, 'Darna_tesseract', 'ocr_results.txt'))
+    except shutil.Error as e:
+        print(f"Error occurred while copying file: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+    else:
+        print('OCR completed. Results saved in', output_file)
 
 
 def add_deidentification_tags(text):
@@ -166,7 +173,7 @@ def deidentify_records(ocr_files, formatted_ignore_words):
             text = ""
 
         # remove specific words
-        IGNORE_REGEX = rf'(?i)(?<!\bNO\b[-.,])(?:NO\b[-.]|[Nn][Oo]\b[-.,]|{deidentify_words})'
+        IGNORE_REGEX = rf'(?i)(?<!\bNO\b[-.,])(?:NO\b[-.]|[Nn][Oo]\b[-.,]|{formatted_ignore_words})'
 
 
         redacted = re.sub(KEYWORDS_REGEX, generate_fake_text, text, flags=re.IGNORECASE)
@@ -830,7 +837,7 @@ def generate_output(heading_content_dict, directory):
         f.write(json_data)
 
 
-import shutil
+
 def whitelist_directory(directory, whitelist):
     for filename in os.listdir(directory):
         file_path = os.path.join(directory, filename)
