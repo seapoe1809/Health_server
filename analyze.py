@@ -27,6 +27,7 @@ from datetime import datetime
 import json
 import fitz  # PyMuPDF
 import chromadb
+import shutil
 from tqdm import tqdm
 
 #from install_module.Analyze.pdf_sectionreader import *
@@ -137,8 +138,14 @@ def process_ocr_files(directory, age):
                             f.write(f"File: {file_name}\n")
                             f.write(text)
                             f.write('\n\n')
-
-    print('OCR completed. Results saved in', output_file)
+    try:
+        shutil.copy(output_file, os.path.join(directory, 'Darna_tesseract', 'ocr_results.txt'))
+    except shutil.Error as e:
+        print(f"Error occurred while copying file: {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+    else:
+        print('OCR completed. Results saved in', output_file)
 
 
 def add_deidentification_tags(text):
@@ -386,7 +393,13 @@ def extract_lforms_data(json_data):
                 if allergy_item.get("question") == "Allergies and Other Dangerous Reactions":
                     for subitem in allergy_item.get("items", []):
                         if subitem.get("question") == "Name" and "value" in subitem:
-                            extracted_info["allergies"].append(subitem["value"]["text"])
+                            value = subitem["value"]
+                            if isinstance(value, dict):
+                                allergy_text = value.get("text")
+                            else:
+                                allergy_text = value
+                            if allergy_text:
+                                extracted_info["allergies"].append(allergy_text)
         
         elif item.get("question") == "PAST MEDICAL HISTORY:":
             for condition_item in item.get("items", []):
@@ -830,7 +843,7 @@ def generate_output(heading_content_dict, directory):
         f.write(json_data)
 
 
-import shutil
+
 def whitelist_directory(directory, whitelist):
     for filename in os.listdir(directory):
         file_path = os.path.join(directory, filename)
