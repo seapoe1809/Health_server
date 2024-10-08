@@ -1,6 +1,6 @@
 #/* DARNA.HI
 # * Copyright (c) 2023 Seapoe1809   <https://github.com/seapoe1809>
-# * 
+# * Copyright (c) 2023 pnmeka   <https://github.com/pnmeka>
 # * 
 # *
 # *   This program is free software: you can redistribute it and/or modify
@@ -338,7 +338,13 @@ def extract_lforms_data(json_data):
                 if allergy_item.get("question") == "Allergies and Other Dangerous Reactions":
                     for subitem in allergy_item.get("items", []):
                         if subitem.get("question") == "Name" and "value" in subitem:
-                            extracted_info["allergies"].append(subitem["value"]["text"])
+                            value = subitem["value"]
+                            if isinstance(value, dict):
+                                allergy_text = value.get("text")
+                            else:
+                                allergy_text = value
+                            if allergy_text:
+                                extracted_info["allergies"].append(allergy_text)
         
         elif item.get("question") == "PAST MEDICAL HISTORY:":
             for condition_item in item.get("items", []):
@@ -839,6 +845,7 @@ with gr.Blocks(theme='Taithrah/Minimal', css= "footer{display:none !important}")
             btn1 = gr.Button("Ask")
             Clear = gr.ClearButton([msg, chatbot])
 
+    
 
         btn1.click(my_function, inputs=[msg, chatbot], outputs=[chatbot])
         Clear.click(clear_conversation, outputs=[msg, chatbot])
