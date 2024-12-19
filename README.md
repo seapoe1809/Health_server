@@ -308,7 +308,7 @@ Note: some XML health files need a supporting styles.xsl file alongwith to allow
 ============
 
 
-Darnahi currenlty uses Ollama for local LLM's and specifically Mistral-Nemo:
+Darnahi currently uses Ollama for local LLM's and specifically Mistral-Nemo:
 
 Structured and Unstructured RAG architecture: This helps the LLM quickly find and understand the specific health information it needs from your medical data.
     
