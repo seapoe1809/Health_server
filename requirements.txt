@@ -21,3 +21,4 @@ tqdm
 PyMuPDF 
 pandas 
 unidecode
+ollama
