@@ -28,7 +28,7 @@ import urllib.parse
 from ollama import AsyncClient
 import asyncio
 
-
+model= gemma3:4b
 # Ensure the upload directory exists
 #UPLOADS_DIR = "/workspace/uploads"
 UPLOADS_DIR = "uploads"
@@ -446,7 +446,7 @@ class HealthMotivator:
             #yield chunk
         try:    
             OLLAMA_HOST = os.environ.get('OLLAMA_HOST', 'http://localhost:11434')
-            async for part in await AsyncClient(host=OLLAMA_HOST).chat(model='mistral-nemo', messages=messages, stream=True):
+            async for part in await AsyncClient(host=OLLAMA_HOST).chat(model, messages=messages, stream=True):
                 yield part['message']['content']
         except Exception as e:
             yield f"Remember to take care of your health. Please see links below! (Error: {str(e)})"
@@ -668,7 +668,7 @@ def create_gradio_interface():
                 outputs=[file_list]
             )
             
-    demo.launch(server_name='0.0.0.0', server_port=3022, share=False, allowed_paths=[UPLOADS_DIR])
+    demo.launch(server_name='0.0.0.0', server_port=3022, pwa=True, share=False, allowed_paths=[UPLOADS_DIR])
 
 if __name__ == "__main__":
     create_gradio_interface()
