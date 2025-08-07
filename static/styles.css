@@ -14,22 +14,101 @@ body {
     padding: 0;
     background-size: 100%;
     font-family: 'Roboto', sans-serif;
-    background-color: #36593f;
+    background-color: #68d6f7;
+    opacity: 1;
+    transition: opacity 0.4s ease-in;
     
 }
 
+/* Body loaded state */
+body.loaded {
+    opacity: 1;
+}
+
+/* Loading spinner styles */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 63, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease-out;
+}
+
+.loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #9FE2BF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Rightward fade-in animations */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRightSoft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Fade in from left (for variety) */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
 .container {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 50vh;
+            min-height: 85vh;
             min-width:50vh;
-            margin: 0;
-            padding: 10px;
-            background: radial-gradient(circle, #000000, #9FE2BF);
+            margin: 5px;
+            padding: 0;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.1), rgba(59, 19, 138, 0.2));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
             overflow: hidden;
             box-sizing: border-box;
+            animation: fadeInRight 0.6s ease-out;
         }
 
         .icons {
@@ -48,7 +127,17 @@ body {
             border: 2px solid hsla(244, 16%, 92%, 0.75);
             backdrop-filter: blur(20px);
             border-radius: 11px;
+            opacity: 0;
+            animation: fadeInRight 0.5s ease-out forwards;
         }
+        
+        /* Stagger the icon animations */
+        .icons li:nth-child(1) { animation-delay: 0.1s; }
+        .icons li:nth-child(2) { animation-delay: 0.2s; }
+        .icons li:nth-child(3) { animation-delay: 0.3s; }
+        .icons li:nth-child(4) { animation-delay: 0.4s; }
+        .icons li:nth-child(5) { animation-delay: 0.5s; }
+        .icons li:nth-child(6) { animation-delay: 0.6s; }
 
         .icons li a {
             display: flex;
@@ -81,10 +170,12 @@ body {
     align-items: center;
     margin: 0.6rem;
     height: 50vh;
-    position: absolute; /* or you could use 'fixed' depending on your needs */  top: 0in;
+    position: absolute; /* or you could use 'fixed' depending on your needs */  
+    top: 0in;
     bottom: 1in;
     left: 50%;
     transform: translateX(-50%); /* this will ensure it stays horizontally centered */
+    animation: fadeInRightSoft 0.8s ease-out;
 }
 
 .login__user {
@@ -125,66 +216,173 @@ body {
     box-shadow: none;
 }
 
- .done-button {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      background-color: #F28C28;
-      color: black;
-      padding: 10px;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
+.done-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: #F28C28;
+    color: #fff;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.done-button:hover {
+    background-color: #E67E22;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.done-button i {
+    font-size: 20px;
+    color: black;
+}
+
+/* Settings button container */
+.form-container-setting-button {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeInRight 0.8s ease-out forwards;
+    animation-delay: 0.3s;
+}
+
+.settings_button {
+    width: 50px;  /* Increased from 40px */
+    height: 50px; /* Increased from 40px */
+    padding: 0;   /* Reduced padding to give more room for icon */
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #E5E4E2, #36454F);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 24px hsla(244, 75%, 48%, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings_button:hover {
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(135deg, #E5E4E2, #36454F);
+}
+
+.settings_button i {
+    font-size: 24px; /* Set specific size for the icon */
+    color: #E5E4E2; /* Light grey color */
+    transition: transform 0.3s ease;
+}
+
+/* Add rotation to settings */
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.settings_button:active {
+    animation: rotate 0.5s ease-in-out;
+}
+
+/* animation */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
     }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
-
-/* Corrected and improved CSS */
+/* Choice button CSS */
 .form-container-choice-button {
-  display: flex;
-  justify-content: center; /* Correctly center the buttons horizontally */
-  align-items: center; /* Center the buttons vertically */
-  position: fixed; /* Keep the container fixed at the bottom */
-  left: 0; /* Align with the left edge */
-  right: 0; /* Align with the right edge */
-  bottom: 2rem; /* Distance from the bottom */
-  width: 100%;
+    display: flex;
+    justify-content: center; /* Correctly center the buttons horizontally */
+    align-items: center; /* Center the buttons vertically */
+    position: fixed; /* Keep the container fixed at the bottom */
+    left: 0; /* Align with the left edge */
+    right: 0; /* Align with the right edge */
+    bottom: 2rem; /* Distance from the bottom */
+    width: 100%;
+    opacity: 0;
+    animation: fadeInRight 0.8s ease-out forwards;
+    animation-delay: 0.3s;
 }
 
 .choice_button {
-  width: 2.2cm; /* Default size */
-  height: 2.2cm; /* Ensure circular shape */
-  padding: 10px; /* Corrected unit */
-  border-radius: 50%; /* Round shape */
-  background: turquoise; /* Background color */
-  color: #000; /* Font color */
-  font-family: 'Roboto', sans-serif;
-  font-size: var(--very-small-font-size);
-  font-weight: var(--font-bold);
-  box-shadow: 0 6px 24px hsla(244, 75%, 48%, 0.5);
-  margin: 0 20px; /* Horizontal margin between buttons */
-  cursor: pointer;
-  transition: transform 0.3s ease;
+    width: 2.2cm; /* Default size */
+    height: 2.2cm; /* Ensure circular shape */
+    padding: 10px; /* Corrected unit */
+    border-radius: 50%; /* Round shape */  
+    color: #000; /* Font color */
+    font-family: 'Roboto', sans-serif;
+    font-size: var(--very-small-font-size);
+    font-weight: var(--font-bold);
+    box-shadow: 0 6px 24px hsla(244, 75%, 48%, 0.5);
+    margin: 0 20px; /* Horizontal margin between buttons */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    opacity: 0;
+    animation: fadeInRightSoft 0.6s ease-out forwards;
 }
 
+/* Stagger button animations */
+.form-container-choice-button a:nth-child(1) .choice_button { animation-delay: 0.6s; }
+.form-container-choice-button a:nth-child(2) .choice_button { animation-delay: 0.7s; }
+.form-container-choice-button a:nth-child(3) .choice_button { animation-delay: 0.8s; }
+
 .fas {
-  color: #E5E4E2; /* Change the color to light grey */
-  font-size: 40px; /* Make the icons bigger */
+    color: #E5E4E2; /* Change the color to light grey */
+    font-size: 40px; /* Make the icons bigger */
 }
 
 .button_content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 
 .choice_button:hover {
-  transform: translateY(-3px); /* Slight move up on hover */
+    transform: translateY(-3px); /* Slight move up on hover */
 }
 
 .choice_button:active {
-  transform: translateY(1px); /* Slight move down on click */
+    transform: translateY(1px) translateX(1px); /* Slight move down on click */
+}
+
+/* Smooth all transitions */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure smooth link transitions */
+a {
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.9;
+}
+
+/* Text elements animation */
+.text {
+    animation: fadeInRightSoft 0.5s ease-out;
 }
 
 /* Adjustments for laptops and larger screens */
@@ -197,22 +395,22 @@ body {
 
 /* Positioning for the buttons in a banner at the bottom */
 .banner {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: space-around; /* Distribute buttons evenly */
-  align-items: center;
-  height: 60px; /* Adjust based on your preference */
-  background-color: hsla(242, 45%, 90%, 0.8);
-  padding: 20px; /* Example padding */
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around; /* Distribute buttons evenly */
+    align-items: center;
+    height: 60px; /* Adjust based on your preference */
+    background-color: hsla(242, 45%, 90%, 0.8);
+    padding: 20px; /* Example padding */
 }
 
 @media (min-width: 501px) {
     body {
         background-position: top;
-        background: linear-gradient(to right, #8A9A5B, #C0C0C0);
+        background: linear-gradient(to right, #094ae3, #68d6f7);
         font-family: 'Roboto', sans-serif; 
     }
     .icons {
@@ -235,7 +433,7 @@ body {
     
     .container {
         display: flex;
-        justify-content: flex-start; /* Align items to the start of the row */
+        justify-content: center; /* Align items to the start of the row */
         margin: 3rem;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on mobile */
@@ -278,5 +476,94 @@ ul li {
 }
 }
 
+/*Accordion style for settings menu */
+      .accordion-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 40px;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+
+        .accordion-header {
+            padding: 20px 25px;
+            cursor: pointer;
+            background-color: #ffffff;
+            transition: background-color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .accordion-header:hover {
+            background-color: #f8f9fa;
+        }
+
+        .accordion-header.active {
+            background-color: #f0f4f8;
+            color: #1a73e8;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+            font-size: 20px;
+            color: #666;
+        }
+
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+            color: #1a73e8;
+        }
+
+        .accordion-content {
+            height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        .accordion-content.active {
+            padding: 20px 25px;
+            height: auto;
+            overflow: visible;
+        }
+
+        .accordion-content a {
+            color: #1a73e8;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .accordion-content a:hover {
+            color: #1557b0;
+            text-decoration: underline;
+        }
+
+        .action-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: turquoise;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .action-button:hover {
+            background-color: turquoise;
+            color: white;
+            text-decoration: none;
+        }
 
 

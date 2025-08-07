@@ -18,18 +18,64 @@ body {
     
 }
 
+/* Body loaded state */
+body.loaded {
+    opacity: 1;
+}
+
+/* Loading spinner styles */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 63, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease-out;
+}
+
+.loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #9FE2BF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 
 .container {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 50vh;
+            min-height: 85vh;
             min-width:50vh;
-            margin: 0;
-            padding: 10px;
+            margin: 5px;
+            padding: 0;
             background: radial-gradient(circle, #5D3FD3, #C0C0C0);
-            overflow:visible;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-sizing: border-box;
+            animation: fadeInRight 0.6s ease-out;
         }
+        
+
         .responsive-img {
             max-width: 100%; /* Ensures the image doesn't exceed the container's width */
             height: auto;    /* Maintains the aspect ratio */
