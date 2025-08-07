@@ -5,3 +5,4 @@
 4. Add this line in the index2.html located in /install_module/templates that links to your info.js file.
 	<li style="display: flex; justify-content: center; align-items: center; font-family: 'Roboto', sans-serif; font-size: 35px; font-weight: bold; color: black; text-align: center;"><a id="App-link" target="_blank" class="install">***INSTALL APP MODULE</a></li>
     <script src="/static/App_script.js"></script>
+5. whitelist name of application in darna.py
