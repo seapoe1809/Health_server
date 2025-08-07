@@ -16,23 +16,38 @@
 # *
 # *   You should have received a copy of the GNU General Public License
 # *   along with this program. If not, see <http://www.gnu.org/licenses/>.
-import pytesseract
-from pdf2image import convert_from_path
-import os, subprocess
-from variables import variables
-from variables import variables2
-import re
-from PIL import Image, ImageFile
-from datetime import datetime
+
+import asyncio
+import base64
 import json
-import fitz  # PyMuPDF
-import chromadb
+import mimetypes
+import os
+import re
 import shutil
+import sqlite3
+import subprocess
+import xml.etree.ElementTree as ET
+import zipfile
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, Optional, List, Tuple
+
+import chromadb
+import fitz  # PyMuPDF
+import matplotlib.pyplot as plt
+import nltk
+import pandas as pd
+import pytesseract
+import pydicom
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from pdf2image import convert_from_path
+from PIL import Image, ImageFile
 from tqdm import tqdm
+from unidecode import unidecode
+from wordcloud import WordCloud
 
-#from install_module.Analyze.pdf_sectionreader import *
-#from install_module.Analyze.nlp_process import *
-
+from variables import variables, variables2
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
@@ -40,6 +55,7 @@ HS_path = os.getcwd()
 
 print(HS_path)
 folderpath = os.environ.get('FOLDERPATH')
+
 print("folderpath is", folderpath)
 
 
@@ -51,6 +67,7 @@ else:
 APP_dir = f"{HS_path}/install_module"
 ocr_files = f"{folderpath}/ocr_files"
 upload_dir = f"{folderpath}/upload"
+summary_dir = f"{folderpath}/summary"
 ip_address = variables.ip_address
 age = variables2.age
 sex = variables2.sex
@@ -69,30 +86,87 @@ output_dir = os.path.join(ocr_files_dir, 'Darna_tesseract')
 os.makedirs(output_dir, exist_ok=True)
 
 # Define the patterns to identify and deidentify
-# remove anything after keyword
 KEYWORDS_REGEX = r'(?i)(?:Name|DOB|Date of birth|Birth|Address|Phone|PATIENT|Patient|MRN|Medical Record Number|APT|House|Street|ST|zip|pin):.*?(\n|$)'
-
 # remove specific words
 IGNORE_REGEX = rf'(?i)(?<!\bNO\b[-.,])(?:NO\b[-.]|[Nn][Oo]\b[-.,]|{formatted_ignore_words})'
-
 KEYWORDS_REPLACE = r'\1REDACT'
-# NAME_REGEX = r'\b(?!(?:NO\b|NO\b[-.]|[Nn][Oo]\b[-.,]))(?:[A-Z][a-z]+\s){1,2}(?:[A-Z][a-z]+)(?<!\b[A-Z]{2}\b)\b'
-
 DOB_REGEX = r'\b(?!(?:NO\b|NO\b[-.]|[Nn][Oo]\b[-.,]))(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2]\d|3[0-1])-\d{4}\b'
 SSN_REGEX = r'\b(?!(?:NO\b|NO\b[-.]|[Nn][Oo]\b[-.,]))(\d{3})-(\d{4})\b'
 EMAIL_REGEX = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
 ZIP_REGEX = r'\b(?!(?:NO\b|NOb[-.]|[Nn][Oo]\b[-.,]))([A-Z]{2}) (\d{5})\b'
 
-def perform_ocr(image_path):
-    # Implementation of the perform_ocr function
+
+def perform_ocr(image_path, model="gemma3:4b"):
+    """Perform OCR and correct grammar in chunks for long texts"""
     try:
+        import requests
+        
         # Perform OCR using Tesseract
-        text = pytesseract.image_to_string(image_path)
-        return text
-    except pytesseract.TesseractError as e:
-        print(f"Error processing image: {image_path}")
-        print(f"Error message: {str(e)}")
+        raw_text = pytesseract.image_to_string(image_path)
+        
+        if not raw_text.strip():
+            return "No text detected in image"
+        
+        # If text is short, process normally
+        if len(raw_text) < 500:
+            try:
+                response = requests.post(
+                    "http://localhost:11434/api/generate",
+                    json={
+                        "model": model,
+                        "prompt": f"Fix grammar and coherence without commentary and preamble in errorprone text: {raw_text}\nCorrected:",
+                        "stream": False,
+                        "temperature": 0.4
+                    },
+                    timeout=60
+                )
+                
+                if response.status_code == 200:
+                    corrected = response.json().get("response", "").strip()
+                    return corrected or raw_text
+            except:
+                pass
+        
+        # For longer texts, process in chunks
+        else:
+            sentences = raw_text.split('. ')
+            chunk_size = 15  # Process 5 sentences at a time
+            corrected_chunks = []
+            
+            for i in range(0, len(sentences), chunk_size):
+                chunk = '. '.join(sentences[i:i+chunk_size])
+                if not chunk.strip():
+                    continue
+                    
+                try:
+                    response = requests.post(
+                        "http://localhost:11434/api/generate",
+                        json={
+                            "model": model,
+                            "prompt": f"Fix grammar and coherence without commentary and preamble in error prone text: {chunk}\nCorrected:",
+                            "stream": False,
+                            "temperature": 0.4
+                        },
+                        timeout=60
+                    )
+                    
+                    if response.status_code == 200:
+                        corrected = response.json().get("response", "").strip()
+                        corrected_chunks.append(corrected or chunk)
+                    else:
+                        corrected_chunks.append(chunk)
+                except:
+                    corrected_chunks.append(chunk)
+            
+            return '. '.join(corrected_chunks)
+        
+        return raw_text
+        
+    except Exception as e:
+        print(f"OCR error: {str(e)}")
         return None
+        
+
 
 def convert_pdf_to_images(file_path):
     # Implementation of the convert_pdf_to_images function
@@ -107,7 +181,7 @@ def convert_pdf_to_images(file_path):
 
 
 def process_ocr_files(directory, age):
-    output_file = os.path.join(directory, 'ocr_results.txt')  # Assuming you meant to define `directory` here.
+    output_file = os.path.join(directory, 'ocr_results.txt') 
     with open(output_file, 'w') as f:
         for root, dirs, files in os.walk(directory):
             # Skip any paths that include the 'tesseract' directory
@@ -364,8 +438,7 @@ def generate_recommendations(age=None, sex=None):
     doc.save(f'{ocr_files}/USPTF.pdf')  # Save the PDF
     doc.close()
 
-#extract data from the updated fhir file        
-
+#extract data from the updated fhir file - mychart       
 def extract_lforms_data(json_data):
     if isinstance(json_data, str):
         data = json.loads(json_data)
@@ -441,18 +514,7 @@ def extract_med_value(med_item):
     return ""
 
 
-#######
 ###nlp_process.py functions
-
-
-import json
-import nltk
-import re, os
-from wordcloud import WordCloud
-import matplotlib.pyplot as plt
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-
 
 
 # Ensure NLTK components are downloaded
@@ -750,13 +812,8 @@ def chromadb_embed(directory, collection_name="documents_collection"):
     new_count = collection.count()
     print(f"Added {new_count - count} documents")
 
-#######################################
+
 #########pdf_sectionreader.py
-import os
-import fitz
-import pandas as pd
-import json
-from unidecode import unidecode
 
 global_heading_content_dict = {}  # Global dictionary to accumulate data
 
@@ -855,6 +912,675 @@ def whitelist_directory(directory, whitelist):
                 print(f"Error removing {file_path}: {e}")
 
 
+##########################################
+#AI ASSISTANCE TO TAG AND SAVE FILES
+###########################################
+
+
+#imports with availability checks
+try:
+    import fitz  # PyMuPDF
+    PYMUPDF_AVAILABLE = True
+except ImportError:
+    PYMUPDF_AVAILABLE = False
+
+try:
+    from PIL import Image
+    from PIL.ExifTags import TAGS
+    PIL_AVAILABLE = True
+except ImportError:
+    PIL_AVAILABLE = False
+
+try:
+    import pytesseract
+    TESSERACT_AVAILABLE = True
+except ImportError:
+    TESSERACT_AVAILABLE = False
+
+try:
+    from ollama import AsyncClient
+    OLLAMA_AVAILABLE = True
+except ImportError:
+    OLLAMA_AVAILABLE = False
+
+try:
+    import pydicom  # PyMuPDF
+    PYDICOM_AVAILABLE = True
+except ImportError:
+    PYDICOM_AVAILABLE = False
+
+class AsyncFileProcessor:
+    """Async file processor for metadata extraction and AI analysis"""
+    
+    def __init__(self, db_path: str = f"{summary_dir}/medical_records.db", model: str = "gemma3:4b", use_vision_for_images: bool = True):
+        self.db_path = db_path
+        self.model = model
+        self.use_vision_for_images = use_vision_for_images
+        self.ollama_host = os.environ.get('OLLAMA_HOST', 'http://localhost:11434')
+        self._init_database()
+    
+    def _init_database(self):
+        """Initialize SQLite database with required tables"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS files (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                filename TEXT NOT NULL,
+                file_path TEXT UNIQUE NOT NULL,
+                file_size INTEGER,
+                file_type TEXT,
+                upload_date TIMESTAMP,
+                embedded_metadata TEXT,
+                ai_metadata TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        
+        # Create index for faster searches
+        cursor.execute('''
+            CREATE INDEX IF NOT EXISTS idx_filename ON files(filename)
+        ''')
+        
+        conn.commit()
+        conn.close()
+    
+    def _is_dicom_file(self, file_path: Path) -> bool:
+        """Check if file is DICOM by reading header"""
+        try:
+            with open(file_path, 'rb') as f:
+                header = f.read(132)
+                return b'DICM' in header
+        except:
+            return False
+    
+    async def process_folder(self, folder_path: str, extensions: Optional[List[str]] = None, exclude_extensions: Optional[List[str]] = None) -> Dict:
+        """
+        Process all files in a folder asynchronously
+        """
+        results = {
+            "processed": 0,
+            "skipped": 0,
+            "errors": 0,
+            "files": [],
+            "error": None
+        }
+        
+        try:
+            folder_path = Path(folder_path)
+            if not folder_path.exists():
+                results["error"] = f"Folder {folder_path} does not exist"
+                return results
+            
+            # Default excluded extensions if not specified
+            if exclude_extensions is None:
+                exclude_extensions = ['.db', '.sqlite', '.sqlite3', '.tmp', '.temp', '.cache', '.lock', '.DS_Store']
+            
+            # Get all files in folder
+            files = []
+            for file_path in folder_path.rglob('*'):
+                if file_path.is_file():
+                    file_ext = file_path.suffix.lower()
+                    
+                    # Skip excluded extensions
+                    if file_ext in exclude_extensions:
+                        continue
+                    
+                    # Skip hidden files and system files
+                    if file_path.name.startswith('.') or file_path.name.startswith('~'):
+                        continue
+                    
+                    # If specific extensions are requested, only include those
+                    if extensions is not None:
+                        if file_ext in extensions:
+                            files.append(file_path)
+                    else:
+                        # Include all non-excluded files
+                        files.append(file_path)
+            
+            if not files:
+                results["error"] = f"No files found in {folder_path}"
+                return results
+            
+            # Process files in batches for better performance
+            batch_size = 5
+            for i in range(0, len(files), batch_size):
+                batch = files[i:i+batch_size]
+                batch_results = await asyncio.gather(
+                    *[self.process_file(str(file_path)) for file_path in batch],
+                    return_exceptions=True
+                )
+                
+                for file_path, result in zip(batch, batch_results):
+                    if isinstance(result, Exception):
+                        results["errors"] += 1
+                        results["files"].append({
+                            "filename": file_path.name,
+                            "status": "error",
+                            "message": str(result)
+                        })
+                    else:
+                        if result.get("status") == "success":
+                            results["processed"] += 1
+                        elif result.get("status") == "skipped":
+                            results["skipped"] += 1
+                        else:
+                            results["errors"] += 1
+                        results["files"].append(result)
+            
+        except Exception as e:
+            results["error"] = f"Error processing folder: {str(e)}"
+        
+        return results
+    
+    async def process_file(self, file_path: str) -> Dict:
+        """
+        Process a single file: extract metadata and generate AI summary
+
+        """
+        file_path = Path(file_path)
+        
+        # Check if file already exists in database
+        if self._file_exists_in_db(str(file_path)):
+            return {
+                "filename": file_path.name,
+                "status": "skipped",
+                "message": "Already in database"
+            }
+        
+        try:
+            # Get file stats
+            stats = file_path.stat()
+            file_info = {
+                "filename": file_path.name,
+                "file_path": str(file_path),
+                "file_size": stats.st_size,
+                "file_type": file_path.suffix.lower(),
+                "upload_date": datetime.now()
+            }
+            
+            # Extract embedded metadata
+            embedded_metadata = await self._extract_embedded_metadata(file_path)
+            file_info["embedded_metadata"] = json.dumps(embedded_metadata)
+            
+            # Generate AI metadata if Ollama is available
+            if OLLAMA_AVAILABLE:
+                content = await self._extract_content(file_path)
+                ai_metadata = await self._generate_ai_metadata(file_path.name, content)
+                file_info["ai_metadata"] = ai_metadata
+            else:
+                file_info["ai_metadata"] = json.dumps({"error": "Ollama not available"})
+            
+            # Save to database
+            self._save_to_database(file_info)
+            
+            return {
+                "filename": file_path.name,
+                "status": "success",
+                "embedded_metadata": embedded_metadata,
+                "ai_metadata": json.loads(file_info["ai_metadata"]) if file_info["ai_metadata"] else None
+            }
+            
+        except Exception as e:
+            raise Exception(f"Error processing {file_path.name}: {str(e)}")
+    
+    async def _analyze_image_with_vision(self, file_path: Path, max_chars: int = 3000) -> str:
+        """
+        Analyze image using vision LLM model
+
+        """
+        try:
+            import requests
+            
+            # Encode image to base64
+            with open(str(file_path), "rb") as image_file:
+                encoded_image = base64.b64encode(image_file.read()).decode("utf-8")
+            
+            # Create analysis prompt
+            prompt = """Analyze this image and provide concise summary and relevant keywords in json format. No preamble or commentary". Provide JSON: {{\"summary\": \"...\", \"keywords\": [\"...\", \"...\"]}}"
+            s"""
+            
+            payload = {
+                "model": self.model,
+                "prompt": prompt,
+                "images": [encoded_image],
+                "stream": False,
+                "options": {
+                    "temperature": 0.3,
+                    "num_predict": 1000
+                }
+            }
+            
+            response = requests.post(
+                f"{self.ollama_host}/api/generate",
+                json=payload,
+                headers={"Content-Type": "application/json"},
+                timeout=60
+            )
+            
+            if response.status_code == 200:
+                result = response.json().get("response", "")
+                if result:
+                    return result[:max_chars]
+            
+            # If vision fails, note it
+            return f"Vision analysis failed for {file_path.name}"
+            
+        except Exception as e:
+            return f"Error analyzing image {file_path.name}: {str(e)}"
+    
+    async def _extract_content(self, file_path: Path, max_chars: int = 3000) -> str:
+        """Extract text content from file for AI analysis"""
+        content = ""
+        ext = file_path.suffix.lower()
+        
+        # PDF and similar documents
+        if PYMUPDF_AVAILABLE and ext in ['.pdf', '.xps', '.epub', '.mobi', '.fb2', '.cbz']:
+            try:
+                doc = fitz.open(str(file_path))
+                for page_num in range(min(3, doc.page_count)):  # First 3 pages
+                    content += doc[page_num].get_text()
+                doc.close()
+                return content[:max_chars]
+            except:
+                pass
+        
+        # Office documents - .docx, .xlsx, .pptx
+        elif ext in ['.docx', '.xlsx', '.pptx']:
+            try:
+                if ext == '.docx':
+                    # Extract text from docx
+                    with zipfile.ZipFile(str(file_path), 'r') as zip_file:
+                        if 'word/document.xml' in zip_file.namelist():
+                            xml_content = zip_file.read('word/document.xml')
+                            root = ET.fromstring(xml_content)
+                            # Extract text from all text elements
+                            texts = []
+                            for elem in root.iter():
+                                if elem.text:
+                                    texts.append(elem.text)
+                            content = ' '.join(texts)
+                            return content[:max_chars]
+                elif ext == '.xlsx':
+                    # Basic Excel text extraction
+                    with zipfile.ZipFile(str(file_path), 'r') as zip_file:
+                        for name in zip_file.namelist():
+                            if name.startswith('xl/sharedStrings'):
+                                xml_content = zip_file.read(name)
+                                root = ET.fromstring(xml_content)
+                                texts = []
+                                for elem in root.iter():
+                                    if elem.text:
+                                        texts.append(elem.text)
+                                content = ' '.join(texts)
+                                return content[:max_chars]
+                elif ext == '.pptx':
+                    # PowerPoint text extraction
+                    with zipfile.ZipFile(str(file_path), 'r') as zip_file:
+                        texts = []
+                        for name in zip_file.namelist():
+                            if name.startswith('ppt/slides/slide'):
+                                xml_content = zip_file.read(name)
+                                root = ET.fromstring(xml_content)
+                                for elem in root.iter():
+                                    if elem.text:
+                                        texts.append(elem.text)
+                        content = ' '.join(texts)
+                        return content[:max_chars]
+            except:
+                pass
+        
+        # Legacy .doc files (if python-docx is available)
+        elif ext == '.doc':
+            try:
+                # Try using LibreOffice/OpenOffice command line tool if available
+                import subprocess
+                temp_txt = str(file_path) + '.txt'
+                result = subprocess.run(
+                    ['soffice', '--headless', '--convert-to', 'txt:Text', str(file_path)],
+                    capture_output=True,
+                    timeout=10
+                )
+                if os.path.exists(temp_txt):
+                    with open(temp_txt, 'r', encoding='utf-8', errors='ignore') as f:
+                        content = f.read()[:max_chars]
+                    os.remove(temp_txt)
+                    return content
+            except:
+                # If conversion fails, return file info
+                pass
+        
+        # Text-based files
+        elif ext in ['.txt', '.md', '.py', '.js', '.jsx', '.ts', '.tsx', 
+                     '.html', '.htm', '.css', '.scss', '.sass', '.less',
+                     '.json', '.xml', '.yaml', '.yml', '.toml', '.ini', '.cfg', '.conf',
+                     '.csv', '.tsv', '.log', '.sql', '.sh', '.bash', '.zsh',
+                     '.c', '.cpp', '.h', '.hpp', '.java', '.cs', '.go', '.rs', '.swift',
+                     '.r', '.m', '.php', '.rb', '.pl', '.lua', '.vim', '.el']:
+            try:
+                with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                    content = f.read()[:max_chars]
+                return content
+            except:
+                pass
+        
+        # RTF files
+        elif ext == '.rtf':
+            try:
+                with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                    rtf_content = f.read()
+                    # Simple RTF stripping (removes most RTF formatting)
+                    import re
+                    # Remove RTF commands
+                    content = re.sub(r'\\[a-z]+\d*\s?', '', rtf_content)
+                    content = re.sub(r'[{}]', '', content)
+                    return content[:max_chars]
+            except:
+                pass
+        
+        # Images with Vision LLM or OCR
+        elif ext in ['.png', '.jpg', '.jpeg', '.gif', '.tiff', '.tif', '.bmp', '.webp', '.ico']:
+            # Use vision model if enabled
+            if self.use_vision_for_images:
+                vision_result = await self._analyze_image_with_vision(file_path, max_chars)
+                if vision_result and "failed" not in vision_result.lower():
+                    return vision_result
+            
+            # Fallback to OCR
+            if TESSERACT_AVAILABLE and PIL_AVAILABLE:
+                try:
+                    image = Image.open(str(file_path))
+                    if image.mode != 'RGB':
+                        image = image.convert('RGB')
+                    content = pytesseract.image_to_string(image)
+                    if content.strip():
+                        return content[:max_chars]
+                except:
+                    pass
+            
+            return f"Image file: {file_path.name}, Type: {ext}, Size: {file_path.stat().st_size} bytes"
+        
+        # DICOM medical imaging files
+        elif ext in ['.dcm', '.dicom'] or self._is_dicom_file(file_path):
+            if PYDICOM_AVAILABLE:
+                try:
+                    from pydicom.pixel_data_handlers.util import apply_modality_lut, apply_voi_lut
+            
+                    # Read DICOM file
+                    ds = pydicom.dcmread(str(file_path))
+            
+                    # Extract metadata
+                    metadata = {
+                        "patient_id": getattr(ds, 'PatientID', 'Unknown'),
+                        "study_date": getattr(ds, 'StudyDate', 'Unknown'),
+                        "modality": getattr(ds, 'Modality', 'Unknown'),
+                        "body_part": getattr(ds, 'BodyPartExamined', 'Unknown')
+                    }
+            
+                    # Convert to image if pixel data exists
+                    if hasattr(ds, 'pixel_array'):
+                        pixel_array = ds.pixel_array
+                
+                        # Apply LUT transformations if needed
+                        if 'RescaleSlope' in ds or 'RescaleIntercept' in ds:
+                            pixel_array = apply_modality_lut(pixel_array, ds)
+                
+                        if 'WindowCenter' in ds and 'WindowWidth' in ds:
+                            pixel_array = apply_voi_lut(pixel_array, ds)
+                
+                        # Convert to PIL Image for vision analysis
+                        if len(pixel_array.shape) == 2:  # Grayscale
+                            # Normalize to 0-255 range
+                            pixel_array = ((pixel_array - pixel_array.min()) * 255.0 / 
+                                        (pixel_array.max() - pixel_array.min())).astype(np.uint8)
+                            image = Image.fromarray(pixel_array, mode='L').convert('RGB')
+                    
+                            # Now use vision analysis
+                            if self.use_vision_for_images:
+                                # Convert PIL image back to base64 for vision analysis
+                                import io
+                                img_buffer = io.BytesIO()
+                                image.save(img_buffer, format='PNG')
+                                encoded_image = base64.b64encode(img_buffer.getvalue()).decode()
+                        
+                                # Use your existing vision analysis with the encoded image
+                                vision_result = await self._analyze_dicom_with_vision(
+                                    encoded_image, metadata, max_chars
+                                )
+                                if vision_result:
+                                    return vision_result
+            
+                    # Fallback to metadata only
+                    return f"DICOM file: {file_path.name}, Modality: {metadata['modality']}, Body Part: {metadata['body_part']}, Patient ID: {metadata['patient_id']}"
+            
+                except Exception as e:
+                    return f"Error reading DICOM file {file_path.name}: {str(e)}"
+    
+            return f"DICOM file: {file_path.name} (pydicom not available for analysis)"
+        
+        # Audio/Video files - just return metadata
+        elif ext in ['.mp3', '.mp4', '.avi', '.mkv', '.mov', '.wav', '.flac', '.ogg', '.webm', '.m4a', '.aac']:
+            return f"Media file: {file_path.name}, Type: {ext}, Size: {file_path.stat().st_size} bytes"
+        
+        # Default: return basic file info
+        return f"File: {file_path.name}, Type: {ext}, Size: {file_path.stat().st_size} bytes"
+    
+    async def _extract_embedded_metadata(self, file_path: Path) -> Dict:
+        """Extract native file metadata"""
+        stats = file_path.stat()
+        metadata = {
+            "size": stats.st_size,
+            "modified": datetime.fromtimestamp(stats.st_mtime).isoformat(),
+            "created": datetime.fromtimestamp(stats.st_ctime).isoformat()
+        }
+        
+        mime_type, _ = mimetypes.guess_type(str(file_path))
+        ext = file_path.suffix.lower()
+        
+        # PDF and ebook metadata
+        if PYMUPDF_AVAILABLE and ext in ['.pdf', '.xps', '.epub', '.mobi', '.fb2', '.cbz']:
+            try:
+                doc = fitz.open(str(file_path))
+                meta = doc.metadata
+                if meta:
+                    for key in ['author', 'title', 'subject', 'keywords', 'creator', 'producer']:
+                        if meta.get(key):
+                            metadata[key.capitalize()] = meta[key]
+                    metadata['Pages'] = doc.page_count
+                doc.close()
+            except:
+                pass
+        
+        # Image metadata
+        elif PIL_AVAILABLE and ext in ['.png', '.jpg', '.jpeg', '.gif', '.tiff', '.tif', '.bmp', '.webp', '.ico']:
+            try:
+                image = Image.open(str(file_path))
+                metadata['Format'] = image.format
+                metadata['Dimensions'] = f"{image.width}x{image.height}"
+                metadata['Mode'] = image.mode
+                
+                # EXIF data for photos
+                if hasattr(image, 'getexif'):
+                    exifdata = image.getexif()
+                    if exifdata:
+                        for tag_id in exifdata:
+                            tag = TAGS.get(tag_id, tag_id)
+                            data = exifdata.get(tag_id)
+                            if tag in ['Artist', 'Copyright', 'DateTime', 'DateTimeOriginal', 
+                                      'Software', 'Make', 'Model', 'LensModel', 'GPSInfo']:
+                                try:
+                                    metadata[tag] = str(data)
+                                except:
+                                    pass
+            except:
+                pass
+        
+        # Office documents
+        elif ext in ['.docx', '.xlsx', '.pptx', '.odt', '.ods', '.odp']:
+            try:
+                with zipfile.ZipFile(str(file_path), 'r') as zip_file:
+                    # Microsoft Office
+                    if 'docProps/core.xml' in zip_file.namelist():
+                        core_xml = zip_file.read('docProps/core.xml')
+                        root = ET.fromstring(core_xml)
+                        
+                        namespaces = {
+                            'cp': 'http://schemas.openxmlformats.org/package/2006/metadata/core-properties',
+                            'dc': 'http://purl.org/dc/elements/1.1/',
+                            'dcterms': 'http://purl.org/dc/terms/'
+                        }
+                        
+                        elements = {
+                            'Creator': './/dc:creator',
+                            'Title': './/dc:title',
+                            'Subject': './/dc:subject',
+                            'Keywords': './/cp:keywords',
+                            'Description': './/dc:description',
+                            'LastModifiedBy': './/cp:lastModifiedBy',
+                            'Revision': './/cp:revision'
+                        }
+                        
+                        for name, xpath in elements.items():
+                            elem = root.find(xpath, namespaces)
+                            if elem is not None and elem.text:
+                                metadata[name] = elem.text
+                    
+                    # OpenDocument format
+                    elif 'meta.xml' in zip_file.namelist():
+                        meta_xml = zip_file.read('meta.xml')
+                        root = ET.fromstring(meta_xml)
+                        # Extract OpenDocument metadata
+                        for elem in root.iter():
+                            if 'title' in elem.tag.lower() and elem.text:
+                                metadata['Title'] = elem.text
+                            elif 'creator' in elem.tag.lower() and elem.text:
+                                metadata['Creator'] = elem.text
+            except:
+                pass
+        
+        # Audio files metadata (if mutagen is available)
+        elif ext in ['.mp3', '.mp4', '.m4a', '.flac', '.ogg', '.wav']:
+            try:
+                from mutagen import File
+                audio = File(str(file_path))
+                if audio:
+                    if audio.info:
+                        metadata['Duration'] = str(audio.info.length) + ' seconds'
+                        metadata['Bitrate'] = str(getattr(audio.info, 'bitrate', 'N/A'))
+                    for key in ['title', 'artist', 'album', 'date', 'genre']:
+                        if key in audio:
+                            metadata[key.capitalize()] = str(audio[key][0])
+            except ImportError:
+                pass
+            except:
+                pass
+        
+        return metadata
+    
+    async def _generate_ai_metadata(self, filename: str, content: str) -> str:
+        """Generate AI metadata using Ollama"""
+        if not OLLAMA_AVAILABLE:
+            return json.dumps({"error": "Ollama not available"})
+        
+        messages = [
+            {
+                "role": "system", 
+                "content": "You are a document analyst. Provide concise summary and relevant keywords."
+            },
+            {
+                "role": "user", 
+                "content": f"File: {filename}\nContent: {content[:2000]}\n\nProvide JSON: {{\"date\": \"...\", \"summary\": \"...\", \"keywords\": [\"...\", \"...\"]}}"
+            }
+        ]
+        
+        try:
+            client = AsyncClient(host=self.ollama_host)
+            response = await client.chat(
+                model=self.model,
+                messages=messages,
+                stream=False
+            )
+            
+            result = response['message']['content']
+            
+            # Try to extract JSON
+            try:
+                json_start = result.index('{')
+                json_end = result.rindex('}') + 1
+                json_str = result[json_start:json_end]
+                parsed = json.loads(json_str)
+                return json.dumps(parsed)
+            except:
+                return json.dumps({"summary": result, "keywords": []})
+                
+        except Exception as e:
+            return json.dumps({"error": str(e)})
+    
+    def _file_exists_in_db(self, file_path: str) -> bool:
+        """Check if file already exists in database"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        cursor.execute("SELECT id FROM files WHERE file_path = ?", (file_path,))
+        result = cursor.fetchone()
+        conn.close()
+        return result is not None
+    
+    def _save_to_database(self, file_info: Dict):
+        """Save file information to database"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        cursor.execute('''
+            INSERT INTO files (
+                filename, file_path, file_size, file_type,
+                upload_date, embedded_metadata, ai_metadata
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            file_info["filename"],
+            file_info["file_path"],
+            file_info["file_size"],
+            file_info["file_type"],
+            file_info["upload_date"],
+            file_info["embedded_metadata"],
+            file_info["ai_metadata"]
+        ))
+        
+        conn.commit()
+        conn.close()
+
+# Calling AI assistance usage
+async def main():
+    # Initialize processor with vision enabled for images
+    processor = AsyncFileProcessor(
+        db_path=f"{summary_dir}/medical_records.db",
+        model="gemma3:4b", 
+        use_vision_for_images=True 
+    )
+    
+    # Process ALL files except database and temp files (recommended)
+    results = await processor.process_folder(
+        f"{summary_dir}",
+        exclude_extensions=['.db', '.sqlite', '.tmp', '.temp', '.cache']
+    )
+    
+    
+    # Check for errors first
+    if results.get("error"):
+        print(f"Error: {results['error']}")
+    else:
+        print(f"Processed: {results['processed']} files")
+        print(f"Skipped: {results['skipped']} files")
+        print(f"Errors: {results['errors']} files")
+        
+        # Show details for any errors
+        if results['errors'] > 0:
+            print("\nError details:")
+            for file_info in results['files']:
+                if file_info.get('status') == 'error':
+                    print(f"  - {file_info['filename']}: {file_info.get('message', 'Unknown error')}")
+    
 ###########################################
 
 #write files to pdf
@@ -866,6 +1592,7 @@ def write_text_to_pdf(directory, text):
     doc.close()
 def run_analyzer(age, sex, ocr_files, formatted_ignore_words):
     try:
+    
         # Process OCR files with provided input
         print("Processing OCR files")
         process_ocr_files(ocr_files, age)
@@ -934,76 +1661,9 @@ def run_analyzer(age, sex, ocr_files, formatted_ignore_words):
     except Exception as e:
         print(f"Error during processing: {e}")
 
-##CALL ANALYZER
+##CALL ANALYZER AND AI ANALYSIS->SQLITE
+if __name__ == "__main__":
+            asyncio.run(main())
 run_analyzer(age, sex, ocr_files, formatted_ignore_words)
-"""              
-# Process OCR files with provided input
-print("process ocr files")
-process_ocr_files(ocr_files, age)
-
-#doesnt work
-#create collated file
-collate_images(ocr_files, f"{ocr_files}/Darna_tesseract")
 
 
-# Deidentify records
-print("debug deidentify records")
-deidentify_records()
-
-
-# Generate recommendations with provided age and sex
-print("debug generate records")
-recommendations = generate_recommendations(age=age, sex=sex)
-
-#extract data from fhir file and make pdf
-directory = ocr_files
-
-with open(f'{folderpath}/summary/chart.json', 'r') as file:
-    json_data = json.load(file)
-# Extract information using function above from fhir document and write to pdf and json file
-extracted_info = extract_lforms_data(json.dumps(json_data))
-print(extracted_info)
-#extracted_info = extract_info(json_data)
-json_output = json.dumps(extracted_info, indent=4)
-#extracted_info = extract_info(json_data)
-write_text_to_pdf(directory, str(extracted_info))
-final_directory= f'{directory}/Darna_tesseract/'
-
-#calls the CALL_FILE pdf_sectionreader
-process_pdf_files(directory)
-
-# Write the JSON output to a file and pdf file (2 lines above)
-with open(f'{directory}/fhir_output.json', 'w', encoding='utf-8') as f:
-    f.write(json_output)
-
-
-#CALL FILE NLP_PROCESS
-# Usage nlp_process
-json_file_path = f'{directory}/combined_output.json'
-#json_file_path = 'processed_data2.json'
-#keys_summary = ['HPI', 'History of presenting illness', 'History of', 'summary']
-keys_pmh = ['PMH', 'medical', 'past medical history', 'surgical', 'past'] #extracts past medical history
-keys_meds = ['medications', 'MEDICATIONS:', 'medicine', 'meds'] #extracts medications
-keys_summary = ['HPI', 'history', 'summary']
-keys_screening= ['RECS', 'RECOMMENDATIONS']
-
-#call functions and write to wordcloud and creat wordcloud.png file
-text_summary = process_directory_summary(directory, keys_summary)
-#creates wordcloud of uploaded files
-preprocess_and_create_wordcloud(text_summary, final_directory)
-
-text_meds = process_directory_meds(directory, keys_meds)#saves to medications in json
-text_screening = load_text_from_json_screening(json_file_path, keys_screening)#saves to screening in json
-
-text_pmh = process_directory_pmh(directory, keys_pmh)#saves to past history in json
-#write to json using "keys":"texts"
-keys= ("darnahi_summary", "darnahi_past_medical_history", "darnahi_medications", "darnahi_screening")
-texts= (text_summary, text_pmh, text_meds, text_screening)
-wordcloud_summary(keys, texts, final_directory)
-
-#CHROMA MINER  # Adjust this path to your directory
-chromadb_embed(directory)
-
-#remove files from ocr_files- cleanup but leave Darna_tesseract files
-subprocess.run(f'find {directory} -maxdepth 1 -type f -exec rm {{}} +', shell=True)
-"""

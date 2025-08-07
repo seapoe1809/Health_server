@@ -1,7 +1,7 @@
 ##Sets up the flask server for viewing locally at {ip_address}:3001
 #/* DARNA.HI
 # * Copyright (c) 2023 Seapoe1809   <https://github.com/seapoe1809>
-# * 
+# * Copyright (c) 2023 pnmeka   <https://github.com/pnmeka>
 # * 
 # *
 # *   This program is free software: you can redistribute it and/or modify
@@ -17,29 +17,41 @@
 # *   You should have received a copy of the GNU General Public License
 # *   along with this program. If not, see <http://www.gnu.org/licenses/>.
 # */
+# Flask and extensions
 from flask import Flask, render_template, send_file, send_from_directory, session, request, redirect, jsonify, url_for, Response, flash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
-from urllib.parse import quote, unquote
-from cryptography.fernet import Fernet
-from datetime import datetime, timedelta
-import requests
+
+# Standard library
+import os
+import sqlite3
 import json
-import webbrowser
-import os, subprocess
+import subprocess
 from subprocess import run, CalledProcessError
 import getpass
-import variables.variables as variables
+import webbrowser
+from datetime import datetime, timedelta
+from pathlib import Path
+from functools import wraps
+from urllib.parse import quote, unquote
+import io
+
+# Third-party packages
+import requests
 import qrcode
 import pyzipper
-from pdf2image import convert_from_path
-#dicom #numpy, pydicom, matplotlib
-import io
-import pydicom
-from pydicom.pixel_data_handlers.util import apply_voi_lut
 import numpy as np
 import matplotlib.pyplot as plt
+from pdf2image import convert_from_path
+from cryptography.fernet import Fernet
+
+# DICOM handling
+import pydicom
+from pydicom.pixel_data_handlers.util import apply_voi_lut
+
+# Local imports
+import variables.variables as variables
 
 ##UPDATE ZIP PASSWORD HERE
 create_zip_password = "2023"
@@ -379,6 +391,7 @@ def custom_static(filename):
     directory = os.path.join(folderpath, 'summary')
     return send_from_directory(directory, filename)
 
+"""
 #view dicom files in Health files    
 @app.route('/summary/', methods=['GET'])
 @login_required
@@ -436,8 +449,304 @@ def display_file(filename):
 
     # Fallback for unsupported file types
     return 'Unsupported file type', 404
+"""
+#view structured data with AI metadata
+import os
+import sqlite3
+import json
+from datetime import datetime
+from pathlib import Path
+from flask import render_template, send_from_directory, session, request
+import pydicom
+from functools import wraps
 
 
+def get_db_connection(db_path):
+    """Create a database connection to medical_records.db"""
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def format_file_size(size_in_bytes):
+    """Convert bytes to human readable format"""
+    for unit in ['B', 'KB', 'MB', 'GB']:
+        if size_in_bytes < 1024.0:
+            return f"{size_in_bytes:.1f} {unit}"
+        size_in_bytes /= 1024.0
+    return f"{size_in_bytes:.1f} TB"
+
+def format_date(date_string):
+    """Format date string to readable format"""
+    try:
+        dt = datetime.fromisoformat(date_string)
+        return dt.strftime("%B %d, %Y at %I:%M %p")
+    except:
+        return date_string
+
+def format_json_metadata(json_string):
+    """Format JSON string for display"""
+    try:
+        if json_string:
+            data = json.loads(json_string)
+            return json.dumps(data, indent=2)
+        return None
+    except:
+        return json_string
+
+def search_files(search_term, folderpath):
+    """Search files across all fields with folder path filtering"""
+    # Get the summary directory path
+    db_path = f"{folderpath}/medical_records.db"
+    print("db_path", db_path)
+    
+    # Check if database exists
+    if not os.path.exists(db_path):
+        raise FileNotFoundError(f"Database not found at {db_path}")
+    
+    conn = get_db_connection(db_path)
+    cursor = conn.cursor()
+    
+    # First, let's check what paths are actually in the database
+    # (You can remove this debug code later)
+    cursor.execute("SELECT DISTINCT file_path FROM files LIMIT 5")
+    sample_paths = cursor.fetchall()
+    print("Sample paths in DB:", sample_paths)
+    
+    if not search_term:
+        # Return all files if no search term
+        # Remove the file_path filter since we're already using the correct database
+        query = """
+        SELECT 
+            filename,
+            file_path,
+            file_size,
+            file_type,
+            upload_date,
+            embedded_metadata,
+            ai_metadata
+        FROM files
+        WHERE filename != '.db' 
+        AND filename != 'chart.json'
+        AND filename != 'medical_records.db'
+        ORDER BY upload_date DESC
+        """
+        cursor.execute(query)
+    else:
+        # Search across all relevant fields
+        query = '''
+            SELECT 
+                filename,
+                file_path,
+                file_size,
+                file_type,
+                upload_date,
+                embedded_metadata,
+                ai_metadata
+            FROM files 
+            WHERE (filename LIKE ? 
+            OR embedded_metadata LIKE ? 
+            OR ai_metadata LIKE ?)
+            AND filename != '.db' 
+            AND filename != 'chart.json'
+            AND filename != 'medical_records.db'
+            ORDER BY upload_date DESC
+        '''
+        search_pattern = f"%{search_term}%"
+        cursor.execute(query, [search_pattern, search_pattern, search_pattern])
+    
+    files = cursor.fetchall()
+    conn.close()
+    
+    # Convert to list of dictionaries and add formatted fields
+    file_list = []
+    for file in files:
+        file_dict = dict(file)
+        
+        # Add formatted versions
+        file_dict['file_size_formatted'] = format_file_size(file_dict.get('file_size', 0))
+        file_dict['upload_date_formatted'] = format_date(file_dict.get('upload_date', ''))
+        file_dict['embedded_metadata_formatted'] = format_json_metadata(file_dict.get('embedded_metadata', ''))
+        file_dict['ai_metadata_formatted'] = format_json_metadata(file_dict.get('ai_metadata', ''))
+        
+        file_list.append(file_dict)
+    
+    return file_list
+
+def categorize_files_from_db(files):
+    """Categorize files from database based on their extensions"""
+    categories = {
+        'pdf_files': [],
+        'xml_files': [],
+        'dicom_files': [],
+        'image_files': [],
+        'other_files': []
+    }
+    
+    # Define file extensions for each category
+    pdf_extensions = {'.pdf'}
+    xml_extensions = {'.xml'}
+    dicom_extensions = {'.dcm', '.dicom'}
+    image_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.svg', '.webp'}
+    
+    for file in files:
+        filename = file['filename'].lower()
+        extension = Path(filename).suffix.lower()
+        
+        if extension in pdf_extensions:
+            categories['pdf_files'].append(file)
+        elif extension in xml_extensions:
+            categories['xml_files'].append(file)
+        elif extension in dicom_extensions:
+            categories['dicom_files'].append(file)
+        elif extension in image_extensions:
+            categories['image_files'].append(file)
+        else:
+            categories['other_files'].append(file)
+    
+    return categories
+
+# View dicom files in Health files - MAIN SUMMARY ROUTE
+@app.route('/summary/', methods=['GET'])
+@login_required
+def dicom_files():
+    """Main summary page with search functionality"""
+    folderpath = session.get('folderpath', '')
+    directory = os.path.join(folderpath, 'summary')
+    
+    # Get search term from query parameters
+    search_term = request.args.get('search', '').strip()
+    
+    # Try database first, then fallback to filesystem
+    use_database = False
+    total_results = 0
+    
+    try:
+        # Check if database exists and try to use it
+        db_path = f"{directory}/medical_records.db"
+        if os.path.exists(db_path):
+            # Try to get files from database
+            if search_term:
+                files = search_files(search_term, directory)
+
+            else:
+                files = search_files(None, directory)  # Get all files
+            
+            # Categorize files from database
+            categories = categorize_files_from_db(files)
+            
+            # Calculate total results
+            total_results = len(files)
+            use_database = True
+            
+            # Extract the categorized files
+            pdf_files = categories['pdf_files']
+            xml_files = categories['xml_files']
+            dicom_files = categories['dicom_files']
+            image_files = categories['image_files']
+            other_files = categories['other_files']
+        else:
+            raise FileNotFoundError("Database not found, using filesystem")
+            
+    except Exception as e:
+        # Fallback to filesystem if database fails
+        print(f"Database error, falling back to filesystem: {str(e)}")
+        
+        # Lists to store file names (original method)
+        pdf_files = []
+        xml_files = []
+        dicom_files = []
+        image_files = []
+        other_files = []
+        
+        # Scan directory and categorize files by extension
+        if os.path.exists(directory):
+            for f in os.listdir(directory):
+                # Skip database files
+                if f in ['medical_records.db', '.db', 'chart.json']:
+                    continue
+                    
+                # Create file dict for compatibility with template
+                file_dict = {'filename': f}
+                
+                if f.lower().endswith(('.pdf', '.PDF')):
+                    pdf_files.append(file_dict)
+                elif f.lower().endswith(('.xml', '.XML')):
+                    xml_files.append(file_dict)
+                elif f.lower().endswith(('.dcm', '.dicom', '.DCM')):
+                    dicom_files.append(file_dict)
+                elif f.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.svg', '.webp')):
+                    image_files.append(file_dict)
+                else:
+                    # Other files
+                    other_files.append(file_dict)
+        
+        use_database = False
+        search_term = None
+        total_results = len(pdf_files) + len(xml_files) + len(dicom_files) + len(image_files) + len(other_files)
+    
+    # Debug prints (like original)
+    print(f"PDF files: {len(pdf_files)}")
+    print(f"DICOM files: {len(dicom_files)}")
+    print(f"Using database: {use_database}")
+    
+    # Pass the lists to the template
+    return render_template('summary.html', 
+                         pdf_files=pdf_files, 
+                         xml_files=xml_files, 
+                         dicom_files=dicom_files,
+                         image_files=image_files,
+                         other_files=other_files,
+                         search_term=search_term,
+                         total_results=total_results,
+                         use_database=use_database)
+
+@app.route('/summary/<filename>')
+@login_required
+def display_file(filename):
+    """Display individual file"""
+    folderpath = session.get('folderpath', '')
+    directory = os.path.join(folderpath, 'summary')
+    file_path = os.path.join(directory, filename)
+    
+    # Handle DICOM files
+    if filename.lower().endswith(('.dcm', '.dicom', '.DCM')):
+        # Load the DICOM file to compute max_slice
+        dicom_data = pydicom.dcmread(file_path)
+        
+        # Ensure it's a multi-dimensional dataset to calculate max_slice
+        if dicom_data.pixel_array.ndim > 2:
+            max_slice = dicom_data.pixel_array.shape[0] - 1
+        else:
+            max_slice = 0  # Handle single-slice (2D) DICOM images as well
+        return render_template('view_dicom.html', filename=filename, max_slice=max_slice)
+    
+    # Directly serve PDF files
+    if filename.lower().endswith('.pdf'):
+        return send_from_directory(directory, filename, mimetype='application/pdf')
+    
+    # Directly serve XML files
+    elif filename.lower().endswith('.xml'):
+        return send_from_directory(directory, filename, mimetype='application/xml')
+    
+    # Serve image files
+    elif filename.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.svg', '.webp')):
+        # Determine appropriate mimetype
+        extension = Path(filename).suffix.lower()
+        mimetypes = {
+            '.jpg': 'image/jpeg',
+            '.jpeg': 'image/jpeg',
+            '.png': 'image/png',
+            '.gif': 'image/gif',
+            '.bmp': 'image/bmp',
+            '.tiff': 'image/tiff',
+            '.svg': 'image/svg+xml',
+            '.webp': 'image/webp'
+        }
+        return send_from_directory(directory, filename, mimetype=mimetypes.get(extension, 'application/octet-stream'))
+    
+    # Fallback for unsupported file types
+    return 'Unsupported file type', 404
+####End og AI metadata view
 
 @app.route('/dicom/slice/<filename>/<int:slice_index>')
 @login_required
@@ -643,7 +952,7 @@ def execute_script():
         print("Inside /execute_script")
         
         # List of allowed app names
-        allowed_app_names = ['Ibs_Module', 'Immunization_Tracker', 'Weight_Tracker', 'Tailscale', 'Dock']
+        allowed_app_names = ['Ibs_Module', 'Immunization_Tracker', 'Weight_Tracker', 'Tailscale', 'Dock', 'Strep_Module', 'Anxiety_Module']
         
         app_name = session.get('app_name_file', '').replace('.js', '')
         if not app_name:
