@@ -45,7 +45,7 @@ import asyncio
 
 #from transformers import pipeline
 #set model
-model="mistral-nemo"
+model="gemma3:4b"
 directory = ""
 folderpath= ""
 basic_info=""
@@ -166,11 +166,11 @@ def analyze_query(query, directory):
     if darna_value is not None:
         print(darna_value)
         key='darnahi'
-        result += existing_data.get(key, " ")[:150]
+        result += existing_data.get(key, " ")[:200]
     if med_value is not None:
         print(med_value)
         key = 'darnahi_medications'
-        result += existing_data.get(key, " ")[:350]
+        result += existing_data.get(key, " ")[:500]
     if summary_value is not None:
         print(summary_value)
         key = 'darnahi_summary'
@@ -178,11 +178,11 @@ def analyze_query(query, directory):
     if past_medical_history_value is not None:
         print(past_medical_history_value)
         key = 'darnahi_past_medical_history'
-        result += existing_data.get(key, " ")[:150]  
+        result += existing_data.get(key, " ")[:500]  
     if xmr_value is not None:
         print(xmr_value)
         key = 'darnahi_xmr'
-        result += existing_data.get(key, " ")[:150]
+        result += existing_data.get(key, " ")[:200]
 
      # Check if no pattern matched
     if not (darna_match or med_match or summary_match or xmr_match or past_medical_history_match):
@@ -384,6 +384,8 @@ def extract_med_value(med_item):
     elif isinstance(value, dict):
         return value.get("text", "")
     return ""
+
+
 ##run analyze located in ../dir
 def analyze(request: gr.Request, deidentify_words):
     set_user_health_files_directory(request)
@@ -853,12 +855,12 @@ with gr.Blocks(theme='Taithrah/Minimal', css= "footer{display:none !important}")
 
     with gr.Tab("RUN AI"):
         
-            gr.Markdown("## This section will run AI tools on your medical records and do the following\n 1. Calculate Age using Darnahi Chartit Data\n 2. Scan through your previously uploaded records once\n 3. Run Image recognition on it once\n 4. Generate Age and Sex based Recommendations using USPTF recommendations\n 5. Create summaries from your uploaded records that you can explore or download from file server tab\n 6. Create Wordclouds\n 7. Create structured and Unstructured RAG for Darnabot to use so as to tailor its answers using your uploaded chunked data. \n\n")
+            gr.Markdown("## This section will run AI tools (~5min) on your medical records and do the following\n 1. Calculate Age using Darnahi Chartit Data\n 2. Scan through your previously uploaded records once\n 3. Run Image recognition and AI vision on it once to generate AI metadata\n 4. Generate Age and Sex based Recommendations using USPTF recommendations\n 5. Create summaries from your uploaded records that you can explore or download from file server tab\n 6. Create Wordclouds\n 7. Create structured and Unstructured data/ RAG for Darnabot to use so as to tailor its answers using your uploaded chunked data. \n\n")
             with gr.Row():
                 fetch_button = gr.Button("Fetch Age and Sex")
                 with gr.Column(visible=False) as analysis_column:
                     deidentify_words = gr.Textbox(label="Enter information to deidentify", placeholder="names|email|address|phone")
-                    analyze_button = gr.Button("Deidentify and Analyze")
+                    analyze_button = gr.Button("RUN AI")
     
             output1 = gr.Textbox(label="Age and Sex")
             output2 = gr.Textbox(label="Alert")
@@ -907,7 +909,7 @@ with gr.Blocks(theme='Taithrah/Minimal', css= "footer{display:none !important}")
             
                 gr.Markdown("## Are you up to date on Immunizations?\n See Immunization suggestions:")
                 gr.HTML("""
-        <iframe src="https://www2a.cdc.gov/nip/adultimmsched/#print" 
+        <iframe src="https://www.aafp.org/family-physician/patient-care/prevention-wellness/immunizations-vaccines/immunization-schedules/adult-immunization-schedule.html" 
         width="100%" height="500px"></iframe>
         """)
 
@@ -969,6 +971,6 @@ with gr.Blocks(theme='Taithrah/Minimal', css= "footer{display:none !important}")
 
 if __name__ == "__main__":
 
-    demo.launch(server_name='0.0.0.0', server_port=3012, share=False)
+    demo.launch(server_name='0.0.0.0', server_port=3012, pwa=True, share=False)
     
 
