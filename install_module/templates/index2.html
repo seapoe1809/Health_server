@@ -13,6 +13,7 @@
 </head>
 
 <body onload="hideAddressBar()">
+<div id="loader" class="loader"><div class="spinner"></div></div>
   <div class="text">
    
   
@@ -36,6 +37,14 @@
     <li><a id="Ibs_Module-link" target="_blank" class="Weight_Tracker">
     <img class="icon" src="/static/icons/Ibs_Module.png" alt="Weight_Tracker"></a></li>
     <script src="/static/Ibs_Module_script.js"></script>
+    
+    <li><a id="Anxiety_Module-link" target="_blank" class="Anxiety_Tracker">
+    <img class="icon" src="/static/icons/Anxiety_Module.png" alt="Anxiety_Tracker"></a></li>
+    <script src="/static/Anxiety_Module_script.js"></script>
+    
+    <li><a id="Strep_Module-link" target="_blank" class="Strep_Tracker">
+    <img class="icon" src="/static/icons/Strep_Module.png" alt="Strep_Tracker"></a></li>
+    <script src="/static/Strep_Module_script.js"></script>
     
     <!--<li><a id="Applehealth-link" target="_blank" class="install">
     <img class="icon" src="/static/icons/graph.png" alt="Install"></a></li>
@@ -84,6 +93,19 @@
         window.scrollTo(0, 1);
       }
     }
+    
+    // Initialize page with animations from styles.css
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        
+        // Hide loader if it exists
+        const loader = document.getElementById('loader');
+        if (loader) {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 300);
+        }
+    });
   </script>
 </body>
 </html>
