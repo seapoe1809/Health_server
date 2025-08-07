@@ -1,0 +1,22 @@
+#README
+This module works along with DarnaV2.5 at : https://github.com/seapoe1809/Health_server
+
+ This module offers a basic overview and solution for Streptococcal infection and related symptomatology. It enables you to understand, track and interact all in one place. Beyond simple tools, ot also features Darnabot that helps with understanding your probability of strep infection. Alongwith are some helpful links. As always its informational only and not a replacement for your doctor.
+
+What is Strep probability scoring?
+
+Darnahi Strep scoring module offers a solution for understanding the probability of your strep throat infection. Its based in Centors criteria (https://reference.medscape.com/calculator/489/centor-score-modified-for-gas-pharyngitis)
+
+
+
+HOW TO STOP THE CONTAINER: If you wish to stop the container for some reason. You could stop it from Yacht Local or go to terminal directly and type:
+
+	docker ps -a #would list the name of container
+
+To stop the container
+
+	docker stop <container>
+	
+To permanently remove the container
+
+	docker rm <container>
