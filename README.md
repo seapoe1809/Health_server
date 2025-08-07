@@ -2,18 +2,19 @@
 
 <img src="https://github.com/seapoe1809/Health_server/blob/main/static/favicon.png" width =150, height=150>
 
-***DARNA HEALTH INTELLIGENCE V2.3***
+***DARNA HEALTH INTELLIGENCE V2.5***
 
 
 
-**Self Hosted Health_Server is DARNA.HI V2.3**
+**Self Hosted Health_Server is DARNA.HI V2.5**
 
 **Darnahi's Vision:**
 =================
 
-This tool wants to be your personal health intelligent assistant. It aims to be built around AI core. The local running LLM will be able to understand your personal health information while being private and secure. For example you'll be able to ask Darnabot any health questions you have, and it will provide answers specifically based on your own health details. It's like having a knowledgeable health assistant available whenever you need, but the assitant is actually intelligent , local running program giving you personalized suggestions while protecting your privacy.
+This tool wants to be your personal health intelligent recordkeeper. It aims to be built around AI core. Imagine visiting a doctor 5 years ago. Now imagine if you still have the record if you look for it. Darnahi will allow you to store it, index it and use it to generate personal health insights. 
+Furthermore a local running LLM will be able to understand your personal health information while being private and secure. For example you'll be able to ask Darnabot any health questions you have, and it will provide answers specifically based on your own health details. It's like having a knowledgeable health assistant available whenever you need, but the assitant is actually intelligent , local giving you personalized suggestions while protecting your privacy.
 
-CAUTION: This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based and has risk of hallucinations. Early stage. Beta and under development and isnt secure. Please take all steps to safeguard your data. 
+CAUTION: This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based and is at risk of hallucinations. Early stage, under development and isnt secure. Please take all steps to safeguard your data. 
 
 **Key words:** 
 
@@ -23,7 +24,7 @@ CAUTION: This tool is not a replacement for a Doctor. For medical advice, please
 - Open Source,
 - Free,
 - AI/ML,
-- LLM (ollama, mistral-nemo)
+- LLM (ollama, gemma3:4b)
 - No Internet required to run it
 
 DEMO version with features turned off: http://seapoe1809.pythonanywhere.com/login
@@ -46,9 +47,9 @@ VIDEO ABOUT DARNAHI LANDING PAGE
 
     1. Chartit to log your basic information in FHIR R4 format
     2. Ability to upload and save your files to your self hosted file server
-    3. Ability to view dicom files, xml files, health suggestions for your age
-    4. Ability to encrypt and zip your files securely and remotely
-    5. Launch Darnabot
+    3. Ability to view dicom files, xml files, health suggestions for your age; The files are indexed by AI metadata
+    4. Ability to encrypt, zip and your files securely and remotely
+    5. Launch Darnabot; AI analyzer
     6. Launch Optional Modules
 
 2. Darnabot
@@ -77,12 +78,16 @@ Darnahi optional modules include:
 2. IBS module- tracks your dietary and bowel habits; AI FODMAP engine; exercises to manage your IBS; know your IBS
 
 3. Immunization passport- to track and keep record of your immunizations; AI travel advisor; travel map
+   
+4. Anxiety-OCD module*New - Simply understandable chapters and techniques to manage anxiety
 
-4. Tailscale to allow remote access
+5. Strep Module*New - Simply understandable chapters and self management/care tips in regards to Strep throat or impetigo
 
-5. Portal to share your encrypted zipped health docs securely
+6. Tailscale to allow remote access
 
-6. Remote docker container manager
+7. Portal to share your encrypted zipped health docs securely
+
+8. Remote docker container manager
     
 ##DARNA Healthy Intelligence v2.3- An open source, self hosted intiative - self custody of your health data
 
@@ -140,9 +145,9 @@ Use at your own Risk. See License document. It is still beta. Take all steps to 
 This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
 
 WHY I CARE ABOUT THIS:
-I created this project because I had trouble moving my own health data when I switched healthcare providers. As someone who works in the healthcare space, I see that current EHR solutions make it difficult to port your data, even though there are regulatory requirements to do so. It's frustrating to see that some institutions still rely on fax and scan to move data around, which shows how outdated and hidden these data porting techniques are.
+I created this project because I had trouble moving my own health data when I switched healthcare providers. As someone who worked in healthcare previously, I saw that current EHR solutions make it difficult to port your data, even though there are regulatory requirements to do so. It's frustrating to see that some institutions still rely on fax and scan to move data around, which shows how outdated and hidden these data porting techniques are.
 
-This is version 2.3 of the project, and I anticipate that there will be many more iterations and help from OSS community before it takes a good form. My goal is to make it easier for people to take ownership of their health data and store it in one place on their own computer. They can shoose to interact with local LLM or use their deidentified data to interact with powerful public LLM if they wish. Darnahi provides both- a way to interact with local LLM and also to deidentify their data seamlessly/ This way, they can decide who to share it with, how to use it and finally have more control over their own health.
+This is version 2.5 of the project, and I anticipate that there will be many more iterations and help from OSS community before it takes a good form. My goal is to make it easier for people to take ownership of their health data and store it in one place on their own computer. They can choose to interact with local LLM or use their deidentified data to interact with powerful public LLM if they wish. Darnahi provides both- a way to interact with local LLM and also to deidentify their data seamlessly/ This way, they can decide who to share it with, how to use it and finally have more control over their own health.
 
 License? 
 ========
@@ -153,7 +158,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 basic requirements
 =======================================
 #linux os (Debian or Ubuntu distro preferred)
-#ollama and model mistral-nemo
+#ollama and model Gemma3b:4b
 #GPU enabled computer (preferred for running local LLM)
 #python3
 #git
@@ -217,7 +222,7 @@ Darnahi currently uses Ollama for its stable Local LLMs (https://ollama.com/down
 Time to get the model
     
     
-    ollama pull mistral-nemo
+    ollama pull gemma3:4b
     ollama serve
     
 
@@ -269,6 +274,7 @@ RUN AI via Darnabot:
 Here it what the Run AI does. It might need you to enter words to de-identify separated by "|"
     -It generates a list of USPTF recommended medical screenings for your age/ sex based on US guidelines
     -It uses OCR to extract data from your uploaded files
+    -It analyzes all health files using OCR and Vision, and generates AI insights and indexes it for ease of recordkeeping
     -It runs NLP to get medical data organized by type
     -It vectorizes and chunks up the data and creates a database
     -It creates a visual word cloud 
@@ -323,10 +329,12 @@ More information is available within Darnahi
 1. weight/ bp/ glucose/ water tracker
 2. IBS module- tracks your dietary and bowel habits; AI FODMAP engine; exercises to manage your IBS; know your IBS
 3. Immunization passport- to track and keep record of your immunizations; AI travel advisor; travel map
-4. Tailscale to allow remote access
-5. Portal to share your encrypted zipped health docs securely
-6. Remote docker container manager
-7. A portal for you to be able to download your information from local health providers. It isnt exhaustive.
+4. Anxiety-OCD module*New - Simply understandable chapters and techniques to manage anxiety
+5. Strep Module*New - Simply understandable chapters and self management/care tips in regards to Strep throat or impetigo
+5. Tailscale to allow remote access
+6. Portal to share your encrypted zipped health docs securely
+7. Remote docker container manager
+8. A portal for you to be able to download your information from local health providers. It isnt exhaustive.
 
 **Bookmark to your device iphone:**
 =====================================
