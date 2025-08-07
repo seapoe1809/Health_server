@@ -25,6 +25,8 @@ from datetime import datetime, date
 import plotly.graph_objs as go
 import pandas as pd
 
+model=gemma3:4b
+
 # Function to initialize the database and create the personas table if not exists
 def initialize_database():
     if not os.path.exists('personas.db'):
@@ -503,7 +505,7 @@ class HealthMotivator:
             #yield chunk
         try:    
             OLLAMA_HOST = os.environ.get('OLLAMA_HOST', 'http://localhost:11434')
-            async for part in await AsyncClient(host=OLLAMA_HOST).chat(model='mistral-nemo', messages=messages, stream=True):
+            async for part in await AsyncClient(host=OLLAMA_HOST).chat(model, messages=messages, stream=True):
                 yield part['message']['content']
         except Exception as e:
             yield f"Remember to take care of your health! (Error: {str(e)})"
@@ -717,7 +719,7 @@ def create_gradio_interface():
 
         
         
-    demo.launch(server_name='0.0.0.0', server_port=3020, share=False)
+    demo.launch(server_name='0.0.0.0', server_port=3020, pwa=True, share=False)
 
 if __name__ == "__main__":
     create_gradio_interface()
