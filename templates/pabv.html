@@ -28,7 +28,9 @@
   </style>
 </head>
 <body onload="hideAddressBar()">
-<button class="done-button" onclick="window.close()">Done</button>
+<div id="loader" class="loader"><div class="spinner"></div></div>
+<button class="done-button" onclick="window.close()"> ✖️ </button>
+
   <div class="text">
     <h1 style="font-family: Roboto, sans-serif; font-size: 45px; font-weight: bold; color: black; font-style: bold; text-align: center;">DIRECTORY</h1>
     <h2 style="font-family: Roboto, sans-serif; font-size: 30px; font-weight: regular; color: black; font-style: bold; text-align: center;">DARNA.HI</h2>
@@ -57,6 +59,21 @@
       
       <a href="https://www.myhealth.va.gov/mhv-portal-web/user-login" target="_blank" class="link-box">VA Health</a>
     </div>
+    
   </div>
+  <script>
+  // Initialize page with animations from styles.css
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        
+        // Hide loader if it exists
+        const loader = document.getElementById('loader');
+        if (loader) {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 300);
+        }
+    });
+  </script>
 </body>
 </html>

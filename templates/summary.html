@@ -2,70 +2,68 @@
 <html>
 <head>
     <title>SUMMARY</title>
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-
-</head>
-<body>
-<style>
-.form__container {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .form__container {
             display: flex;
-    	    flex-direction: column; /* Set flex direction to column */
-    	    justify-content: center; /* Center items vertically */
-    	    align-items: center; /* Center items horizontally */
-    	    padding: 20px; /* Add padding as desired */
-    	    max-width: 400px; /* Set maximum width as desired */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            max-width: 400px;
             height: 40px;
-    	    background-color: hsla(244, 16%, 92%, 0.6);
-    	    border-radius: 10px; /* Add rounded edges */
-    	    margin: 0 auto;
+            background-color: hsla(244, 16%, 92%, 0.6);
+            border-radius: 10px;
+            margin: 0 auto;
             margin-top: 30px;
             font-family: 'Roboto', sans-serif;
-            
         }
-.text__container {
-  	    display: flex;
- 	    flex-direction: column;
-  	    justify-content: center;
-  	    align-items: top;
- 	    padding: 20px;
-  	    max-width: 100%; /* make it responsive */
-  	    box-sizing: border-box;
- 	    background-color: white;
-	    border-radius: 10px;
-  	    margin: 10px; /* added px */
-  	    margin-top: 30px;
+
+        .text__container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: top;
+            padding: 20px;
+            max-width: 100%;
+            box-sizing: border-box;
+            background-color: white;
+            border-radius: 10px;
+            margin: 10px;
+            margin-top: 30px;
             font-family: 'Roboto', sans-serif;
             overflow-y: auto;
-            overflow-x: 100%;
+            overflow-x: hidden;
         }
-        
-#pdf-container {
-    width: 100%; 
-    overflow-y: auto; /* Enables vertical scrolling if necessary */
-    overflow-x: auto; /* Hides horizontal scrollbar */
-    margin: 0 auto; /* Centers the container */
-    height: auto; /* Makes height dynamic based on content */
-    max-height: 800px; /* Limits maximum height */
-}
 
-.file-view, #pdf-container {
-    display: none; /* Ensures all are hidden by default */
-}  
-        
-#zip {
-  text-align: center;
-}
-    
-.vertical-grid-container {
+        #pdf-container {
+            width: 100%;
+            overflow-y: auto;
+            overflow-x: auto;
+            margin: 0 auto;
+            height: auto;
+            max-height: 800px;
+        }
+
+        .file-view, #pdf-container {
+            display: none;
+        }
+
+        #zip {
+            text-align: center;
+        }
+
+        .vertical-grid-container {
             background-color: lightgray;
             padding: 10px;
             overflow-y: auto;
         }
 
-.link-box {
+        .link-box {
             background-color: #f2f2f2;
             padding: 10px;
             margin-bottom: 10px;
@@ -75,76 +73,497 @@
             border-radius: 5px;
         }
 
-</style>
-<button class="done-button" onclick="window.close()">Done</button>
+        /* Search section styles */
+        .search-section {
+            padding: 20px;
+            background: hsla(244, 16%, 92%, 0.6);
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 800px;
+        }
 
-<h1 style="font-family: 'Roboto', sans-serif; font-size: 45px; font-weight: bold; font-style: bold; color:black; text-align: center;">SUMMARY FOLDER FILES</h1>
-        <h2 style="font-family: 'Roboto', sans-serif; font-size: 30px; font-weight: bold; color:black; text-align: center;">DARNA.HI
-        </h2>
+        .search-form {
+            margin-bottom: 0;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            background: white;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: turquoise;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background: turquoise;
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .clear-button {
+            padding: 10px 15px;
+            background: #F28C28;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .search-info {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* File item with metadata styles */
+        .file-item-with-metadata {
+            background: #f2f2f2;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .file-header-clickable {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            cursor: pointer;
+            min-height: 50px;
+        }
+
+        .file-info-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            margin-right: 10px;
+        }
         
+        .file-info-row .link-box {
+            padding: 8px 12px;
+        }
+        
+        .file-info-row .link-box:hover {
+            background-color: #e0e0e0;
+        }
+
+        .metadata-toggle {
+            background: turquoise;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: background-color 0.2s;
+        }
+        
+        .metadata-toggle:hover {
+            background: #40E0D0;
+        }
+
+        .metadata-content {
+            padding: 15px;
+            background: #fff;
+            border-top: 1px solid #e0e0e0;
+            display: none;
+        }
+
+        .metadata-content.show {
+            display: block;
+        }
+
+        .metadata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .metadata-item {
+            background: #f8f9fa;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .metadata-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .metadata-value {
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .metadata-json {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 150px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .done-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #F28C28;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            z-index: 1000;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid turquoise;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="loader" class="loader"><div class="spinner"></div></div>
+<button class="done-button" onclick="window.close()" title="Close"><i class="fas fa-times"></i></button>
+
+<br>
+<h1 style="font-family: 'Roboto', sans-serif; font-size: 35px; font-weight: bold; color:black; text-align: center;">𓊈𒆜MY SUMMARY𒆜𓊉</h1>
+<h2 style="font-family: 'Roboto', sans-serif; font-size: 30px; font-weight: bold; color:black; text-align: center;">DARNA.HI</h2>
+
+<!-- Search section (only shows if database is available) -->
+{% if use_database %}
+<div class="search-section">
+    <form method="GET" action="/summary/" class="search-form">
+        <div class="search-container">
+            <input type="text" 
+                   name="search" 
+                   class="search-input" 
+                   placeholder="Search files by name or metadata..." 
+                   value="{{ search_term or '' }}">
+            <button type="submit" class="search-button">Search</button>
+            {% if search_term %}
+            <a href="/summary/" class="clear-button">Clear</a>
+            {% endif %}
+        </div>
+    </form>
+    {% if search_term %}
+    <div class="search-info">
+        Showing results for: <strong>"{{ search_term }}"</strong>
+        <span>({{ total_results }} file{{ 's' if total_results != 1 else '' }} found)</span>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
 <!-- Original form container -->
 <div class="form__container">
-    <form method="POST" action="/summary" enctype="multipart/form-data">
+    <form method="POST" action="/summary/" enctype="multipart/form-data">
         <div style="text-align: center; font-family: 'Roboto', sans-serif;">
             <select id="fileType" name="Type" class="login__user" onchange="showFile(); showDescription()">
-                
                 <option value="List">Summary Files</option>
                 <option value="intent">View Health Intent</option>
                 <option value="zip">Make Summary Zip</option>
-                <option value="pdf">Summary PDF</option>                               
+                <option value="pdf">Summary PDF</option>
                 <option value="wordcloud">View WordCloud</option>
                 <option value="deidentified">View Deidentified File</option>
-                
             </select>
         </div>
     </form>
 </div>
 
 <!-- Container for files and the submit button -->
-
 <div class="text__container">
-<!-- Container for PDF files -->
-<div id="pdf-container" style="width: 100%;">{% for pdf_file in pdf_files %}<iframe src="{{ url_for('display_file', filename=pdf_file) }}" style="width:100%; height:800px;" frameborder="0"></iframe>{% endfor %}</div>
-
-
-<div id="List" class="file-view" style="display:none;"><h3>PDFs</h3>
-    <div class="vertical-grid-container">
-        {% for file in pdf_files %}
-        <a href="{{ url_for('display_file', filename=file) }}" target="_blank" class="link-box">{{ file }}</a>
+    <!-- Container for PDF files -->
+    <div id="pdf-container" style="width: 100%;">
+        {% for pdf_file in pdf_files %}
+            <iframe src="{{ url_for('display_file', filename=pdf_file.filename) }}" style="width:100%; height:800px;" frameborder="0"></iframe>
         {% endfor %}
     </div>
 
-    <h3>XMLs</h3>
-    <h4>Styles file required to view</h4>
-    <div class="vertical-grid-container">
-        {% for file in xml_files %}
-        <a href="{{ url_for('display_file', filename=file) }}" target="_blank" class="link-box">{{ file }}</a>
-        {% endfor %}
-    </div>
+    <div id="List" class="file-view" style="display:none;">
+        {% if use_database and (search_term and total_results == 0) %}
+        <div class="no-results">
+            <h3>No files found</h3>
+            <p>No files match your search term "{{ search_term }}"</p>
+            <p>Try searching with different keywords or <a href="/summary">view all files</a></p>
+        </div>
+        {% else %}
+        
+        <!-- PDFs Section -->
+        <h3>PDFs</h3>
+        <div class="vertical-grid-container">
+            {% for file in pdf_files %}
+                {% if use_database %}
+                    {% set file_id = loop.index0 ~ '_pdf' %}
+                    <div class="file-item-with-metadata">
+                        <div class="file-header-clickable">
+                            <div class="file-info-row">
+                                <a href="{{ url_for('display_file', filename=file.filename) }}" 
+                                   target="_blank" 
+                                   class="link-box" 
+                                   onclick="event.stopPropagation();"
+                                   style="margin: 0; flex: 1;">
+                                    {{ file.filename }}
+                                    {% if file.file_size_formatted %}
+                                    <span style="color: #666; font-size: 0.9rem;">({{ file.file_size_formatted }})</span>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <button type="button" class="metadata-toggle" id="toggle-{{ file_id }}" onclick="toggleFileMetadata('{{ file_id }}'); event.stopPropagation();">
+                                View Info ▼
+                            </button>
+                        </div>
+                        <div class="metadata-content" id="metadata-{{ file_id }}">
+                            <div class="metadata-grid">
+                                {% if file.file_type %}
+                                <div class="metadata-item">
+                                    <div class="metadata-label">Type</div>
+                                    <div class="metadata-value">{{ file.file_type }}</div>
+                                </div>
+                                {% endif %}
+                                {% if file.upload_date_formatted %}
+                                <div class="metadata-item">
+                                    <div class="metadata-label">Upload Date</div>
+                                    <div class="metadata-value">{{ file.upload_date_formatted }}</div>
+                                </div>
+                                {% endif %}
+                                {% if file.file_size_formatted %}
+                                <div class="metadata-item">
+                                    <div class="metadata-label">Size</div>
+                                    <div class="metadata-value">{{ file.file_size_formatted }}</div>
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% if file.embedded_metadata_formatted and file.embedded_metadata_formatted != '{}' %}
+                            <div class="metadata-item">
+                                <div class="metadata-label">Embedded Metadata</div>
+                                <div class="metadata-json">{{ file.embedded_metadata_formatted }}</div>
+                            </div>
+                            {% endif %}
+                            {% if file.ai_metadata_formatted and file.ai_metadata_formatted != '{}' %}
+                            <div class="metadata-item">
+                                <div class="metadata-label">AI Metadata</div>
+                                <div class="metadata-json">{{ file.ai_metadata_formatted }}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{{ url_for('display_file', filename=file.filename) }}" target="_blank" class="link-box">{{ file.filename }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
 
-    <h3>DICOMs</h3>
-    <div class="vertical-grid-container">
-        {% for file in dicom_files %}
-        <a href="{{ url_for('display_file', filename=file) }}" target="_blank" class="link-box">{{ file }}</a>
-        {% endfor %}
-    </div>
+        <!-- XMLs Section -->
+        <h3>XMLs</h3>
+        <h4>Styles file required to view</h4>
+        <div class="vertical-grid-container">
+            {% for file in xml_files %}
+                {% if use_database %}
+                    {% set file_id = loop.index0 ~ '_xml' %}
+                    
+                    <div class="file-item-with-metadata">
+                        <div class="file-header-clickable">
+                            <div class="file-info-row">
+                                <a href="{{ url_for('display_file', filename=file.filename) }}" 
+                                   target="_blank" 
+                                   class="link-box" 
+                                   onclick="event.stopPropagation();"
+                                   style="margin: 0; flex: 1;">
+                                    {{ file.filename }}
+                                    {% if file.file_size_formatted %}
+                                    <span style="color: #666; font-size: 0.9rem;">({{ file.file_size_formatted }})</span>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <button type="button" class="metadata-toggle" id="toggle-{{ file_id }}" onclick="toggleFileMetadata('{{ file_id }}'); event.stopPropagation();">
+                                View Info ▼
+                            </button>
+                        </div>
+                        <div class="metadata-content" id="metadata-{{ file_id }}">
+                            <div class="metadata-grid">
+                                {% if file.file_type %}
+                                <div class="metadata-item">
+                                    <div class="metadata-label">Type</div>
+                                    <div class="metadata-value">{{ file.file_type }}</div>
+                                </div>
+                                {% endif %}
+                                {% if file.upload_date_formatted %}
+                                <div class="metadata-item">
+                                    <div class="metadata-label">Upload Date</div>
+                                    <div class="metadata-value">{{ file.upload_date_formatted }}</div>
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% if file.embedded_metadata_formatted %}
+                            <div class="metadata-item">
+                                <div class="metadata-label">Embedded Metadata</div>
+                                <div class="metadata-json">{{ file.embedded_metadata_formatted }}</div>
+                            </div>
+                            {% endif %}
+                            {% if file.ai_metadata_formatted %}
+                            <div class="metadata-item">
+                                <div class="metadata-label">AI Metadata</div>
+                                <div class="metadata-json">{{ file.ai_metadata_formatted }}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{{ url_for('display_file', filename=file.filename) }}" target="_blank" class="link-box">{{ file.filename }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- DICOMs Section -->
+        <h3>DICOMs</h3>
+        <div class="vertical-grid-container">
+            {% for file in dicom_files %}
+                {% if use_database %}
+                    {% set file_id = loop.index0 ~ '_dicom' %}
+                    <div class="file-item-with-metadata">
+                        <div class="file-header-clickable">
+                            <div class="file-info-row">
+                                <a href="{{ url_for('display_file', filename=file.filename) }}" 
+                                   target="_blank" 
+                                   class="link-box" 
+                                   onclick="event.stopPropagation();"
+                                   style="margin: 0; flex: 1;">
+                                    {{ file.filename }}
+                                    {% if file.file_size_formatted %}
+                                    <span style="color: #666; font-size: 0.9rem;">({{ file.file_size_formatted }})</span>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <button type="button" class="metadata-toggle" id="toggle-{{ file_id }}" onclick="toggleFileMetadata('{{ file_id }}'); event.stopPropagation();">
+                                View Info ▼
+                            </button>
+                        </div>
+                        <div class="metadata-content" id="metadata-{{ file_id }}">
+                            <div class="metadata-grid">
+                                {% if file.file_type %}
+                                <div class="metadata-item">
+                                    <div class="metadata-label">Type</div>
+                                    <div class="metadata-value">{{ file.file_type }}</div>
+                                </div>
+                                {% endif %}
+                                {% if file.upload_date_formatted %}
+                                <div class="metadata-item">
+                                    <div class="metadata-label">Upload Date</div>
+                                    <div class="metadata-value">{{ file.upload_date_formatted }}</div>
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% if file.embedded_metadata_formatted %}
+                            <div class="metadata-item">
+                                <div class="metadata-label">Embedded Metadata</div>
+                                <div class="metadata-json">{{ file.embedded_metadata_formatted }}</div>
+                            </div>
+                            {% endif %}
+                            {% if file.ai_metadata_formatted %}
+                            <div class="metadata-item">
+                                <div class="metadata-label">AI Metadata</div>
+                                <div class="metadata-json">{{ file.ai_metadata_formatted }}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{{ url_for('display_file', filename=file.filename) }}" target="_blank" class="link-box">{{ file.filename }}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+        
+        {% endif %}
     </div>
     
-<div id="intent" class="file-view" style="display:none;"><embed src="/ocr_files/Darna_tesseract/USPTF_Intent.txt" type="text/plain" style="width:100%; height:800px;"></div>
+    <div id="intent" class="file-view" style="display:none;">
+        <embed src="/ocr_files/Darna_tesseract/USPTF_Intent.txt" type="text/plain" style="width:100%; height:800px;">
+    </div>
 
-<div id="wordcloud" class="file-view" style="display:none;"><embed src="/ocr_files/Darna_tesseract/darnahi_ocr.png" style="width:100%; height:800px"></div>
+    <div id="wordcloud" class="file-view" style="display:none;">
+        <embed src="/ocr_files/Darna_tesseract/darnahi_ocr.png" style="width:100%; height:800px">
+    </div>
 
-<div id="deidentified" class="file-view" style="display:none;"><embed src="/ocr_files/Darna_tesseract/deidentified_records.txt" type="text/plain" style="width:100%; height:800px;"></div>
+    <div id="deidentified" class="file-view" style="display:none;">
+        <embed src="/ocr_files/Darna_tesseract/deidentified_records.txt" type="text/plain" style="width:100%; height:800px;">
+    </div>
     
-<!-- New form embedded within text__container -->
-<div id="zip" style="display:none;"><form method="POST" action="/zip_summary" enctype="multipart/form-data"><p id="description" class="description"></p><button id="submitButton" type="submit" class="login__button"><i></i> ZIP IT</button></form></div>
-
+    <!-- New form embedded within text__container -->
+    <div id="zip" class="file-view" style="display:none;">
+        <form method="POST" action="/zip_summary" enctype="multipart/form-data">
+            <p id="description" class="description"></p>
+            <button id="submitButton" type="submit" class="login__button">
+                <i></i> ZIP IT
+            </button>
+        </form>
+    </div>
 </div>
 
 <script>
-
-   
-        
     function showFile() {
         // Hide all divs including the PDF container
         document.querySelectorAll('.file-view, #pdf-container').forEach((div) => {
@@ -153,37 +572,124 @@
 
         // Show the selected div
         const selectedType = document.getElementById('fileType').value;
+        
+        // Handle each case
         if (selectedType === 'pdf') {
-            // Show PDF container for 'pdf' selection
             document.getElementById('pdf-container').style.display = 'block';
+        } else if (selectedType === 'List') {
+            // Show the List div for Summary Files
+            const listDiv = document.getElementById('List');
+            if (listDiv) {
+                listDiv.style.display = 'block';
+            }
         } else if (document.getElementById(selectedType)) {
-            // Show other selected div based on 'intent' or 'deidentified' or 'zip'
+            // Show other selected div
             document.getElementById(selectedType).style.display = 'block';
         }
     }
 
     function showDescription() {
-    const selectedType = document.getElementById('fileType').value;
-    const descriptionElement = document.getElementById('description');
-    const zipDiv = document.getElementById('zip');  // Get the wrapper div
+        const selectedType = document.getElementById('fileType').value;
+        const descriptionElement = document.getElementById('description');
 
-    if (selectedType === 'zip') {
-        descriptionElement.textContent = 'Prepares an encrypted zip file for share with password (2023). The contents of the "summary" folder are zipped.To change password, edit darna.py';
-        zipDiv.style.display = 'block';  // Show the wrapper div
-    } else {
-        descriptionElement.textContent = '';
-        zipDiv.style.display = 'none';  // Hide the wrapper div
+        if (selectedType === 'zip' && descriptionElement) {
+            descriptionElement.textContent = 'Prepares an encrypted zip file for share with password (2023). The contents of the "summary" folder are zipped. To change password, edit darna.py';
+        } else if (descriptionElement) {
+            descriptionElement.textContent = '';
+        }
     }
-}
-   
-window.onload = function() {
-    showFile(); // This will hide or show elements based on the initial selection
-    showDescription();
-};
+    
+    // Toggle metadata for files - fixed to use the pre-escaped ID
+    function toggleFileMetadata(fileId) {
+        const metadata = document.getElementById('metadata-' + fileId);
+        const toggle = document.getElementById('toggle-' + fileId);
+        
+        console.log('Toggling:', fileId, metadata, toggle); // Debug log
+        
+        if (metadata && toggle) {
+            if (metadata.classList.contains('show')) {
+                metadata.classList.remove('show');
+                toggle.innerHTML = 'View Info ▼';
+            } else {
+                metadata.classList.add('show');
+                toggle.innerHTML = 'Hide Info ▲';
+            }
+        } else {
+            console.error('Could not find elements for:', fileId);
+        }
+    }
 
+    // Initialize page with smooth loading animations
+    function initializePage() {
+        // Add loaded class for CSS animations
+        document.body.classList.add('loaded');
+        
+        // Hide loader if it exists
+        const loader = document.getElementById('loader');
+        if (loader) {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                // Remove loader from DOM after animation
+                setTimeout(() => loader.remove(), 300);
+            }, 300);
+        }
+        
+        // Initialize file display - this will show "List" by default (first option)
+        showFile();
+        showDescription();
+    }
+    
+    // Check if DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializePage);
+    } else {
+        // DOM is already ready
+        initializePage();
+    }
+    
+    // Fallback for window load event
+    window.addEventListener('load', function() {
+        // Ensure body has loaded class
+        if (!document.body.classList.contains('loaded')) {
+            document.body.classList.add('loaded');
+        }
+        
+        // Ensure initial state is set
+        showFile();
+        showDescription();
+    });
+    
+    // Add smooth transitions when changing selections
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileTypeSelect = document.getElementById('fileType');
+        if (fileTypeSelect) {
+            fileTypeSelect.addEventListener('change', function() {
+                // Add fade effect when switching content
+                const visibleElements = document.querySelectorAll('.file-view:not([style*="display: none"]), #pdf-container:not([style*="display: none"])');
+                
+                visibleElements.forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transition = 'opacity 0.3s ease-out';
+                });
+                
+                setTimeout(() => {
+                    showFile();
+                    showDescription();
+                    
+                    // Fade in new content
+                    const newVisibleElements = document.querySelectorAll('.file-view:not([style*="display: none"]), #pdf-container:not([style*="display: none"])');
+                    newVisibleElements.forEach(el => {
+                        el.style.opacity = '0';
+                        setTimeout(() => {
+                            el.style.opacity = '1';
+                            el.style.transition = 'opacity 0.3s ease-in';
+                        }, 50);
+                    });
+                }, 300);
+            });
+        }
+    });
 </script>
-
 
 </body>
 </html>
-

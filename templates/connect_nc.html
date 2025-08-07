@@ -9,171 +9,139 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
  
- <style>
- body{
- background-color: #DCDCDC;
- } 
- </style>
    
 </head>
 
 <body>
-<button class="done-button" onclick="window.close()">Done</button>
+<div id="loader" class="loader"> <div class="spinner"></div></div>
+<button class="done-button" onclick="window.close()" title="Close"><i class="fas fa-times"></i></button>
 
 
 	
-<h1 style="font-family: 'Roboto', sans-serif; font-size: 35px; font-weight: bold; color: black; font-style: bold; text-align: center; margin-top: 20px;"> PASSWORD CHANGE, QR & OTHER TIPS</h1>
+<h1 style="font-family: 'Roboto', sans-serif; font-size: 35px; font-weight: bold; color: black; font-style: bold; text-align: center; margin-top: 20px;">꧁𓊈SETTINGS𓊉꧂</h1>
     <h2 style="font-family: 'Roboto', sans-serif; font-size: 25px; font-weight: bold; color: black; font-style: bold; text-align: center;">DARNA.HI</h2>
     
 
- 
 
-
-
-<!--First Container --> 
- <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; margin-top: 40px;">
- <span> Own your Health future! Few things Darna.Health Intelligence can do for you.</span>
- <br><br>
-  <img src="{{ url_for('static', filename='darnav2_mktg.png') }}" width="340" height="600" alt="MKTG"> 
-</div>
-
-
-
-
-
-</div>
-
-<div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px; color:black; padding: 5px; margin-left: 20px;">
- 
- <p>
- 1. <a <li><a href="/register" target="_blank" class="Password change"><img alt="CHANGE PASSWORD"></a></li></a></p>
- <p>
- 2. <a href="#qrcode">Connect other devices using QR Code.</a> </p>
-
- <p>
- 3.  <a href="#upload"> What are the tags in 'Upload' and what are the directories for?</a> </p>
-
- <p>
- 4.  <a href="#rsync"> What does RUN AI in Darnabot do?.</a> </p>
- <p>
- 5. <a href="#hi">How to generate personalized Health Intents and wordclouds for yourself?</a> 
- </p> 
- <p>
- 6. <a href="#deid">How to deidentify your Health data and why?</a> 
- </p> 
-  <p>
- 7. <a href="#pi"> What is Sky Store?</a></p>
-  <p>
- 8. <a href="mailto:pmqa1980@gmail.com"> Email feedback to Darna creator </a></p>
 
  
+<div class="accordion-container">
 
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>Change Password ⚙️</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Need to update your password? Click below to access the password change page.</p>
+                <a href="/register" target="_blank" class="action-button">Change Password</a>
+            </div>
+        </div>
 
-</div>
-   <!-- Second Container -->
-  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 40px; padding: 5px; margin-left: 20px;">
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>Connect Other Devices Using QR Code ⚙️</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
     <img src="{{ url_for('static', filename='qrcode.png') }}" width="150" height="150" alt="QR Code">
-    <br><br>
-    <span>Scan QR Code to Connect other Devices</span>
-    <span>Please Scan QR Code above with your device camera to connect other devices to Darnahi Server on local network.</span>
-  </div>
 
-<div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px; padding: 5px; margin-left: 20px;">
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold; text-align: center;">Connect other devices using QR Code </h3>
-<p id="qrcode">
- </p> <p>
-This guide allows you to connect other devices to your Darna Server. It does require you to have camera enabled to scan QR codes:
- </p> <p>
- 1.  Open "camera app" on your iOS or Android. When pointed to QR code at top of screen it should give you a link to click on. Click on link.
- </p> <p>
- 2.  On the bottom ribbon of browser window on your iOS device, click on '⮹'. Then choose 'Add to home screen'. 
-  </p> <p>
+    <span><p>
+        This guide allows you to connect other devices to your Darna Server. It does require you to have camera enabled to scan QR codes:
+    </p> <p>
+    1.  Open "camera app" on your iOS or Android. When pointed to QR code at top of screen it should give you a link to click on. Click on link.
+    </p> <p>
+    2.  On the bottom ribbon of browser window on your iOS device, click on '⮹'. Then choose 'Add to home screen'. 
+    </p> <p>
  3.  This link will now allow you to launch the server directly from your home screen when connected to local WIFI where the server is enabled as a WebApp.
-  </p> <p>
+    </p> <p>
  4.  To change the QR code, go to Health_server/variables/variable.py. Edit the IP address.
-  </p> <p>
-  
-</div>
+    </p> </span>
+            </div>              
+    </div>
 
-<div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px; padding: 5px; margin-left: 20px;">
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">What are the tags in 'Upload' and what are the directories for?</h3>
-<p id="upload">
- </p> <p>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>'Upload' button, tags and directories? 🛈</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>
 Upload button allows you to upload files from any other device or phone to upload files to the Darna.HI server. With drop down menu you could either tag it as a 'Health File' or a 'Regular File'.
  </p> <p>
  1. Health File: Any health document you would like to save for obvious reasons. Tagging it allows it to be catalogued to the right subdirectory. The Health subdirectories are 'summary' and 'ocr_files'. So that when analyzed, included in RAG Daarnabot or zipped it is part of the packet. 
  </p> <p>
  2.  Regular Files: Are any non health file that you would like to store on your health server but isnt a HealthFile. It gets stored in the main folder but untagged. This allows you to store other files of your choice.
   </p> <p>
-                 In future 'Export.zip' file containing your iOS health kit is available in 'Upload' directory and tagged a 'Regular File', it will unzip that file, initate Grafana and Influxdb, populate influxdb with your records.
-  </p>
-  <p>
- 3. The 'summary' folder is where you 'Health' tagged files are stored. When you want to make a secure zip file to share, all the files in 'summary' get zipped. The default password is '2023'. You could change it in the darna.py code if you wish. It is hardcoded for obvious reasons.
-  </p>
-  <p>
- 4. The 'ocr_files' folder is where your 'Health' tagged files of pdf, jpg, png and even json ext are stored. When Darnabot Analyze is run it OCR's the files and stores it as a deidentified text dump in Darna_tesseract subdirectory. It is used to generate RAG for Darnabot, Wordclouds.
-  </p>
-   <p>
- 5. The 'Darna_tesseract' folder is where your 'Analyze' card stores relevant files. Files such as deidentified records, Personalized Health intents, wordclouds, NLP generated jsons are stored.
-  </p>
- 6. You could explore the ocr_files and Darna_Tesseract files from Darnabot, via 'RUN AI' tab and click on dropdown 'EXPLORE AI FILES'.
-  </p>
-  </div>
-  
-  <div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px; padding: 5px; margin-left: 20px;">
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">What does 'RUN AI' in Darnabot do?.</h3>
-<p id="rsync">
- </p> <p>
- 'RUN AI' has many functions mashed into one. Once you enter your age, sex (imported from Chartit), and words to de-identify separated by "|" It generates a list of recommended medical screening information for your age based on USPSTF guidelines.
- </p> <p>
- It uses OCR to extract data from your uploaded files It runs simple NLP to get medical data organized by headings. It then vectorizes and chunks up the data It creates a word cloud of your recent uploaded data
- </p> <p>
-It creates a vectorized database for the local LLM This allows the LLM to access your data and provide personalized answers to your medical questions.
-
-</p> <p>
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">How about the 'Chart it' Card? </h3>
-</p> <p>
-</p> <p>
-It allows you to enter your past medical history and update your list of medications in a standard FHIR R4 format. This information gets stored in the 'summary' folder. When you share an encrypted zip file with your healthcare provider, they can access your basic demographics, allergies, past medical history and current medication list in a format compatible with electronic medical records (EMRs). Additionally, it creates a database from your entered information that the vectorizer can use when you ask health-related questions to the local language model.
-</p> <p>
-So in summary, it lets you securely share your medical details with providers while also building a personalized database to enable the AI to provide tailored health information based on your specific medical history.
+ 3. The 'summary' folder is where you 'Health' tagged files are stored. When you want to make a secure zip file to share, all the files in 'summary' get zipped. The default password is **'2023'**. You could change it in the darna.py code if you wish. It is hardcoded for obvious reasons.
   </p> <p>
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">What is symptom Logger in Darnabot? </h3>
-</p> <p>
-</p> <p>
-It allows you to log your symptoms that are stored in the database and also creates a PDF to be stored in the 'Summary' folder and 'Ocr files'. The PDF files can then be used to generate RAG database for Darnabot and be shared with your medical provider if needed. There is also a 'Generate' option that leverages local AI to write the note for you.
-</p> <p>
-So in summary, it lets you securely share your medical details with providers while also building a personalized database to enable the AI to provide tailored health information based on your specific medical history.
+ 4. The 'ocr_files' folder is where your 'Health' tagged files of pdf, jpg, png and even json ext are stored. When Darnabot Analyze is run it OCR's the files and stores it as a deidentified text dump in Darna_tesseract subdirectory. It is used to generate retrieval augmented generation (RAG) for Darnabot (for personalized responses) and Wordclouds.
+  </p> <p>
+ 5. The 'Darna_tesseract' folder is where your 'Analyze' run stores relevant files. Files such as deidentified records, Personalized Health intents, wordclouds, NLP generated jsons are stored.
+  </p> <p>
+ 6. You could explore the AI generated files in 'ocr_files' and 'Darna_Tesseract' files from Darnabot, via 'RUN AI' tab and then click on dropdown 'EXPLORE AI FILES'.
   </p>
-  </div>
+            </div>
+        </div>
 
-<div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px; padding: 5px; margin-left: 20px;">
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">How to generate personalized Health Intents for yourself? </h3>
-<p id="hi">
- </p> 
- <!-- fourth Container --> 
- <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 40px;">
- <span> As outlined above, Darna.HI has an analytic engine that can generate personalized Health Intents for you depending on your age and sex. Please note however Darna.HI is beta and might contain errors. Please go to USPTF for comprehensive information (Link Included). The intents are guidelines based.To access, go to Darnabot>>RUN AI Tab>> Fetch Age/Sex/>> Enter information to deidentify>> Deidentify and Analyze</span> <br><br>
-  <img src="{{ url_for('static', filename='darna_information.png') }}" width="340" height="600" alt="health intent"> 
-</div>
-  
-</div>
-
-<div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px; padding: 5px; ">
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">How to deidentify your Health data and why? </h3>
-<p id="deid">
- </p> <!-- fifth Container --> 
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 40px; padding: 5px; margin-left: 20px; padding: 5px; margin-left: 20px;">
-
-<span> Darna.HI has an analytic engine that can deidentify your health data so that you can engage with LLM's. Please note however Darna.HI is beta. Please review file thoroughly before sharing. To access, go to Darnabot>>RUN AI Tab>> Fetch Age/Sex/>> Enter information to deidentify>> Deidentify and Analyze. </span> <br><br>
-  <img src="{{ url_for('static', filename='deidentify.png') }}" width="340" height="600" alt="deidentify"> 
-</div>
-  
- </div>
- <div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px; padding: 5px; margin-left: 20px;">
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">What are the Optional Modules for? </h3>
-<p id="pi">
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>Understand RUN AI in Darnabot? 🛈</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>RUN AI is our advanced artificial intelligence feature that helps process and analyze your health data automatically, providing personalized insights and recommendations for you.
+</p><p>
+'RUN AI' has many cleansing, analysis functions mashed into one. User needs to add words to de-identify separated by "|" if additional words needs to be removed. 
+  </p> <p>
+Once run, it retrieves age, sex (from Chartit card), extracts, cleanses and generates a list of personalized medical information for your age based on USPSTF guidelines.
  </p> <p>
+ It uses OCR to extract data from your uploaded files. It then runs simple NLP to get medical data organized by headings. It then vectorizes and chunks up the data to create a RAG database. 
+  </p> <p>
+It then creates a word cloud of your recent uploaded data.
+ </p> <p>
+The created vectorized database allows the local LLM to access your data and provide personalized answers to your questions.
+</p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>Generate Wordclouds and Health Insights 🛈</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Create beautiful visual representations of your health data with our wordcloud generator and personalized insights for your health. It's perfect for identifying key themes and insights in your content.</p>
+                <span> As outlined above, Darna.HI has an analytic engine that can generate personalized Health Intents for you depending on your age and sex. Please note however Darna.HI is beta and might contain errors. Please go to USPTF for comprehensive information (Link Included). The intents are guidelines based.To access, go to Darnabot>>RUN AI Tab>> Fetch Age/Sex/>> Enter information to deidentify>> Deidentify and Analyze</span>
+                <p>
+Once run, it retrieves age, sex (from Chartit card), extracts, cleanses and generates a list of personalized medical information for your age based on USPSTF guidelines.
+ </p> <p>
+It then creates a word cloud of your recent uploaded data.
+ </p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>Why Deidentify Data? 🛈</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Protect sensitive information by using our deidentification tools. Remove personal identifiers while maintaining data utility for analysis.</p>
+                <span> Darnahi has an analytic engine that can deidentify your health data so that you can engage with LLM's. Please note however Darnahi is beta and make errors. Please review generated file thoroughly before sharing. To access, go to Darnabot>>RUN AI Tab>> Fetch Age/Sex/>> Enter information to deidentify>> Deidentify and Analyze. </span>
+                <img src="{{ url_for('static', filename='deidentify.png') }}" width="340" height="600" alt="deidentify"> 
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>Understand Optional Modules 🛈</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Collection of useful Docker applications to take control of your health</p>
+                <p>
 The optional card installer allows you to install modules you would like. It is Docker based. It's a one click docker container installer that launches a static site to interact with the docker container.
  </p> <p>
  1.  Click Install to begin installing the Card.
@@ -190,53 +158,170 @@ The optional card installer allows you to install modules you would like. It is 
   </p><p>
  6. Immunization Module/ Passport: This module offers a comprehensive solution for recording and storing your Immunization history and associated scans all in one place. Beyond simple tracking, it employs data visualization through interactive graphs, allowing for more informed insights into your wellbeing. Moreover, Darnabot helps with Travel related health suggestions. Module also provides helpful links, hints and tips tailored to enhance your overall travel health  and well being in general.
   </p><p>
-7.  We hope to add more cards in future to the Sky Store.
+ 7. Anxiety-OCD Module: This module offers a primer to understand Anxiety and some techniques to help deal with it. Moreover, Darnabot helps with quick information and outline of technique. Module also provides helpful links, hints and tips tailored to enhance your overall mental health and well being in general.
+  </p><p>
+ 8. Strep-Throat Module: This module offers a primer to understand Strep throat better. It is a very common cause of tics, heart disease, kidney disease, skin disease and mental health issues worldwide. Moreover, Darnabot helps with quick information and outline of quick scoring and information when suspected. Module also provides helpful links, hints and tips tailored to enhance your overall well being in general.
   </p>
-  
-</div>
-
- <div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px; padding: 5px; margin-left: 20px;">
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">Why we support Monero or BTC? </h3>
-<p id="pi">
- </p> <p>
- We support Monero!
- </p> <p> 
-In the realm of financial privacy, the use of cryptocurrencies like Monero or Bitcoin can play a role in enhancing users' security. Especially Monero is a privacy-focused cryptocurrency that provides anonymity and obfuscation of transaction details. This can be particularly relevant in healthcare contexts.
-
-  </p> <p>
-  
-
-You could choose to support by donating to the maker of Darna.HI.
+We hope to add more cards in future. Suggestions welcome.
   </p>
-  
-</div>
-
- <div style="display: flex; flex-direction: column; justify-content: left; margin-top: 40px; padding: 5px; margin-left: 20px;">
-<h3 style="font-family: 'Roboto', sans-serif; font-size: 20px; font-weight: bold; color: black; font-style: bold;text-align: center;">Kill Switch </h3>
-<p id="pi">
- </p> <p>
-Kill Switch shuts down the Server on your home computer. It also shuts down the Darnabot running on port :3012.
- </p> <p>
-Please note it can only be restarted when you are near your home computer.
- </p> <p>
-It might not shut down the running docker containers.
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>Understand Symptom-Logger © in Darnabot 🛈</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Your personal ambient AI and heatlh note taker/ generator 🤖</p>
+                <p>
+It allows you to log your symptoms that are stored in the database and also creates a PDF to be stored in the 'summary' folder and 'ocr files'. The PDF files can then be used to generate RAG database for Darnabot and be shared with your medical provider if needed. There is also a 'Generate' option that leverages local AI to write the note for you.
+</p> <p>
+So in summary, it lets you securely share your medical details with providers while also building a personalized database to enable the AI to provide tailored health information based on your specific medical history.
+  </p>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span>About the 'Chart it' Card. 🛈</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Your FHIR health form.</p>
+                <p>
+It allows you to enter your past medical history and update your list of medications in a standard FHIR R4 format. This information gets stored in the 'summary' folder. When you share an encrypted zip file with your healthcare provider, they can access your basic demographics, allergies, past medical history and current medication list in a format compatible with electronic medical records (EMRs). Additionally, it creates a database from your entered information that the vectorizer can use when you ask health-related questions to the local language model.
+</p> <p>
+It also connects directly with <strong>locally</strong> running 'RUN AI' and Darnabot.
+</p> <p>
+So in summary, it lets you securely share your medical details with providers while also building a personalized database to enable the AI to provide tailored health information based on your specific medical history.
   </p> 
-  
+            </div>
+        </div>
+        
+      <div class="accordion-item">
+            <div class="accordion-header">
+                <span>Understand personalized Health Intents for your 🛈</span>
+                <span class="accordion-icon">▼</span>
+            </div>
+        <div class="accordion-content">
+                <p>AI generated personalized health information for you through 'RUN AI'.</p>
+                <span>Darnahi has an analytic engine that can generate personalized Health Intents for you depending on your age and sex. Please note however Darna.HI is beta and might contain errors. Please go to USPTF for comprehensive information (Link Included). The intents are guidelines based.To access, go to Darnabot>>RUN AI Tab>> Fetch Age/Sex/>> Enter information to deidentify>> Deidentify and Analyze</span>
+              <img src="{{ url_for('static', filename='darna_information.png') }}" width="340" height="600" alt="health intent"> 
+        </div>
+      </div>
+        
+
+    <div class="accordion-item">
+    <div class="accordion-header">
+        <span>Shut Down Server Remotely ⚙️</span>
+        <span class="accordion-icon">▼</span>
+    </div>
+    <div class="accordion-content">
+        <p>Kill Switch shuts down the Server on your home computer. It also shuts down the Darnabot running on port :3012.</p> 
+        <p>Please note it can only be restarted when you are near your home computer.</p> 
+        <p>It might not shut down the running docker containers.</p> 
+        <div style="display: flex; justify-content: center; height: 5vh;">
+            <a href="/shutdown">
+                <button type="button" class="choice_button" style="background-image: radial-gradient(circle, #FF2400, #FF4433);">
+                    <div class="button_content">
+                        <i class="fas fa-power-off"></i>
+                        <span></span>
+                    </div>
+                </button>
+            </a> <!-- This closing tag was missing! -->
+        </div>
+    </div>
 </div>
 
-<!-- Central Red Button with the stop icon -->
-<div style="display: flex; justify-content: center; height: 5vh;">
-    <a href="/shutdown">
-        <button type="button" class="choice_button" style="background-image: radial-gradient(circle, #FF2400, #FF4433);">
-            <div class="button_content"><i class="fas fa-power-off"></i><span></span></div>
-        </button>
-    </a>
+    
+    
+        
+        <div class="accordion-item">
+    <div class="accordion-header">
+        <span>About Darnahi 🛈</span>
+        <span class="accordion-icon">▼</span>
+    </div>
+    <div class="accordion-content">
+        <span>Own your Health future! Few things Darna.Health Intelligence can do for you.</span>
+        <br><br>
+        <img src="{{ url_for('static', filename='darnav2_mktg.png') }}" width="340" height="600" alt="MKTG"> 
+    </div>
+</div>
+
+    <div class="accordion-item">
+    <div class="accordion-header">
+        <span>Why we support Monero or BTC? 🔋⚡</span>
+        <span class="accordion-icon">▼</span>
+    </div>
+    <div class="accordion-content">
+        <span>Own your Health future! We support Monero and BTC.</span>
+        <br><br>
+        <p>We support Monero!</p> <p> 
+In the realm of financial privacy, the use of cryptocurrencies like Monero or Bitcoin can play a role in enhancing users' security. Especially Monero is a privacy-focused cryptocurrency that provides anonymity and obfuscation of transaction details. This can be particularly relevant in healthcare contexts.</p> <p>
+You could choose to support by donating to the maker of Darnahi. If you wish to 'Contact Support'.
+</p>
+    </div>
+</div>
+     
+    
+        <div class="accordion-item">
+    <div class="accordion-header">
+        <span>Contact Support ⚙️</span>
+        <span class="accordion-icon">▼</span>
+    </div>
+    <div class="accordion-content">
+        <p>Have feedback or need assistance? We'd love to hear from you! Send us your thoughts and suggestions.</p>
+        <a href="mailto:pmqa1980@gmail.com" class="action-button">Email Darna Creator</a>
+    </div>
+</div>
+
 </div>
 
 
 
-</div>
 
+<script>
+    // Initialize page with animations from styles.css
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        
+        // Hide loader if it exists
+        const loader = document.getElementById('loader');
+        if (loader) {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 300);
+        }
+    });
+    // Get all accordion headers
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        // Add click event listener to each header
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                // Get the content element
+                const content = header.nextElementSibling;
+                
+                // Toggle active class on header and content
+                header.classList.toggle('active');
+                content.classList.toggle('active');
+                
+                // Optional: Close other accordions when one is opened
+                // Uncomment the following code if you want only one accordion open at a time
+                /*
+                accordionHeaders.forEach(otherHeader => {
+                    if (otherHeader !== header) {
+                        otherHeader.classList.remove('active');
+                        otherHeader.nextElementSibling.classList.remove('active');
+                    }
+                });
+                */
+            });
+        });
+</script>
+
+<br><br>
 </body>
 </html>
 

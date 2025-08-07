@@ -3,7 +3,7 @@
 <head>
     <title>Login</title>
     
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width">
 <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -15,7 +15,7 @@
             margin: 0;
             padding: 0;
             background-position: top;
-            background: linear-gradient(to bottom, #9FE2BF, #000000);
+            background: linear-gradient(to bottom, #3b138a, #000000);
             background-repeat: no-repeat;
             background-size: cover;
             font-family: 'Poppins', sans-serif;
@@ -31,7 +31,7 @@
             background-position: top;
             background-image: url("{{ url_for('static', filename='blue_door.png') }}"); /* Replace "blue_door2.png" with your desktop background image path */
             background-repeat: no-repeat;
-            background: linear-gradient(to bottom, #9FE2BF, #000000);
+            background: linear-gradient(to bottom, #3b138a, #000000);
             background-size: cover;
             font-family: 'Poppins', sans-serif;
             min-height: 100vh;
@@ -47,6 +47,11 @@
     	    90% { transform: translateY(-2px); }
     	    100% { transform: translateY(1px); }
         }
+      
+      @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+}
         
       #base {
         position: absolute; 
@@ -56,7 +61,39 @@
         font-size: 20px;  
         color: #848884;  
   }
+    /* Body loaded state */
+    body.loaded {
+    opacity: 1;
+    }
 
+    /* Loading spinner styles */
+    .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 63, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.3s ease-out;
+    }
+
+    .loader.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid #000000;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
 	.form_container {
             display: flex;
             flex-direction: column;
@@ -65,11 +102,11 @@
             width: 100vw; /* 100% of viewport width */
             max-width: 230px; /* Set maximum width as desired */
             height: 320px;
-            background-color: hsla(244, 16%, 92%, 0.6);
-            border: 2px solid hsla(244, 16%, 92%, 0.75);
+            background-color: hsla(244, 16%, 92%, 0.2);
+            border: 2px solid hsla(244, 16%, 92%, 0.1);
             margin-inline: 1.5rem;
-  	    row-gap: 0.1rem;
-  	    backdrop-filter: blur(5px);
+  	        row-gap: 0.1rem;
+  	        backdrop-filter: blur(5px);
             padding: 2rem;
             border-radius: 0.5rem;
             margin: 0 auto;
@@ -77,8 +114,8 @@
             animation: jiggle 1s ease-in-out;
         }
         h3 {
-            margin-top: 1rem;
-            margin-bottom: 1rem; 
+            margin-top: 0.8rem;
+            margin-bottom: 0.8rem; 
 }
 
         h2 {
@@ -91,24 +128,42 @@
             border-radius: 6px;
             border: 2px solid var(--text-color);
             background-color: hsla(244, 16%, 92%, 0.6);
-            text-align: center;
             color: var(--title-color);
             font-size: var(--smaller-font-size);
-            font: "Poppins";
+            font-family: "Poppins", sans-serif;
+            text-align: center;
             font-weight: var(--font-medium);
             transition: border 0.4s;
             margin: 0 auto;
-            margin-bottom: 20px; /* Add margin below the element */
+            margin-bottom: 20px;
+            
+            /* Critical fixes for iOS/iPhone */
+            -webkit-appearance: none; /* Remove iOS default styling */
+            -moz-appearance: none;
+            appearance: none;
+    
+            /* Fix text centering on mobile */
+            text-align: center;
+            text-align-last: center; /* Centers the selected option */
+            text-indent: 0px;
+    
+            /* Add custom arrow*/
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 20px;
+            padding-right: 20px; /* Make room for arrow */
         }
 
         .login__input {
-  	    width: 80%;
+  	        width: 80%;
             padding: 12px 12px;
             border-radius: 6px;
             border: 2px solid var(--text-color);
-            background-color: hsla(244, 16%, 92%, 0.6);
+            background-color: hsla(244, 16%, 92%, 0.2);
             color: var(--title-color);
-            font: "Poppins";
+            font-family: "Poppins", sans-serif;
+            text-align: center;
             font-size: var(--smaller-font-size);
             font-weight: var(--font-medium);
             transition: border 0.4s;
@@ -140,13 +195,17 @@
         }
     </style>
 </head>
-<body>
+<body onload="hideAddressBar()">
+    <div id="loader" class="loader">
+    <div class="spinner"></div>
+    </div>
+    
 <div class="form_container">
-    <h2 style="font-family: Poppins, sans-serif; font-size: 40px; font-weight: regular; color: black; text-align: center;">DARNA .HI</h1>
+    <h2 style="font-family: Poppins, sans-serif; font-size: 40px; font-weight: regular; color: #73f5ec; text-align: center;">DARNA .HI</h1>
     
 
 
-    <h2 style="font-family: Poppins, sans-serif; font-size: 20px; font-weight: regular; color: #36454F;text-align: center;">LOGIN TO CONTINUE</h2>
+    <h2 style="font-family: Poppins, sans-serif; font-size: 20px; font-weight: regular; color: #6e7c80; text-align: center;">LOGIN</h2>
     
     {% if error_message %}
     <p>{{ error_message }}</p>
@@ -188,6 +247,14 @@
       index++;
       setTimeout(type, 30);  // Adjust time for faster or slower typing
     }
+  // Hide loader if present
+  const loader = document.getElementById('loader');
+     if (loader) {
+         setTimeout(() => {
+             loader.classList.add('hidden');
+             setTimeout(() => loader.remove(), 300);
+         }, 300);
+     }
   }
 
   type();

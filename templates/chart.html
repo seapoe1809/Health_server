@@ -5,25 +5,84 @@
     <title>FHIR Questionnaire Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://lhcfhirtools-static.nlm.nih.gov/lforms-versions/34.0.0/webcomponent/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Other head elements -->
 </head>
 <style>
 .done-button {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      background-color: #F28C28;
-      color: black;
-      padding: 10px;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    </style>
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: #F28C28;
+    color: #fff;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.done-button:hover {
+    background-color: #E67E22;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.done-button i {
+    font-size: 20px;
+    color: black;
+}
+
+/* Body loaded state */
+body.loaded {
+    opacity: 1;
+}
+
+/* Loading spinner styles */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 63, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease-out;
+}
+
+.loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #9FE2BF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
 
 <body>
-<button class="done-button" onclick="window.close()">Done</button>
+<div id="loader" class="loader"> <div class="spinner"></div></div>
+<button class="done-button" onclick="window.close()" title="Close"><i class="fas fa-times"></i></button>
 
+<br><br>
 <div id="formContainer"></div>
 
 <script src="https://lhcfhirtools-static.nlm.nih.gov/lforms-versions/34.0.0/webcomponent/assets/lib/zone.min.js"></script>
@@ -32,6 +91,20 @@
 
 
 <script>
+
+    // Initialize loader
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        
+        // Hide loader if it exists
+        const loader = document.getElementById('loader');
+        if (loader) {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 150);
+        }
+    });
+
 document.addEventListener('DOMContentLoaded', function() {
     const chartJsonUrl = "{{ chart_json_url }}?nocache=" + new Date().getTime();
     fetch(chartJsonUrl)

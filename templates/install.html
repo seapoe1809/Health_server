@@ -18,8 +18,10 @@
 }
 </style>
 <body>
-    <button class="done-button" onclick="window.close()">Done</button>
-    <h1 style="font-family: 'Roboto', sans-serif; font-size: 45px; font-weight: bold; font-style: bold; font-color: black; text-align: center;">CARD INSTALL</h1>
+    <div id="loader" class="loader"><div class="spinner"></div></div>
+    <button class="done-button" onclick="window.close()">✖️</button>
+    
+    <h1 style="font-family: 'Roboto', sans-serif; font-size: 45px; font-weight: bold; font-style: bold; font-color: black; text-align: center;">「 ✦Card-Install✦ 」</h1>
     <h2 style="font-family: 'Roboto', sans-serif; font-size: 30px; font-weight: bold; font-color:black; font-style: bold;text-align: center;">DARNA.HI</h2>
 
     <!-- Import pictures -->
@@ -27,7 +29,7 @@
         <ul>
             <li>
                 <a href="#" class="flip">
-                    <img src="{{ url_for('serve_install_module', filename=app_folder ~ '/pic1.png') }}" alt="App Image" class="responsive-img"">
+                    <img src="{{ url_for('serve_install_module', filename=app_folder ~ '/pic1.png') }}" alt="App Image" class="responsive-img">
                 </a>
             </li>
             <li>
@@ -59,6 +61,20 @@
     </div>
 
     <script>
+    
+        // Initialize page with animations from styles.css
+            window.addEventListener('load', function() {
+                document.body.classList.add('loaded');
+        
+         // Hide loader if it exists
+                const loader = document.getElementById('loader');
+                if (loader) {
+                    setTimeout(() => {
+                        loader.classList.add('hidden');
+                    }, 100);
+                }
+            });
+  
         document.addEventListener('DOMContentLoaded', function() {
             const installButton = document.getElementById('install-button');
 

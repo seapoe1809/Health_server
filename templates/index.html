@@ -14,6 +14,9 @@
 
 </head>
 <body onload="hideAddressBar()">
+    <div id="loader" class="loader">
+    <div class="spinner"></div>
+    </div>
   <div class="text">
   
 
@@ -27,12 +30,15 @@
       <li><a href="/summary" target="_blank" class="healthfile"><img class="icon" src="{{ url_for('static', filename='icons/healthfile.png') }}" alt="Health File"></a></li>
       <li><a href="{{ url_for('folder_index') }}" target="_blank" class="home"><img class="icon" src="{{ url_for('static', filename='icons/home.png') }}" alt="Home"></a></li>   
       <li><a href="/pi" class="pi"><img class="icon" src="{{ url_for('static', filename='icons/PI.png') }}" alt="PI"></a></li>
-      <li><a href="/connect_nc" target="_blank" class="nc"><img class="icon" src="{{ url_for('static', filename='icons/NC.png') }}" alt="nc"></a></li>
 
     </ul>
    
     </div>
- 
+
+<!-- Settings button container -->
+<div class="form-container-setting-button"><a href="/connect_nc" target="_blank"><button type="button" class="settings_button" title="Settings"><i class="fas fa-cog"></i></button></a></div>
+
+<!-- Darnabot button container -->
 <div class="form-container-choice-button">
   <!-- Button with the robot icon -->
 <a href="/gradio_user" target="_blank">
@@ -45,8 +51,9 @@
 <!--  a third button -->
 <a href="/upload" target="_blank" class="upload"><button type="button" class="choice_button" style="background-image: linear-gradient(135deg, #E5E4E2, #36454F);"><div class="button_content"><i class="fas fa-plus"></i></div></button></a>
 
-
 </div>
+
+
 
 
 <script>
@@ -56,6 +63,22 @@
         window.scrollTo(0, 1);
       }
     }
+    // Initialize page with animations
+    window.addEventListener('load', function() {
+        hideAddressBar();
+        
+        // Trigger fade-in animation
+        document.body.classList.add('loaded');
+        
+        // Hide loader if present
+        const loader = document.getElementById('loader');
+        if (loader) {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+                setTimeout(() => loader.remove(), 300);
+            }, 300);
+        }
+    });
 </script>
 </body>
 </html>

@@ -2,14 +2,18 @@
 <html>
 <head>
     <title>UPLOAD FILE</title>
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width", initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
 <body>
-<button class="done-button" onclick="window.close()">Done</button>
+<div id="loader" class="loader"><div class="spinner"></div></div>
+
+<button class="done-button" onclick="window.close()" title="Close"><i class="fas fa-times"></i></button>
+
 <style>
 .form__container {
             display: flex;
@@ -27,7 +31,9 @@
             
         }
 </style>
-<h1 style="font-family: 'Roboto', sans-serif; font-size: 45px; font-weight: bold; font-style: bold; color:black; text-align: center;">UPLOAD</h1>
+
+<br>
+<h1 style="font-family: 'Roboto', sans-serif; font-size: 45px; font-weight: bold; font-style: bold; color:black; text-align: center;">𓊈𒆜UPLOAD𒆜𓊉</h1>
         <h2 style="font-family: 'Roboto', sans-serif; font-size: 30px; font-weight: bold; color:black; text-align: center;">DARNA.HI
         </h2>
         
@@ -44,8 +50,23 @@
      
             <button type="submit" class="login__button"><i></i> GO</button>
             </div>
+            <h5 style="font-family: 'Roboto', sans-serif; font-size: 9px; font-weight: bold; color:black; text-align: center;">For folder transfer, copy contents directly into upload folder.  </h5>
         </form>
     </div>
+<script>
+    // Initialize page with animations from styles.css
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        
+        // Hide loader if it exists
+        const loader = document.getElementById('loader');
+        if (loader) {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 300);
+        }
+    });
+</script>
 </body>
 </html>
 

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
 </head>
 <style>
   .play__button {
@@ -25,7 +27,8 @@
 
 </style>
 <body>
-<button class="done-button" onclick="window.close()">Done</button>
+<div id="loader" class="loader"><div class="spinner"></div></div>
+<button class="done-button" onclick="window.close()" title="Close"><i class="fas fa-times"></i></button>
 
     <div style="text-align:center;">
         <!-- Updated src to include filename and initial slice index -->
@@ -35,6 +38,19 @@
         <button class="play__button" id="playPauseBtn">Play</button>
     </div>
     <script>
+    // Initialize page with animations from styles.css
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        
+        // Hide loader if it exists
+        const loader = document.getElementById('loader');
+        if (loader) {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 300);
+        }
+    });
+    
         const filename = "{{ filename }}"; // Add filename to JavaScript
         const slider = document.getElementById('sliceSlider');
         const image = document.getElementById('dicomImage');
