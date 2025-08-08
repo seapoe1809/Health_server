@@ -30,7 +30,7 @@ Imagine having your health records from 5 years ago at your fingertips! 🗂️ 
 - LLM (ollama, gemma3:4b)
 - No Internet required to run it
 
-DEMO version with features turned off: https://huggingface.co/spaces/seapoe1809/Health_server OR http://seapoe1809.pythonanywhere.com/login
+DEMO version with features turned off:  http://seapoe1809.pythonanywhere.com/login
 ADMIN 
 password'health' 
 USER1 
