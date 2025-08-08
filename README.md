@@ -10,10 +10,14 @@
 **Darnahi's Vision:**
 =================
 
-This tool wants to be your personal health intelligent recordkeeper. It aims to be built around AI core. Imagine visiting a doctor 5 years ago. Now imagine if you still have the record if you look for it. Darnahi will allow you to store it, index it and use it to generate personal health insights. 
-Furthermore a local running LLM will be able to understand your personal health information while being private and secure. For example you'll be able to ask Darnabot any health questions you have, and it will provide answers specifically based on your own health details. It's like having a knowledgeable health assistant available whenever you need, but the assitant is actually intelligent , local giving you personalized suggestions while protecting your privacy.
+ Imagine visiting a doctor 5 years ago. Now try to go locate it. If you still have the record, kudos!! For the rest, Darnahi will allow you to store it, index it and use it to generate personal health insights. 
+🌟 **Meet Darnahi: Your Personal Health Recordkeeper!** 🌟
 
-CAUTION: This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based and is at risk of hallucinations. Early stage, under development and isnt secure. Please take all steps to safeguard your data. 
+Imagine having your health records from 5 years ago at your fingertips! 🗂️ Darnahi is powered by AI, allowing you to **store, index,** and **generate insights** about your health. 
+
+🤖 **Ask Darnabot!** Your local AI assistant understands your unique health info while keeping it **private and secure.** Get personalized answers to your health questions anytime you need! 
+
+🔒 **Note:** Darnahi is not a substitute for a doctor. Always consult a healthcare professional for medical advice. Darnahi provides health suggestions that may not be evidence-based and is still in development. Please safeguard your data! 🛡️
 
 **Key words:** 
 
@@ -26,14 +30,14 @@ CAUTION: This tool is not a replacement for a Doctor. For medical advice, please
 - LLM (ollama, gemma3:4b)
 - No Internet required to run it
 
-DEMO version with features turned off: http://seapoe1809.pythonanywhere.com/login
+DEMO version with features turned off: https://huggingface.co/spaces/seapoe1809/Health_server OR http://seapoe1809.pythonanywhere.com/login
 ADMIN 
 password'health' 
 USER1 
 password 'wellness'
 
 
-"Forward looking open source Health server initiative! Put simply, it aspires to be your personal health assistant."
+"Forward looking open source Health server initiative! Put simply, it aspires to be your personal health assistant and recordkeeper."
 
 **Short VIDEO DEMO:**
 
@@ -58,7 +62,7 @@ VIDEO ABOUT DARNAHI LANDING PAGE
 [darnabot2.webm](https://github.com/user-attachments/assets/cddca3d3-1012-4a01-9d09-cb1c2779978c)
 
 New and improved Darnabot, Darnahi's AI engine
-#requires ollama and mistral-nemo
+#requires ollama and gemma3:4b
     1. ask questions of your medical records that is stored as structured and unstructured RAG
     2. Local running LLM and Local running darnahi #privacy
     3. AI engine that uses NLP to analyze your health files to create health screening recommendations (USPTF based), wordclouds, RAG for darnabot
@@ -72,25 +76,28 @@ New and improved Darnabot, Darnahi's AI engine
 <<<
 
 Darnahi optional modules include: 
-1. weight/ bp/ glucose/ water tracker
-    
-2. IBS module- tracks your dietary and bowel habits; AI FODMAP engine; exercises to manage your IBS; know your IBS
 
-3. Immunization passport- to track and keep record of your immunizations; AI travel advisor; travel map
-   
-4. Anxiety-OCD module*New - Simply understandable chapters and techniques to manage anxiety (sample module experience https://huggingface.co/spaces/seapoe1809/anxiety_ocd_workbook )
+🌟 **Unlock Your Health Potential with Darnahi's Optional Modules!** 🌟
 
-5. Strep Module*New - Simply understandable chapters and self management/care tips in regards to Strep throat or impetigo
+1. 📊 **Track Your Health:** Monitor your weight, blood pressure, glucose, and hydration levels effortlessly!
 
-6. Tailscale to allow remote access
+2. 🍽️ **IBS Module:** Keep tabs on your dietary and bowel habits with our AI FODMAP engine, plus exercises to manage your IBS. Know your body better!
 
-7. Portal to share your encrypted zipped health docs securely
+3. 🌍 **Immunization Passport:** Stay on top of your immunizations with a handy travel advisor and interactive travel map!
 
-8. Remote docker container manager
-    
-##DARNA Healthy Intelligence v2.3- An open source, self hosted intiative - self custody of your health data
+4. 😌 **Anxiety-OCD Module (New!):** Discover easy-to-understand techniques to manage anxiety. Check out a sample experience [here](https://huggingface.co/spaces/seapoe1809/anxiety_ocd_workbook)!
 
-##Early stage. Beta and under development and isnt secure. Please take all steps to safeguard your data. 
+5. 🤒 **Strep Module (New!):** Get clear chapters and self-care tips for managing strep throat or impetigo.
+
+6. 🔗 **Tailscale:** Enjoy remote access to your health data anytime, anywhere!
+
+7. 🔒 **Secure Sharing Portal:** Share your encrypted health documents safely and securely.
+
+8. 🐳 **Remote Docker Container Manager:** Manage your health data with ease!
+
+## 🚀 **DARNA Healthy Intelligence v2.5** - An open-source, self-hosted initiative for complete control over your health data!
+
+⚠️ **Note:** Darnahi is in early beta development and may not be fully secure. Please take all necessary steps to protect your data! 🛡️
 
 
 
@@ -103,7 +110,7 @@ This is a forever open source, self hosted personal Health intelligent assistant
 
 What is this project?
 ======================
-DARNA. HI v2.3 is a Forward looking project.
+DARNA. HI v2.5 is a Forward looking project.
 
  <img src="https://github.com/seapoe1809/Health_server/blob/main/static/darnav2_mktg.png" width =300, height=550>
 
@@ -125,18 +132,28 @@ Use at your own Risk. See License document. It is still in beta. Take all steps 
 
 This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based. LLMs are known to hallucinate.
 
- 
-Who is it for:
-==============
-- If you want to take control of your medical information and share it easily with new doctors, this tool is for you. With this program you can create an encrypted health passport. 
-- If you wish to Self Host
-- You are privacy conscious.
-- You have some computer skills and an ability to use Linux or set up a virtual Linux machine. 
-- Support Open Source
 
+==========================
+
+### Who is Darnahi For? 🤔
+
+==========================
+- 🩺 **Take Charge of Your Health:** Easily manage and share your medical information with new doctors using an encrypted health passport!
+- 💻 **Self-Host Enthusiasts:** Perfect for those who want to host their own data.
+- 🔒 **Privacy Advocates:** Keep your health information secure and private.
+- 🛠️ **Tech-Savvy Users:** If you're comfortable with Linux or can set up a virtual Linux machine, this is for you!
+- 🌍 **Support Open Source:** Join a community that values transparency and collaboration.
+
+### What is Darnahi? 🏥
+Darnahi is a **free and open-source software** that aggregates your health data from various sources like electronic health records, fitness apps, and wearables. Imagine having **one secure hub** for all your health information right at home! 🏡
+
+When visiting a new doctor, you can easily share your encrypted health data on demand via QR code, email, or link. You maintain **full custody** of your health data, deciding who to share it with and how!
+
+### Future Innovations 🚀
+In the near future, we aim to introduce a specialized lightweight large language model (LLM) that runs on your laptop or phone. This AI will interpret your health data and generate personalized health insights tailored to your questions. For now, we’re utilizing **gemma3:4b** with **Ollama** to get started!
 
 This project is an Free and open-source local hostedd software that helps bring together your health data that is currently saved in different places like electronic health records, fitness apps, and wearable devices. Darnahi wishes to provide a way to aggregate your health data. One stop to bring all your health data together on your secure computer at home. When you visit a new doctor, you can choose to share your encrypted health data with them on demand through QR code, email, link etc. This way, you have full custody of your health data and can decide who to share it with and what to do with it. 
-In not so distant future we hope to have specialized trained lightweight large language model (LLM) running on your laptop or phone to interpret your health data, generate relevant health intents and responses tailored to an individual's queries about their health. At this time we rely on Mistral-nemo running using Ollama.
+In not so distant future we hope to have specialized trained lightweight large language model (LLM) running on your laptop or phone to interpret your health data, generate relevant health intents and responses tailored to an individual's queries about their health. At this time we rely on gemma3:4b running using Ollama.
 
 **Disclaimer: **
 
@@ -167,8 +184,6 @@ SAFE AND SECURE
 ===============
 We are trying to take all steps to keep it safe and secure. Please note this is still a beta version. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
 Darnahi is Self Hosted -This means you have to run this on your own linux computer and all your data stays on your computer; your data does not leave your computer and security is limited by your own computer security
-
-
 
 
 **step 1: Git clone and install Health_server**
@@ -209,7 +224,7 @@ Change directory into the Health_server directory
 
 Once started, the server should be active at port :3001. The browser should auto launch and take you there. You could easily access on the home computer at http://localhost:3001 .The flask server when launched will give you the IP address at which it launched. You could now navigate to that http://your_ip_adddress:3001 with any mobile device and access the server.
 
-Go to the Information Card to change your password and familiarize yourself with Darnahi. Dont forget to Install Ollama and Mistral Nemo Model for full functionality
+Go to the Settings to change your password and familiarize yourself with Darnahi. Dont forget to Install Ollama and gemma3:4b for full functionality
 
 INSTALLING OLLAMA for Local LLM
 ===============================
@@ -228,7 +243,7 @@ Time to get the model
 
 SHUTDOWN THE SERVER
 ===================
-The app allows you to shut down the server remotely from anywhere. Go to the 'INFORMATION' section and scroll to the bottom to find the 'kill switch' option. Using this will shut down the server and the local language model running on it. However, to restart the server, you need to be physically at your home computer.
+The app allows you to shut down the server remotely from anywhere. Go to the 'SETTINGS' (gearwheel) section and scroll to the bottom to find the 'kill switch' option. Using this will shut down the server and the local language model running on it. However, to restart the server, you need to be physically at your home computer.
 
 Note: This might not shutdownt he docker containers from the sky store. You would have to remove them on your home computer individually.
 
@@ -249,7 +264,7 @@ If you don't want to use the health server app anymore, you can simply delete th
 FEEDBACK
 ========
         
-To give feedback, please go to 'Information' card in Landing and click on last link that allows you to email me. Or you could start a debug thread on github itself.
+To give feedback, please go to 'SETTINGS' (gearwheel) in Landing and click on last link that allows you to email me. Or you could start a debug thread on github itself.
 
 
 
@@ -262,9 +277,9 @@ b) If you have data on EPIC MyChart or Cerner er Athena etc or your doctors gate
  
 c) PDF's and JPGS on mobile: 'UPLOAD' (+) icon on the Darnahi server and follow instructions to upload to your server.
 
-d) Tips are in 'INFORMATION' card of server. 
+d) Tips are in 'SETTINGS' (gearwheel) card of server. 
 
-e)  The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'Information' card if you wish. For Grafana is user:'admin', password:'health'.
+e)  The default username password: ADMIN 'health' and USER1 'wellness'. You could change it 'SETTINGS' (gearwheel) card if you wish. For Grafana is user:'admin', password:'health'.
 
 f) Update Chartit with your basic demographic information that is stored in FHIR R4 format
 
@@ -294,8 +309,10 @@ CHART IT CARD:
 
 HEALTH FILES CARD:
 ==================
+
 The dropdown menu provides several options:
     View health files stored in the 'summary' folder including visualizing data in dicom format.
+    View health files indexed by the AI vision and OCR agent once DARNABOT >> RUN AI is activated
     View the personalized health intents generated when you run the 'Analyze' function.
     View your de-identified data, which could be useful for interacting with public language models.
     View your word cloud visualization.
@@ -313,7 +330,7 @@ Note: some XML health files need a supporting styles.xsl file alongwith to allow
 ============
 
 
-Darnahi currenlty uses Ollama for local LLM's and specifically Mistral-Nemo:
+Darnahi currenlty uses Ollama for local LLM's and specifically gemma3:4b:
 
 Structured and Unstructured RAG architecture: This helps the LLM quickly find and understand the specific health information it needs from your medical data.
     
@@ -333,76 +350,24 @@ More information is available within Darnahi
 5. Tailscale to allow remote access
 6. Portal to share your encrypted zipped health docs securely
 7. Remote docker container manager
-8. A portal for you to be able to download your information from local health providers. It isnt exhaustive.
+8. A portal for you to be able to download your information from local health providers. It isn't exhaustive.
 
 **Bookmark to your device iphone:**
 =====================================
 Navigate in the browser to Darnahi at <ip_address>:3001. Then click [^] and choose 'Add to Home Screen' and 'Add'.
 
-**Update Install Module**
-==========================
-In the future as more optional modules are added, all you have to do is run update_install_module.sh and your folder will be updated to the latest git repo. This file serves this function
 
 **Disclaimer: **
 
 Use at your own Risk. See License document. It is still beta. Take all steps to safeguard your data. The security will be as safe as your computer is. Keep your computer encrypted. Dont share password.
 This tool is not a replacement for a Doctor. For medical advice, please consult with a Healthcare professional. Darnahi only aims to provide Health suggestions/information which might not be evidence based.
 
-**Troubleshooting**
-===================
-
-If you notice a newly installed module doesnt appear after installation. 
-
-    Click refresh of the browser of the home page of optional module 
-
-Newly installed Docker container is acting up
-
-    docker restart <docker-optional-module>
-    
-If you encounter the missing module _sqlite3 error when you start venv. Its a known error with older python Venv. You might need to uninstall python3 and reinstall. Its preferred if you download directly from python.org. 
-
-    sudo apt update
-    sudo apt install libsqlite3-dev
-    sudo apt install python3 python3-venv
-
-You can check with:
-
-    python3
-    import sqlite3
- 
-OR 
-Build python3 from source: https://github.com/seapoe1809/assets/blob/main/Python_from_source_LINUX
-
-
-
-**
-Venv error:** 
-Error creating venv could mean venv need to be installed or upgraded
-
-    python -m pip install --upgrade venv
-
-
-Installation error:
-
-    DEPRECATION: durationpy is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
-
-Fix:
-
-    pip install wheel
-
-OR add this to setup_darna.py
-
-    pip install --use-pep517 -r requirements.txt
-
-
-
-
 
 
 
 ##FEEDBACK##
 =============
- Hope you like it! Please share feedback and let me know if you would like to contribute to this project. You could send feedback by commenting on this repo or going to 'INFORMATiON' card and clicking on link saying 'email' the writer of repo.
+ Hope you like it! Please share feedback and let me know if you would like to contribute to this project. You could send feedback by commenting on this repo or going to 'settings' card and clicking on link saying 'email' the writer of repo.
  
 
 
