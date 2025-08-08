@@ -79,7 +79,7 @@ Darnahi optional modules include:
 
 3. Immunization passport- to track and keep record of your immunizations; AI travel advisor; travel map
    
-4. Anxiety-OCD module*New - Simply understandable chapters and techniques to manage anxiety
+4. Anxiety-OCD module*New - Simply understandable chapters and techniques to manage anxiety (sample module experience https://huggingface.co/spaces/seapoe1809/anxiety_ocd_workbook )
 
 5. Strep Module*New - Simply understandable chapters and self management/care tips in regards to Strep throat or impetigo
 
@@ -329,7 +329,7 @@ More information is available within Darnahi
 1. weight/ bp/ glucose/ water tracker
 2. IBS module- tracks your dietary and bowel habits; AI FODMAP engine; exercises to manage your IBS; know your IBS
 3. Immunization passport- to track and keep record of your immunizations; AI travel advisor; travel map
-4. Anxiety-OCD module*New - Simply understandable chapters and techniques to manage anxiety
+4. Anxiety-OCD module*New - Simply understandable chapters and techniques to manage anxiety sample - https://huggingface.co/spaces/seapoe1809/anxiety_ocd_workbook
 5. Strep Module*New - Simply understandable chapters and self management/care tips in regards to Strep throat or impetigo
 5. Tailscale to allow remote access
 6. Portal to share your encrypted zipped health docs securely
