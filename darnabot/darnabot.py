@@ -38,6 +38,7 @@ from PIL import Image
 import io
 from ollama import AsyncClient
 import asyncio
+import unidecode
 ####NEW
 #install pytesseract
 #install pdf2image pip install reportlab PyPDF2 nltk wordcloud unidecode
@@ -644,6 +645,9 @@ class PDF(FPDF):
         self.set_font('Arial', 'I', 8)
         self.cell(0, 10, f'Page {self.page_no()}/{{nb}}', 0, 0, 'C')
 
+# First install: pip install unidecode
+from unidecode import unidecode
+
 def create_pdf(record, image_data):
     pdf = PDF()
     pdf.alias_nb_pages()
@@ -656,22 +660,23 @@ def create_pdf(record, image_data):
     
     for key, value in record.items():
         if key != 'image' and key != 'comment':
-            pdf.cell(0, 10, txt=f"{key}: {value}", ln=True)
-
+            # Convert Unicode characters to ASCII approximations
+            clean_key = unidecode(str(key))
+            clean_value = unidecode(str(value))
+            pdf.cell(0, 10, txt=f"{clean_key}: {clean_value}", ln=True)
+    
     pdf.ln(10)
     pdf.set_font("Arial", 'B', size=12)
     pdf.cell(0, 10, txt="Comment:", ln=True)
     pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 10, txt=record['comment'])
+    pdf.multi_cell(0, 10, txt=unidecode(record['comment']))
     
     if image_data:
         try:
             image_bytes = base64.b64decode(image_data)
-
             with tempfile.NamedTemporaryFile(delete=False, suffix='.png') as temp_file:
                 temp_file.write(image_bytes)
                 temp_file_path = temp_file.name
-
             pdf.add_page()
             pdf.image(temp_file_path, x=10, y=30, w=190)
             
@@ -683,9 +688,9 @@ def create_pdf(record, image_data):
     summary_dir = os.path.join(folderpath, "summary")
     ocr_dir = os.path.join(folderpath, "ocr_files")
     
-    
-    filename = os.path.join(summary_dir, f"record_{record['date'].replace(':', '-')}.pdf")
-    filename2 = os.path.join(ocr_dir, f"record_{record['date'].replace(':', '-')}.pdf")
+    clean_date = unidecode(record['date']).replace(':', '-')
+    filename = os.path.join(summary_dir, f"record_{clean_date}.pdf")
+    filename2 = os.path.join(ocr_dir, f"record_{clean_date}.pdf")
     
     pdf.output(filename)
     pdf.output(filename2)
